@@ -1,0 +1,29 @@
+.icon {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    user-select: none;
+    position: absolute;
+
+    .fileName {
+        font-size: 10pt;
+        color: white;
+        text-shadow: 1px 1px 1px #000000bb;
+        text-align: center;
+        padding: 1px 3px;
+    }
+
+    &.selected {
+        img {
+            filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(162deg);
+        }
+
+        .fileName {
+            background: #000080;
+        }
+    }
+}
