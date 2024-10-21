@@ -8,6 +8,7 @@
     gap: 4px;
     user-select: none;
     position: absolute;
+    pointer-events: auto;
 
     .fileName {
         font-size: 10pt;

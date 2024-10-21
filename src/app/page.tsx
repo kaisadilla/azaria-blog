@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
+import "./styles.scss";
 
 import { poppins } from "@/app/fonts/fonts";
 import { useEffect, useState } from "react";

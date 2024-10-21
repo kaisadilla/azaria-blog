@@ -1,0 +1,66 @@
+.window {
+    pointer-events: auto;
+    user-select: none;
+    //position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template: "top top top" 30px
+                   "lef con rig" 1fr
+                   "bot bot bot" 3px / 3px 1fr 3px;
+
+    .windowTop {
+        grid-area: top;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        .windowTopLeft {
+            flex: 0;
+        }
+
+        .windowTopCenter {
+            flex: 1;
+        }
+
+        .windowTopRight {
+            flex: 0;
+        }
+    }
+
+    .windowLeft > img {
+        grid-area: lef;
+        height: 100%;
+        width: 100%;
+    }
+
+    .windowContent {
+        grid-area: con;
+        background-color: white;
+    }
+
+    .windowRight > img {
+        grid-area: rig;
+        height: 100%;
+        width: 100%;
+    }
+
+    .windowBottom {
+        grid-area: bot;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        .windowBottomLeft {
+            flex: 0;
+        }
+
+        .windowBottomCenter {
+            flex: 1;
+        }
+
+        .windowBottomRight {
+            flex: 0;
+        }
+    }
+}

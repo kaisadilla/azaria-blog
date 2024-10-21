@@ -8,7 +8,7 @@ import { getClassString, Vec2 } from '@/utils';
 export interface WIconProps {
     icon: string;
     name: string;
-    position: { x: number, y: number };
+    position: Vec2;
     selected?: boolean;
     onMouseDown?: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     onDrop?: (position: Vec2) => void;

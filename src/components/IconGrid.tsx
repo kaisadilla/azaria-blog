@@ -96,8 +96,8 @@ function IconGrid (props: IconGridProps) {
     }
 
     function moveIcon (id: IconId, pos: Vec2) {
-        const xRel = clampNumber(pos.x - topleft.left, 0, (width - (width % 100)) - 1);
-        const yRel = clampNumber(pos.y - topleft.top, 0, (height - (height % 100)) - 1);
+        const xRel = clampNumber(pos.x - topleft.left, 0, (width - 100));
+        const yRel = clampNumber(pos.y - topleft.top, 0, (height - 100));
 
         if (xRel < 0 || xRel > width || yRel < 0 || yRel > height) {
             return;
