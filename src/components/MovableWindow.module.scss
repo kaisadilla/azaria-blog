@@ -1,0 +1,7 @@
+.movableWindow {
+    position: relative;
+
+    &.focused {
+        //z-index: 120;
+    }
+}

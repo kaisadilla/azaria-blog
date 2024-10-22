@@ -8,24 +8,22 @@ import Draggable, { DraggableBounds } from 'react-draggable';
 import { NumberSize, Resizable } from 're-resizable';
 import { Direction } from 're-resizable/lib/resizer';
 import { Rnd } from 'react-rnd';
+import MovableWindow from './MovableWindow';
+import { useOsContext } from '@/app/context';
 
 export interface WindowAreaProps {
     
 }
 
 function WindowArea (props: WindowAreaProps) {
+    const ctx = useOsContext();
+
     const ref = useRef<HTMLDivElement>(null);
-    const nref = useRef<HTMLDivElement>(null);
+
     const [width, setWidth] = useState(1);
     const [height, setHeight] = useState(1);
     const [topleft, setTopleft] = useState({top: 0, left: 0});
-
-    const [size, setSize] = useState({width: 400, height: 300});
-    const [pos, setPos] = useState<Vec2>({x: 300, y: 200});
-
-    const [clickPos, setClickPos] = useState<Vec2>({x: 0, y: 0});
-    const [dragging, setDragging] = useState(false);
-    const [boundaries, setBoundaries] = useState<DraggableBounds | undefined>(undefined);
+    const [indices, setIndices] = useState<{[windowId: string]: number}>({});
 
     useEffect(() => {
         if (ref.current === null) return;
@@ -36,70 +34,56 @@ function WindowArea (props: WindowAreaProps) {
         setHeight(ref.current.clientHeight);
         
         setTopleft({ top: rect.top, left: rect.left });
+    }, [ref.current]);
 
-        //document.addEventListener('mousemove', handleMouseMove);
+    useEffect(() => {
+        setIndices(prevState => {
+            const newState: {[windowId: string]: number} = {};
+            const windowCount = Object.keys(prevState).length;
 
-        //() => {
-        //    document.removeEventListener('mousemove', handleMouseMove);
-        //}
-    }, [ref.current, dragging]);
+            for (const k in prevState) {
+                if (ctx.activeWindowId === k) {
+                    newState[k] = windowCount;
+                }
+                else {
+                    newState[k] = clampNumber(prevState[k] - 1, 0, windowCount - 1);
+                }
+            }
+
+            return newState;
+        });
+    }, [ctx.activeWindowId]);
+
+    useEffect(() => {
+        setIndices(prevState => {
+            const newState: {[windowId: string]: number} = {};
+
+            for (const w of ctx.windows) {
+                if (ctx.activeWindowId === w.id) {
+                    newState[w.id] = ctx.windows.length;
+                }
+                else {
+                    newState[w.id] = prevState[w.id] ?? 0;
+                }
+            }
+
+            return newState;
+        })
+    }, [ctx.windows.length]);
 
     return (
         <div ref={ref} className={styles.windowArea}>
-            <Draggable
-                nodeRef={nref}
-                handle=".windowHandle"
-                bounds={boundaries}
-                onMouseDown={recalculateBoundaries}
-                position={pos}
-                onStop={(evt, data) => setPos({x: data.x, y: data.y})}
-            >
-                <div ref={nref}>
-                    <Rnd
-                        disableDragging={true}
-                        defaultSize={size}
-                        minWidth={196}
-                        minHeight={128}
-                        maxWidth={width + 6}
-                        maxHeight={height + 6}
-                        style={{pointerEvents: 'auto'}}
-                        onResizeStop={handleResizeStop}
-                        size={size}
-                    >
-                        <DesktopWindow
-                            position={pos}
-                        />
-                    </Rnd>
-                </div>
-            </Draggable>
+            {ctx.windows.map(w => <MovableWindow
+                key={w.id}
+                window={w}
+                parentWidth={width}
+                parentHeight={height}
+                focused={ctx.activeWindowId === w.id}
+                onFocus={() => ctx.setActiveWindow(w.id)}
+                index={indices[w.id]}
+            />)}
         </div>
     );
-
-    function recalculateBoundaries (evt: MouseEvent) {
-        const rect = nref.current?.getBoundingClientRect();
-
-        const xOffset = evt.clientX - (rect?.left ?? 0);
-        const yOffset = evt.clientY - (rect?.top ?? 0);
-
-        setBoundaries({
-            left: -xOffset - 3,
-            top: -yOffset - 3,
-            right: width - xOffset,
-            bottom: height - yOffset
-        })
-    }
-
-    function handleResizeStop (
-        evt: MouseEvent | TouchEvent,
-        direction: Direction,
-        elementRef: HTMLElement,
-        delta: NumberSize
-    ) {
-        setSize({
-            width: elementRef.offsetWidth,
-            height: elementRef.offsetHeight,
-        });
-    }
 }
 
 export default WindowArea;

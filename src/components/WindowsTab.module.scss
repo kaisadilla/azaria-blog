@@ -1,0 +1,30 @@
+.tab {
+    width: 147px;
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+    gap: 5px;
+
+    &:hover {
+        filter:brightness(120%);
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+    }
+
+    .title {
+        font-size: 9pt;
+        font-family:  Tahoma, Arial, Helvetica, sans-serif;
+        color: white;
+
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+        overflow: hidden;
+    }
+}

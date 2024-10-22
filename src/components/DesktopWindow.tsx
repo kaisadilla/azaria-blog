@@ -1,75 +1,99 @@
 'use client';
 
-import { Vec2 } from '@/utils';
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { getClassString, Vec2 } from '@/utils';
+import React, { ReactNode, useEffect, useReducer, useRef, useState } from 'react';
 import styles from "./DesktopWindow.module.scss";
+import { OsWindow } from '@/logic/OsWindow';
+import { useOsContext } from '@/app/context';
 
 export interface DesktopWindowProps {
-    position: Vec2;
-    onDragStart?: (relativePosition: Vec2) => void;
-    onDragEnd?: () => void;
-    onMouseMove?: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    window: OsWindow;
+    focused?: boolean;
+    onFocus?: () => void;
+    children?: ReactNode;
 }
 
 function DesktopWindow ({
-    position,
-    onDragStart,
-    onDragEnd,
-    onMouseMove,
+    window,
+    focused = false,
+    onFocus,
+    children,
 }: DesktopWindowProps) {
-    const ref = useRef<HTMLDivElement>(null);
-    const [dragging, setDragging] = useState(false);
-
-    useEffect(() => {
-        document.addEventListener('mouseup', handleMouseUp);
-
-        return () => {
-            document.removeEventListener('mouseup', handleMouseUp);
-        }
-    }, [dragging]);
+    const ctx = useOsContext();
 
     const divStyle = {
-        top: position.y,
-        left: position.x,
+        top: window.position.y,
+        left: window.position.x,
     };
 
+    const frameName = focused ? "window_frame" : "window_frame_inactive"
+
     return (
-        <div ref={ref} className={styles.window} style={divStyle} onMouseMove={onMouseMove}>
+        <div className={styles.window} style={divStyle} onMouseDown={() => onFocus?.()}>
             <div className={styles.windowTop}>
                 <img
                     className={`${styles.windowTopLeft} windowHandle`}
-                    src="/img/window_frame_top_left.png"
+                    src={`/img/${frameName}_top_left.png`}
                     alt=""
                     draggable={false}
-                    onMouseDown={handleMouseDown}
                 />
                 <img
                     className={`${styles.windowTopCenter} windowHandle`}
-                    src="/img/window_frame_top.png"
+                    src={`/img/${frameName}_top.png`}
                     alt=""
                     draggable={false}
-                    onMouseDown={handleMouseDown}
                 />
                 <img
                     className={styles.windowTopRight}
-                    src="/img/window_frame_top_right.png"
+                    src={`/img/${frameName}_top_right.png`}
                     alt=""
                     draggable={false}
                 />
+                <div className={styles.windowHandle}>
+                    <div className={styles.identity}>
+                        <div className={styles.icon}>
+                            <img
+                                className={styles.icon}
+                                src={`img/w_icon/${window.icon}_16.png`}
+                            />
+                        </div>
+                        <div className={styles.title}>
+                            {window.title}
+                        </div>
+                    </div>
+                    <div className={styles.windowControls}>
+                        <img
+                            className={styles.control}
+                            src={`img/${frameName}_minimize.png`}
+                            alt=""
+                        />
+                        <img
+                            className={styles.control}
+                            src={`img/${frameName}_maximize.png`}
+                            alt=""
+                        />
+                        <img
+                            className={styles.control}
+                            src={`img/${frameName}_close.png`}
+                            alt=""
+                            onClick={() => handleClose(window)}
+                        />
+                    </div>
+                </div>
             </div>
             <div className={styles.windowLeft}>
                 <img
-                    src="/img/window_frame_left.png"
+                    src={`/img/${frameName}_left.png`}
                     alt=""
                     draggable={false}
                 />
             </div>
             <div className={styles.windowContent}>
-                Content here
+                {children}
             </div>
             <div className={styles.windowRight}>
                 <img
-                    src="/img/window_frame_right.png"
+                    src={`/img/${frameName}_right.png`}
                     alt=""
                     draggable={false}
                 />
@@ -77,19 +101,19 @@ function DesktopWindow ({
             <div className={styles.windowBottom}>
                 <img
                     className={styles.windowBottomLeft}
-                    src="/img/window_frame_bottom_left.png"
+                    src={`/img/${frameName}_bottom_left.png`}
                     alt=""
                     draggable={false}
                 />
                 <img
                     className={styles.windowBottomCenter}
-                    src="/img/window_frame_bottom.png"
+                    src={`/img/${frameName}_bottom.png`}
                     alt=""
                     draggable={false}
                 />
                 <img
                     className={styles.windowBottomRight}
-                    src="/img/window_frame_bottom_right.png"
+                    src={`/img/${frameName}_bottom_right.png`}
                     alt=""
                     draggable={false}
                 />
@@ -97,21 +121,8 @@ function DesktopWindow ({
         </div>
     );
 
-    function handleMouseDown (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        setDragging(true);
-
-        const rect = ref.current?.getBoundingClientRect();
-
-        onDragStart?.({
-            x: evt.clientX - (rect?.left ?? 0),
-            y: evt.clientY - (rect?.top ?? 0)
-        });
-    }
-
-    function handleMouseUp (evt: MouseEvent) {
-        if (dragging === false) return;
-        
-        onDragEnd?.();
+    function handleClose (window: OsWindow) {
+        ctx.closeWindow(window.id);
     }
 }
 

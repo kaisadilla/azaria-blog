@@ -5,6 +5,8 @@ import WIcon from './WIcon';
 
 import styles from "./IconGrid.module.scss";
 import { clampNumber, Vec2 } from '@/utils';
+import { OsWindow, OsWindowType, PartialOsWindow } from '@/logic/OsWindow';
+import { useOsContext } from '@/app/context';
 
 type IconId = 'recycle_bin' | 'about_me' | 'qualifications' | 'blog' | 'game';
 type IconPositionDictionary = {[K in IconId]: Vec2};
@@ -14,6 +16,8 @@ export interface IconGridProps {
 }
 
 function IconGrid (props: IconGridProps) {
+    const ctx = useOsContext();
+
     const ref = useRef<HTMLDivElement>(null);
     const [selectedIcon, setSelectedIcon] = useState<IconId | null>(null);
     const [width, setWidth] = useState(1);
@@ -46,6 +50,12 @@ function IconGrid (props: IconGridProps) {
                 name="Recycle Bin"
                 position={iconPos['recycle_bin']}
                 selected={selectedIcon == 'recycle_bin'}
+                onOpen={() => openIcon({
+                    id: 'recycle_bin',
+                    title: "Recycle Bin",
+                    icon: "recycle_bin",
+                    type: 'recycle_bin',
+                })}
                 onMouseDown={evt => handleIconClick(evt, 'recycle_bin')}
                 onDrop={pos => moveIcon('recycle_bin', pos)}
             />
@@ -54,6 +64,12 @@ function IconGrid (props: IconGridProps) {
                 name="About Me"
                 position={iconPos['about_me']}
                 selected={selectedIcon == 'about_me'}
+                onOpen={() => openIcon({
+                    id: 'about_me',
+                    title: "About Me",
+                    icon: "about_me",
+                    type: 'about_me',
+                })}
                 onMouseDown={evt => handleIconClick(evt, 'about_me')}
                 onDrop={pos => moveIcon('about_me', pos)}
             />
@@ -62,6 +78,12 @@ function IconGrid (props: IconGridProps) {
                 name="Experience"
                 position={iconPos['qualifications']}
                 selected={selectedIcon == 'qualifications'}
+                onOpen={() => openIcon({
+                    id: 'qualifications',
+                    title: "Experience",
+                    icon: "qualifications",
+                    type: 'qualifications',
+                })}
                 onMouseDown={evt => handleIconClick(evt, 'qualifications')}
                 onDrop={pos => moveIcon('qualifications', pos)}
             />
@@ -70,6 +92,12 @@ function IconGrid (props: IconGridProps) {
                 name="My Blog"
                 position={iconPos['blog']}
                 selected={selectedIcon == 'blog'}
+                onOpen={() => openIcon({
+                    id: 'blog',
+                    title: "My Blog",
+                    icon: "blog",
+                    type: 'blog',
+                })}
                 onMouseDown={evt => handleIconClick(evt, 'blog')}
                 onDrop={pos => moveIcon('blog', pos)}
             />
@@ -78,6 +106,12 @@ function IconGrid (props: IconGridProps) {
                 name="Game"
                 position={iconPos['game']}
                 selected={selectedIcon == 'game'}
+                onOpen={() => openIcon({
+                    id: 'game',
+                    title: "Game",
+                    icon: "game",
+                    type: 'game',
+                })}
                 onMouseDown={evt => handleIconClick(evt, 'game')}
                 onDrop={pos => moveIcon('game', pos)}
             />
@@ -114,6 +148,10 @@ function IconGrid (props: IconGridProps) {
             ...prevState,
             [id]: { x: xGrid, y: yGrid },
         }));
+    }
+
+    function openIcon (window: PartialOsWindow) {
+        ctx.openWindow(window);
     }
 }
 

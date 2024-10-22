@@ -9,6 +9,7 @@
     position: relative;
     font-family: Tahoma, Geneva, Verdana, 'Segoe UI', sans-serif;
     overflow: hidden;
+    user-select: none;
 
     .content {
         flex-grow: 1;

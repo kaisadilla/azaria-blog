@@ -1,7 +1,6 @@
 .window {
     pointer-events: auto;
     user-select: none;
-    //position: absolute;
     width: 100%;
     height: 100%;
     display: grid;
@@ -14,6 +13,7 @@
         width: 100%;
         display: flex;
         flex-direction: row;
+        position: relative;
 
         .windowTopLeft {
             flex: 0;
@@ -25,6 +25,64 @@
 
         .windowTopRight {
             flex: 0;
+        }
+
+        .windowHandle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: row;
+            
+            .identity {
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 0 10px;
+                gap: 5px;
+                overflow: hidden;
+
+                .icon {
+                    width: 16px;
+                    height: 16px;
+                    margin-top: 2px;
+                }
+                .title {
+                    color: white;
+                    text-shadow: 1px 1px 1px #000000bb;
+                    font-size: 9pt;
+                    font-weight: 600;
+                    font-family: Tahoma, Geneva, Verdana, sans-serif;
+                    text-overflow: ellipsis;
+                    text-wrap: nowrap;
+                    overflow: hidden;
+                }
+            }
+
+            .windowControls {
+                width: 76px;
+                flex-shrink: 0;
+                margin-top: 2px;
+                padding-left: 3px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 2px;
+
+                .control {
+                    pointer-events: auto;
+
+                    &:hover {
+                        filter: brightness(120%);
+                    }
+                }
+            }
         }
     }
 

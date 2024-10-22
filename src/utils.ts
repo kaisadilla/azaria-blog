@@ -52,3 +52,30 @@ export interface Vec2 {
     x: number;
     y: number;
 }
+
+/**
+ * Removes the item in the array at the index given. This MUTATES the array
+ * given, and doesn't return anything.
+ * @param arr The array to remove an item from.
+ * @param index The index of the item to remove.
+ */
+export function deleteArrayItemAt<T> (arr: T[], index: number) {
+    arr.splice(index, 1);
+}
+
+export function deleteArrayItem<T> (arr: T[], item: T) {
+    const index = arr.indexOf(item);
+    if (index !== -1) {
+        deleteArrayItemAt(arr, index);
+    }
+}
+
+export function arrayUnion (a: any[], b: any[]) {
+    const set = new Set<any>();
+
+    for (const item of [...a, ...b]) {
+        set.add(item);
+    }
+
+    return Array.from(set);
+}

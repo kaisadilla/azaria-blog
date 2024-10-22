@@ -10,6 +10,7 @@ export interface WIconProps {
     name: string;
     position: Vec2;
     selected?: boolean;
+    onOpen?: () => void;
     onMouseDown?: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     onDrop?: (position: Vec2) => void;
 }
@@ -19,6 +20,7 @@ function WIcon ({
     name,
     position,
     selected,
+    onOpen,
     onMouseDown,
     onDrop,
 }: WIconProps) {
@@ -47,9 +49,10 @@ function WIcon ({
             className={classStr}
             style={divStyle}
             onMouseDown={handleMouseDown}
+            onDoubleClick={handleDoubleClick}
         >
             <Image
-                src={`/img/w_icon/${icon}.png`}
+                src={`/img/w_icon/${icon}_48.png`}
                 alt=""
                 width={48}
                 height={48}
@@ -69,6 +72,10 @@ function WIcon ({
 
         setDragging(false);
         onDrop?.({ x: evt.pageX, y: evt.pageY });
+    }
+
+    function handleDoubleClick () {
+        onOpen?.();
     }
 }
 
