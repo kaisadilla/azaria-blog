@@ -26,6 +26,7 @@ function DesktopWindow ({
         left: window.position.x,
     };
 
+    // inactive border is HSL +5 / -25 / +42.
     const frameName = focused ? "window_frame" : "window_frame_inactive"
 
     return (
@@ -51,12 +52,10 @@ function DesktopWindow ({
                 />
                 <div className={styles.windowHandle}>
                     <div className={styles.identity}>
-                        <div className={styles.icon}>
-                            <img
-                                className={styles.icon}
-                                src={`img/w_icon/${window.icon}_16.png`}
-                            />
-                        </div>
+                        <img
+                            className={styles.icon}
+                            src={`img/w_icon/${window.icon}_16.png`}
+                        />
                         <div className={styles.title}>
                             {window.title}
                         </div>
@@ -66,17 +65,26 @@ function DesktopWindow ({
                             className={styles.control}
                             src={`img/${frameName}_minimize.png`}
                             alt=""
+                            onClick={handleMinimize}
+                            draggable={false}
                         />
                         <img
                             className={styles.control}
-                            src={`img/${frameName}_maximize.png`}
+                            src={
+                                window.maximized
+                                    ? `img/${frameName}_restore.png`
+                                    : `img/${frameName}_maximize.png`
+                            }
                             alt=""
+                            onClick={handleMaximize}
+                            draggable={false}
                         />
                         <img
                             className={styles.control}
                             src={`img/${frameName}_close.png`}
                             alt=""
-                            onClick={() => handleClose(window)}
+                            onClick={handleClose}
+                            draggable={false}
                         />
                     </div>
                 </div>
@@ -121,8 +129,37 @@ function DesktopWindow ({
         </div>
     );
 
-    function handleClose (window: OsWindow) {
+    function handleMinimize () {
+        const update = { ...window };
+        update.minimized = true;
+
+        ctx.updateWindow(update);
+        focusAnotherWindow([window.id]);
+    }
+
+    function handleMaximize () {
+        const update = { ...window };
+        update.maximized = !update.maximized;
+
+        ctx.updateWindow(update);
+    }
+
+    function handleClose () {
         ctx.closeWindow(window.id);
+        focusAnotherWindow([window.id]);
+    }
+
+    function focusAnotherWindow (excludedIds: string[]) {
+        const maximizedWindows = ctx.windows.filter(
+            w => excludedIds.includes(w.id) === false && w.minimized === false
+        );
+
+        if (maximizedWindows.length > 0) {
+            ctx.setActiveWindow(maximizedWindows[0].id);
+        }
+        else {
+            ctx.setActiveWindow(null);
+        }
     }
 }
 

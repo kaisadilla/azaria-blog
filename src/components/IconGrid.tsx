@@ -7,6 +7,7 @@ import styles from "./IconGrid.module.scss";
 import { clampNumber, Vec2 } from '@/utils';
 import { OsWindow, OsWindowType, PartialOsWindow } from '@/logic/OsWindow';
 import { useOsContext } from '@/app/context';
+import { useContextMenu } from 'mantine-contextmenu';
 
 type IconId = 'recycle_bin' | 'about_me' | 'qualifications' | 'blog' | 'game';
 type IconPositionDictionary = {[K in IconId]: Vec2};
@@ -17,6 +18,7 @@ export interface IconGridProps {
 
 function IconGrid (props: IconGridProps) {
     const ctx = useOsContext();
+    const { showContextMenu } = useContextMenu();
 
     const ref = useRef<HTMLDivElement>(null);
     const [selectedIcon, setSelectedIcon] = useState<IconId | null>(null);
@@ -44,7 +46,37 @@ function IconGrid (props: IconGridProps) {
     }, [ref.current]);
 
     return (
-        <div ref={ref} className={styles.iconGrid} onMouseDown={handleMouseDown}>
+        <div
+            ref={ref}
+            className={styles.iconGrid}
+            onMouseDown={handleMouseDown}
+            onContextMenu={showContextMenu([
+                {
+                    key: "arrange_icons",
+                    icon: <div>?</div>,
+                    title: "Auto arrange icons",
+                    onClick: () => {},
+                },
+                {
+                    key: "sort_name",
+                    icon: <div>?</div>,
+                    title: "Sort by name",
+                    onClick: () => {},
+                },
+                {
+                    key: "new_folder",
+                    icon: <div>?</div>,
+                    title: "New folder",
+                    onClick: () => {},
+                },
+                {
+                    key: "new_text_file",
+                    icon: <div>?</div>,
+                    title: "New text document",
+                    onClick: () => {},
+                },
+            ])}
+        >
             <WIcon
                 icon="recycle_bin"
                 name="Recycle Bin"

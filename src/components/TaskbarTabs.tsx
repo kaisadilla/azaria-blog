@@ -14,10 +14,8 @@ function TaskbarTabs (props: TaskbarTabsProps) {
         <div className={styles.taskbarContainer}>
             {ctx.windows.map(w => <WindowsTab
                 key={w.id}
-                title={w.title}
-                icon={w.icon}
+                window={w}
                 focused={ctx.activeWindowId === w.id}
-                onFocus={() => ctx.setActiveWindow(w.id)}
             />)}
         </div>
     );

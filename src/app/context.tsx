@@ -35,6 +35,8 @@ const OsContextProvider = ({ children }: any) => {
                 const window: OsWindow = {
                     ...partialWindow,
                     position: getEmptyWindowPosition({x: 100, y: 50}),
+                    maximized: false,
+                    minimized: false,
                 }
 
                 return {
@@ -108,7 +110,11 @@ const OsContextProvider = ({ children }: any) => {
         if (origin.x > 1000 || origin.x > 1000) return origin;
 
         for (const w of state.windows) {
-            if (w.position.x === origin.x && w.position.y === origin.y) {
+            if (
+                w.maximized == false
+                && w.position.x === origin.x
+                && w.position.y === origin.y
+            ) {
                 return getEmptyWindowPosition({
                     x: origin.x + 25,
                     y: origin.y + 25

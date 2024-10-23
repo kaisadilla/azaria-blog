@@ -9,6 +9,8 @@ export interface PartialOsWindow {
 
 export interface OsWindow extends PartialOsWindow {
     position: Vec2;
+    maximized: boolean;
+    minimized: boolean;
 }
 
 export type OsWindowType =

@@ -6,11 +6,16 @@ import { poppins } from "@/app/fonts/fonts";
 import { useEffect, useState } from "react";
 import WIcon from "@/components/WIcon";
 import Desktop from "@/components/Desktop";
+import { MantineProvider } from "@mantine/core";
+import { ContextMenuProvider } from "mantine-contextmenu";
 
 // 1024 x 768
 
 export default function Home () {
     return (
+        <MantineProvider>
+        <ContextMenuProvider>
+
         <div className={styles.page}>
             <div className={styles.contentContainer} /*style={{backgroundImage: `url("/img/retro_monitor_crt_4_3_by_diegoba_dexnk7i.png")`}}*/>
                 <div className={styles.contentFrame}>
@@ -24,5 +29,8 @@ export default function Home () {
                 alt="scr"
             />
         </div>
+        
+        </ContextMenuProvider>
+        </MantineProvider>
     );
 }

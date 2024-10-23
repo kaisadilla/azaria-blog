@@ -10,6 +10,7 @@ import { Direction } from 're-resizable/lib/resizer';
 import { Rnd } from 'react-rnd';
 import MovableWindow from './MovableWindow';
 import { useOsContext } from '@/app/context';
+import RecycleBin from './RecycleBin';
 
 export interface WindowAreaProps {
     
@@ -73,7 +74,7 @@ function WindowArea (props: WindowAreaProps) {
 
     return (
         <div ref={ref} className={styles.windowArea}>
-            {ctx.windows.map(w => <MovableWindow
+            {ctx.windows.filter(w => w.minimized === false).map(w => <MovableWindow
                 key={w.id}
                 window={w}
                 parentWidth={width}
@@ -81,7 +82,11 @@ function WindowArea (props: WindowAreaProps) {
                 focused={ctx.activeWindowId === w.id}
                 onFocus={() => ctx.setActiveWindow(w.id)}
                 index={indices[w.id]}
-            />)}
+            >
+                {
+                    w.type === 'recycle_bin' && <RecycleBin />
+                }
+            </MovableWindow>)}
         </div>
     );
 }

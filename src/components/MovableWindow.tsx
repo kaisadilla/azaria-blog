@@ -45,13 +45,18 @@ function MovableWindow ({
         focused && styles.focused,
     );
 
+    const windowSize = window.maximized
+        ? { width: parentWidth + 6, height: parentHeight + 6 }
+        : size;
+
     return (
         <Draggable
             nodeRef={ref}
             handle=".windowHandle"
             bounds={boundaries}
             onMouseDown={recalculateBoundaries}
-            position={window.position}
+            position={window.maximized ? { x: -3, y: -3 } : window.position}
+            onDrag={handleDrag}
             onStop={handleDragStop}
         >
             <div className={divClass} ref={ref} style={{zIndex: index}}>
@@ -64,7 +69,7 @@ function MovableWindow ({
                     maxHeight={parentHeight + 6}
                     style={{pointerEvents: 'auto'}}
                     onResizeStop={handleResizeStop}
-                    size={size}
+                    size={windowSize}
                 >
                     <DesktopWindow
                         focused={focused}
@@ -77,6 +82,21 @@ function MovableWindow ({
             </div>
         </Draggable>
     );
+
+    function handleDrag (evt: DraggableEvent, data: DraggableData) {
+        if (window.maximized == false) return;
+        
+        const rect = ref.current?.getBoundingClientRect();
+        if (!rect) return;
+
+        // evt is actually a MouseEvent and not a Draggable event, for some reason.
+        const mEvt = evt as MouseEvent;
+
+        const update = {...window};
+        update.maximized = false;
+        update.position = { x: mEvt.clientX - rect.left - 100, y: mEvt.clientY - rect.top - 15};
+        ctx.updateWindow(update);
+    }
 
     function handleDragStop (evt: DraggableEvent, data: DraggableData) {
         updateWindowField('position', {x: data.x, y: data.y});
@@ -95,6 +115,8 @@ function MovableWindow ({
     }
 
     function recalculateBoundaries (evt: MouseEvent) {
+        if (window.maximized) return;
+
         const rect = ref.current?.getBoundingClientRect();
 
         const xOffset = evt.clientX - (rect?.left ?? 0);

@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^7.13.3",
+    "@mantine/hooks": "^7.13.3",
+    "mantine-contextmenu": "^7.12.2",
     "next": "14.2.15",
     "re-resizable": "^6.10.0",
     "react": "^18",

@@ -1,20 +1,22 @@
 import React from 'react';
 import styles from "./WindowsTab.module.scss";
 import { getClassString } from '@/utils';
+import { OsWindow } from '@/logic/OsWindow';
+import { useOsContext } from '@/app/context';
 
 export interface WindowsTabProps {
-    title: string;
-    icon: string;
+    window: OsWindow;
     focused?: boolean;
     onFocus?: () => void;
 }
 
 function WindowsTab ({
-    title,
-    icon,
+    window,
     focused = false,
     onFocus,
 }: WindowsTabProps) {
+    const ctx = useOsContext();
+
     const imgName = focused ? "active" : "inactive"
 
     const classStr = getClassString(
@@ -28,15 +30,24 @@ function WindowsTab ({
             style={{
                 backgroundImage: `url("img/wxp_taskbar_tab_${imgName}.png")`
             }}
-            onClick={() => onFocus?.()}
+            onClick={handleClick}
         >
             <img
                 className={styles.icon}
-                src={`img/w_icon/${icon}_16.png`}
+                src={`img/w_icon/${window.icon}_16.png`}
             />
-            <div className={styles.title}>{title}</div>
+            <div className={styles.title}>{window.title}</div>
         </div>
     );
+
+    function handleClick () {
+        ctx.setActiveWindow(window.id);
+        if (window.minimized) {
+            const update = { ...window };
+            update.minimized = false;
+            ctx.updateWindow(update);
+        }
+    }
 }
 
 export default WindowsTab;
