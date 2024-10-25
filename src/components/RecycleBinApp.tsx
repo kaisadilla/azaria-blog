@@ -4,7 +4,7 @@ export interface RecycleBinProps {
     
 }
 
-function RecycleBin (props: RecycleBinProps) {
+function RecycleBinApp (props: RecycleBinProps) {
 
     return (
         <div>
@@ -13,4 +13,4 @@ function RecycleBin (props: RecycleBinProps) {
     );
 }
 
-export default RecycleBin;
+export default RecycleBinApp;

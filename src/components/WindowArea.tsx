@@ -10,7 +10,8 @@ import { Direction } from 're-resizable/lib/resizer';
 import { Rnd } from 'react-rnd';
 import MovableWindow from './MovableWindow';
 import { useOsContext } from '@/app/context';
-import RecycleBin from './RecycleBin';
+import RecycleBinApp from './RecycleBinApp';
+import BlogApp from './BlogApp';
 
 export interface WindowAreaProps {
     
@@ -84,7 +85,10 @@ function WindowArea (props: WindowAreaProps) {
                 index={indices[w.id]}
             >
                 {
-                    w.type === 'recycle_bin' && <RecycleBin />
+                    w.type === 'recycle_bin' && <RecycleBinApp />
+                }
+                {
+                    w.type === 'blog' && <BlogApp />
                 }
             </MovableWindow>)}
         </div>
