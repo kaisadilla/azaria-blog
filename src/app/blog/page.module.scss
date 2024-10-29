@@ -1,0 +1,16 @@
+.blogEntry {
+    max-width: 1000px;
+    font-size: 10.5pt;
+
+    code {
+        font-family: 'Cascadia Code', 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+    }
+
+    pre {
+        display: block;
+        padding: 12px;
+        > code {
+
+        }
+    }
+}
