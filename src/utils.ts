@@ -79,3 +79,11 @@ export function arrayUnion (a: any[], b: any[]) {
 
     return Array.from(set);
 }
+
+/**
+ * Splits a string into the lines it includes.
+ * @param string The string to split into lines.
+ */
+export function splitIntoLines (string: string) {
+    return string.split(/\r?\n|\r|\n/g);
+}

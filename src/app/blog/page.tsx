@@ -4,34 +4,73 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc';
 import React from 'react';
 import styles from './page.module.scss';
 import { poppins } from "@/app/fonts/fonts";
+import { BlogEntryAttributes } from './BlogEntry';
+import { splitIntoLines } from '@/utils';
+import Head from 'next/head';
+import { Metadata, ResolvingMetadata } from 'next';
+import { promises as fs } from 'fs';
+import fm, { FrontMatterResult } from 'front-matter';
+import rehypeSlug from 'rehype-slug';
+import Link from 'next/link';
+
+export async function generateMetadata (parent: ResolvingMetadata) {
+    const entry = await fetchFile();
+
+    return {
+        title: `${entry.attributes.title} – Azaria`,
+    }
+}
 
 async function BlogPage () {
-    const entry = await fetchEntry();
+    const entry = await fetchFile();
+    const headings = entry.body.match(/^#+.*/gm);
 
     const components = {
+        h1: BlogH1,
         WIcon,
         Clock,
     };
 
     return (
-        <div>
-            <div className={`${styles.blogEntry} ${poppins.className}`}>
+        <div className={`${poppins.className}`}>
+            <div className={styles.blogEntry}>
+                <h1>{entry.attributes.title}</h1>
                 {<MDXRemote
-                    source={entry}
+                    source={entry.body}
                     components={components}
+                    options={{
+                        mdxOptions: {
+                            rehypePlugins: [
+                                rehypeSlug,
+                            ]
+                        }
+                    }}
                 />}
+            </div>
+            <div className={styles.headings}>
+                {headings?.map(h => <div key={h}>{h.substring(2)}</div>)}
             </div>
         </div>
     );
+}
 
-    async function fetchEntry () {
-        //console.log(import.meta.resolve("./kek"));
-        const res = await fetch('http://localhost:3000/static/blog/examples/test.md');
-        const txt = await res.text();
-        return txt;
-    }
+function BlogH1 ({id, ...headingProps}: React.HTMLAttributes<HTMLHeadingElement>) {
+    if (id) return (
+        <Link href={`#${id}`}>
+            <h1 id={id} {...headingProps} />
+        </Link>
+    );
+    else return (
+        <h1 {...headingProps} />
+    );
+}
+
+async function fetchFile () : Promise<FrontMatterResult<BlogEntryAttributes>> {
+    const file = await fs.readFile(
+        process.cwd() + '/public/static/blog/examples/test.md', 'utf8'
+    );
+    const content = fm<BlogEntryAttributes>(file);
+    return content;
 }
 
 export default BlogPage;
-
-//"Some **mdx** text, with[out] a component. <WIcon icon='recycle_bin' name='lmao' position={{x: 5, y: 3}} />"

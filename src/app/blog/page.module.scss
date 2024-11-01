@@ -1,6 +1,7 @@
 .blogEntry {
     max-width: 1000px;
     font-size: 10.5pt;
+    padding-left: 200px;
 
     code {
         font-family: 'Cascadia Code', 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
@@ -11,6 +12,20 @@
         padding: 12px;
         > code {
 
+        }
+    }
+
+    h1 {
+        color: red;
+
+        &:hover {
+            text-decoration: underline;
+
+            &::before {
+                content: "#";
+                position: absolute;
+                transform: translateX(-1.75rem) translateY(1px) scale(1);
+            }
         }
     }
 }

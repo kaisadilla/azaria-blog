@@ -1,6 +1,10 @@
+---
+title: Testing MDX for the blog
+created: 2022-03-17
+---
 # Introduction
 
-**Lorem ipsum** dolor sit amet, _consectetur_ adipiscing elit. Quisque interdum nisi ac facilisis ornare. Vivamus tristique porttitor purus sed dignissim. Sed diam augue, eleifend nec felis non, dapibus tincidunt neque. Praesent sed finibus sapien. Integer aliquam finibus enim, ut pellentesque libero tristique nec. Integer congue magna vitae lectus eleifend accumsan. Ut ante nisi, condimentum nec mauris sed, aliquam fermentum purus. Duis non est vitae mi interdum mattis. Morbi dictum nec tortor eget sagittis. Morbi sit amet lectus elit. Curabitur viverra, felis vitae pharetra sollicitudin, erat felis pretium enim, at pretium neque quam ultrices neque. Vestibulum egestas imperdiet diam. Donec id varius tellus, sit amet hendrerit velit.
+**Lorem ipsum** dolor sit amet, _consectetur_ adipiscing elit. Quisque interdum nisi ac facilisis ornare. Vivamus tristique porttitor purus sed dignissim. Sed diam augue, eleifend nec felis non, dapibus tincidunt neque. _Praesent sed finibus sapien. Integer aliquam finibus enim, ut pellentesque libero tristique nec. Integer congue magna vitae lectus eleifend accumsan. Ut ante nisi, condimentum nec mauris sed, aliquam fermentum purus. Duis non est vitae mi interdum mattis._ Morbi dictum nec tortor eget sagittis. Morbi sit amet lectus elit. Curabitur viverra, felis vitae pharetra sollicitudin, erat felis pretium enim, at pretium neque quam ultrices neque. **Vestibulum egestas imperdiet diam. Donec id varius tellus, sit amet hendrerit velit.**
 
 ---
 
@@ -28,7 +32,7 @@ SpriteAnimation* EntityReader::getNextEntityStaticAnimation (
 }
 ```
 
-# Collaborations \{#some-id\}
+# Collaborations
 
 Sed ut ornare nisl, eu posuere nibh. Sed bibendum eget lacus et maximus. Suspendisse in ullamcorper felis. [^1] Integer finibus turpis sit amet massa pharetra malesuada. Mauris dapibus, sem at efficitur pellentesque, tellus risus egestas quam, scelerisque ornare sapien odio nec nulla.
 
