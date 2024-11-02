@@ -12,6 +12,12 @@ import { promises as fs } from 'fs';
 import fm, { FrontMatterResult } from 'front-matter';
 import rehypeSlug from 'rehype-slug';
 import Link from 'next/link';
+import { codeToHtml } from 'shiki';
+import InlineCode from './InlineCode';
+import CodeBlock from './CodeBlock';
+import rehypeMdxCodeProps from 'rehype-mdx-code-props';
+import BlogPre from './BlogPre';
+import BlogCode from './BlogCode';
 
 export async function generateMetadata (parent: ResolvingMetadata) {
     const entry = await fetchFile();
@@ -27,29 +33,50 @@ async function BlogPage () {
 
     const components = {
         h1: BlogH1,
+        code: BlogCode,
+        pre: BlogPre,
+        InlineCode,
+        CodeBlock,
         WIcon,
         Clock,
     };
 
     return (
-        <div className={`${poppins.className}`}>
-            <div className={styles.blogEntry}>
+        <div className={`${styles.blogPage} ${poppins.className}`}>
+            <header className={styles.header}>
                 <h1>{entry.attributes.title}</h1>
-                {<MDXRemote
-                    source={entry.body}
-                    components={components}
-                    options={{
-                        mdxOptions: {
-                            rehypePlugins: [
-                                rehypeSlug,
-                            ]
-                        }
-                    }}
-                />}
+            </header>
+            <div className={styles.entry}>
+                <aside className={styles.contentTable}>
+                    <div className={styles.headings}>
+                        <div className={styles.headings}>
+                            {headings?.map(h => <Link
+                                key={h}
+                                href={`#${h.substring(2).toLocaleLowerCase().replaceAll(" ", "-")}`}
+                            >
+                                <div>{h.substring(2)}</div>
+                            </Link>)}
+                        </div>
+                    </div>
+                </aside>
+                <main className={styles.content}>
+                    {<MDXRemote
+                        source={entry.body}
+                        components={components}
+                        options={{
+                            mdxOptions: {
+                                rehypePlugins: [
+                                    rehypeSlug,
+                                    rehypeMdxCodeProps,
+                                ]
+                            }
+                        }}
+                    />}
+                </main>
             </div>
-            <div className={styles.headings}>
-                {headings?.map(h => <div key={h}>{h.substring(2)}</div>)}
-            </div>
+            <footer className={styles.footer}>
+                This is the footer
+            </footer>
         </div>
     );
 }

@@ -1,31 +1,98 @@
-.blogEntry {
-    max-width: 1000px;
-    font-size: 10.5pt;
-    padding-left: 200px;
+.blogPage {
+    //display: grid;
+    //grid-template: "hea hea" auto
+    //               "cta con" 1fr
+    //               "foo foo" auto / 1fr 2fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: #ddd;
 
-    code {
-        font-family: 'Cascadia Code', 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+    .header {
+        grid-area: hea;
+        min-height: 200px; // TODO: Remove
+        width: 100%;
     }
 
-    pre {
-        display: block;
-        padding: 12px;
-        > code {
+    .entry {
+        display: flex;
+        flex-direction: row;
+        max-width: 1200px;
+        background-color: white;
+        padding: 16px 32px;
+        gap: 16px;
+    }
 
+    .contentTable {
+        grid-area: cta;
+        padding: 1rem 1rem 1rem 0;
+        flex: 2;
+
+        .headings {
+            height: 200px;
+            background: red;
+            position: sticky;
+            top: 1rem;
         }
     }
 
-    h1 {
-        color: red;
+    .content {
+        grid-area: con;
+        flex: 5;
+        font-size: 12pt;
+        overflow-x: hidden;
 
-        &:hover {
-            text-decoration: underline;
+        > p, > div {
+            margin: 24px 48px;
+        }
 
-            &::before {
-                content: "#";
-                position: absolute;
-                transform: translateX(-1.75rem) translateY(1px) scale(1);
+        code {
+            font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+            font-size: 10pt;
+
+            span::selection {
+                background-color: #006eff60;
+                //background-color: #006eff80;
             }
         }
+
+        h1 {
+            background-color: #1dd186;
+            color: white;
+            font-size: 18pt;
+            padding: 6px 0 6px 48px;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            transition: padding-left 0.3s;
+            position: relative;
+            margin: 16px 0;
+
+            &:hover {
+                text-decoration: underline;
+                padding-left: calc(48px + 2rem);
+
+                &::before {
+                    content: "#";
+                    position: absolute;
+                    left: 0;
+                    transform: translateX(48px);
+                    //transform: translateX(-1.75rem) translateY(1px) scale(1);
+                }
+            }
+        }
+
+        hr {
+            border-top: 0;
+            margin: 0 24px;
+        }
+    }
+
+    .footer {
+        grid-area: foo;
+
+        background-color: #1dd186;
+        min-height: 3000px; // TODO: Remove
+        width: 100%;
     }
 }

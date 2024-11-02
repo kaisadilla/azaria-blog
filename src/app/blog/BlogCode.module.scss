@@ -1,0 +1,9 @@
+.inlineCode {
+    display: inline-block;
+
+    > pre {
+        border-radius: 6px;
+        padding: 0px 8px;
+        margin: 0px 4px;
+    }
+}

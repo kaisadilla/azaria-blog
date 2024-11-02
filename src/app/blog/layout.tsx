@@ -9,9 +9,7 @@ export interface BlogLayoutProps {
 function BlogLayout (props: BlogLayoutProps) {
 
     return (
-        <div>
-            <BlogPage />
-        </div>
+        <BlogPage />
     );
 }
 
