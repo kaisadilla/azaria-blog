@@ -18,6 +18,7 @@ import CodeBlock from './CodeBlock';
 import rehypeMdxCodeProps from 'rehype-mdx-code-props';
 import BlogPre from './BlogPre';
 import BlogCode from './BlogCode';
+import Image from 'next/image';
 
 export async function generateMetadata (parent: ResolvingMetadata) {
     const entry = await fetchFile();
@@ -45,6 +46,18 @@ async function BlogPage () {
         <div className={`${styles.blogPage} ${poppins.className}`}>
             <header className={styles.header}>
                 <h1>{entry.attributes.title}</h1>
+                <Image
+                    src="/img/blog_header.png"
+                    alt=""
+                    width={1920 / 2}
+                    height={500 / 2}
+                />
+                <Image
+                    src="/img/blog_header.png"
+                    alt=""
+                    width={1920 / 2}
+                    height={500 / 2}
+                />
             </header>
             <div className={styles.entry}>
                 <aside className={styles.contentTable}>

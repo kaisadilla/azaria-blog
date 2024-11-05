@@ -7,12 +7,20 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    background-color: #ddd;
+    //background-color: #ddd;
 
     .header {
         grid-area: hea;
         min-height: 200px; // TODO: Remove
         width: 100%;
+
+        h1 {
+            background: #ff8605;
+        }
+
+        img {
+            filter: sepia() saturate(300%) hue-rotate(148deg);
+        }
     }
 
     .entry {
