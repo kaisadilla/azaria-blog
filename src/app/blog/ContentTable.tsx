@@ -13,6 +13,7 @@ function ContentTable ({
     headings,
 }: ContentTableProps) {
     const [index, setIndex] = useState(0);
+    const cssPadding = `calc(48px + ${headings.length * 0.8}em)`;
     
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -23,16 +24,20 @@ function ContentTable ({
     }, []);
 
     return (
-        <div className={styles.contentTable}>
+        <div
+            className={styles.contentTable}
+            style={{paddingTop: cssPadding, paddingBottom: cssPadding}}
+        >
             <div className={styles.headings}>
                 <div className={styles.headings}>
-                    {headings?.map((h, i) => <_HeadingLink
-                        key={h}
-                        heading={h}
-                        headingIndex={i}
-                        activeIndex={index}
-                        //onClick={() => setIndex(i)}
-                    />)}
+                    <div className={styles.headingContainer}>
+                        {headings?.map((h, i) => <_HeadingLink
+                            key={h}
+                            heading={h}
+                            headingIndex={i}
+                            activeIndex={index}
+                        />)}
+                    </div>
                 </div>
             </div>
         </div>

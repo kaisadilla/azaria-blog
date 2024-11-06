@@ -9,6 +9,11 @@
     gap: 1rem;
     //background-color: #ddd;
 
+    ::selection {
+        //background-color: #feaaee;
+        background-color: #fdab31;
+    }
+
     .header {
         grid-area: hea;
         min-height: 100px; // TODO: Remove
@@ -58,9 +63,6 @@
     .contentTable {
         grid-area: cta;
         padding: 1rem 1rem 1rem 0;
-        // TODO: These should be called dynamically.
-        padding-top: 200px;
-        padding-bottom: 200px;
         min-width: 250px;
     }
 

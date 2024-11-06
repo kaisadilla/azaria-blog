@@ -7,14 +7,21 @@
         position: sticky;
         top: 50%;
         text-align: right;
-        font-size: 14pt;
+        font-size: 16pt;
         font-weight: 200;
-        //background-color: red;
         height: 1px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        //align-items: end;
+        line-height: 1.6;
+
+        .headingContainer {
+            padding: 32px 16px 32px 0px;
+            border-right: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
         .heading {
             padding-left: 36px;
@@ -25,7 +32,7 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: end;
-                gap: 1em;
+                gap: 1rem;
             }
 
             &.active {
