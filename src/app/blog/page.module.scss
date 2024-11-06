@@ -11,37 +11,78 @@
 
     .header {
         grid-area: hea;
-        min-height: 200px; // TODO: Remove
+        min-height: 100px; // TODO: Remove
         width: 100%;
+        position: relative;
+        margin-bottom: 236px;
 
         h1 {
-            background: #ff8605;
+            background: #30c0ef;
+            height: 100px;
         }
 
         img {
-            filter: sepia() saturate(300%) hue-rotate(148deg);
+            //filter: sepia() saturate(300%) hue-rotate(148deg);
+            position: absolute;
+            top: 100%;
+            z-index: -10;
+            user-select: none;
+            width: 100%;
+            aspect-ratio: 3840 / 1144;
         }
     }
 
     .entry {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template: "hea hea" auto
+                       "cta con" 1fr / 2fr 5fr;
         max-width: 1200px;
-        background-color: white;
+        //background-color: white;
         padding: 16px 32px;
         gap: 16px;
+    }
+
+    .entryTitle {
+        grid-area: hea;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 42pt;
+        font-weight: 500;
+        color: #0661b6;
+        min-height: 200px;
     }
 
     .contentTable {
         grid-area: cta;
         padding: 1rem 1rem 1rem 0;
         flex: 2;
+        // TODO: These should be called dynamically.
+        padding-top: 200px;
+        padding-bottom: 200px;
 
         .headings {
-            height: 200px;
-            background: red;
             position: sticky;
-            top: 1rem;
+            top: 50%;
+            text-align: right;
+            font-size: 14pt;
+            font-weight: 200;
+            //background-color: red;
+            height: 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            //align-items: end;
+
+            .heading {
+                padding-left: 36px;
+                border-bottom: 1px solid transparent;
+
+                &:hover {
+                    border-color: black;
+                }
+            }
         }
     }
 
@@ -66,7 +107,7 @@
         }
 
         h1 {
-            background-color: #1dd186;
+            background-color: #30c0ef; //#1dd186;
             color: white;
             font-size: 18pt;
             padding: 6px 0 6px 48px;
@@ -93,14 +134,15 @@
         hr {
             border-top: 0;
             margin: 0 24px;
+            border-color: #30c0ef;
         }
     }
 
     .footer {
         grid-area: foo;
 
-        background-color: #1dd186;
-        min-height: 3000px; // TODO: Remove
+        background-color: #30c0ef;
+        min-height: 1000px; // TODO: Remove
         width: 100%;
     }
 }

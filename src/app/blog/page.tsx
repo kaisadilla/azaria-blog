@@ -3,7 +3,7 @@ import WIcon from '@/components/WIcon';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc';
 import React from 'react';
 import styles from './page.module.scss';
-import { poppins } from "@/app/fonts/fonts";
+import { fontAside, fontBody, fontTitle } from "@/app/fonts/fonts";
 import { BlogEntryAttributes } from './BlogEntry';
 import { splitIntoLines } from '@/utils';
 import Head from 'next/head';
@@ -43,28 +43,27 @@ async function BlogPage () {
     };
 
     return (
-        <div className={`${styles.blogPage} ${poppins.className}`}>
+        <div className={`${styles.blogPage} ${fontBody.className}`}>
             <header className={styles.header}>
-                <h1>{entry.attributes.title}</h1>
-                <Image
+                <h1>Azaria</h1>
+                {true && <img
                     src="/img/blog_header.png"
                     alt=""
-                    width={1920 / 2}
-                    height={500 / 2}
-                />
-                <Image
-                    src="/img/blog_header.png"
-                    alt=""
-                    width={1920 / 2}
-                    height={500 / 2}
-                />
+                    //width={3840 / 2}
+                    //height={1144 / 2}
+                    //quality={100}
+                />}
             </header>
             <div className={styles.entry}>
-                <aside className={styles.contentTable}>
+                <h1 className={`${styles.entryTitle} ${fontTitle.className}`}>
+                    {entry.attributes.title}
+                </h1>
+                <aside className={`${styles.contentTable} ${fontAside.className}`}>
                     <div className={styles.headings}>
                         <div className={styles.headings}>
                             {headings?.map(h => <Link
                                 key={h}
+                                className={styles.heading}
                                 href={`#${h.substring(2).toLocaleLowerCase().replaceAll(" ", "-")}`}
                             >
                                 <div>{h.substring(2)}</div>
