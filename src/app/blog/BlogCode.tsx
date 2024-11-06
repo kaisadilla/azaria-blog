@@ -33,7 +33,7 @@ async function BlogCode ({children, ...codeProps}: React.HTMLAttributes<HTMLElem
         <code>{code}</code>
     );
     else return (
-        <div
+        <span
             className={styles.inlineCode}
             dangerouslySetInnerHTML={{__html: html}}
         />

@@ -19,6 +19,7 @@ import rehypeMdxCodeProps from 'rehype-mdx-code-props';
 import BlogPre from './BlogPre';
 import BlogCode from './BlogCode';
 import Image from 'next/image';
+import ContentTable from './ContentTable';
 
 export async function generateMetadata (parent: ResolvingMetadata) {
     const entry = await fetchFile();
@@ -46,30 +47,20 @@ async function BlogPage () {
         <div className={`${styles.blogPage} ${fontBody.className}`}>
             <header className={styles.header}>
                 <h1>Azaria</h1>
-                {true && <img
+                <img
+                    className={styles.headerEnd}
                     src="/img/blog_header.png"
                     alt=""
-                    //width={3840 / 2}
-                    //height={1144 / 2}
-                    //quality={100}
-                />}
+                />
             </header>
             <div className={styles.entry}>
                 <h1 className={`${styles.entryTitle} ${fontTitle.className}`}>
                     {entry.attributes.title}
                 </h1>
                 <aside className={`${styles.contentTable} ${fontAside.className}`}>
-                    <div className={styles.headings}>
-                        <div className={styles.headings}>
-                            {headings?.map(h => <Link
-                                key={h}
-                                className={styles.heading}
-                                href={`#${h.substring(2).toLocaleLowerCase().replaceAll(" ", "-")}`}
-                            >
-                                <div>{h.substring(2)}</div>
-                            </Link>)}
-                        </div>
-                    </div>
+                    {headings && <ContentTable
+                        headings={headings}
+                    />}
                 </aside>
                 <main className={styles.content}>
                     {<MDXRemote
@@ -87,7 +78,14 @@ async function BlogPage () {
                 </main>
             </div>
             <footer className={styles.footer}>
-                This is the footer
+                <img
+                    className={styles.footerStart}
+                    src="/img/blog_header.png"
+                    alt=""
+                />
+                <div className={styles.footerContent}>
+                    This is the footer
+                </div>
             </footer>
         </div>
     );

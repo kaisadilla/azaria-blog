@@ -1,0 +1,48 @@
+.contentTable {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .headings {
+        position: sticky;
+        top: 50%;
+        text-align: right;
+        font-size: 14pt;
+        font-weight: 200;
+        //background-color: red;
+        height: 1px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        //align-items: end;
+
+        .heading {
+            padding-left: 36px;
+            border-bottom: 1px solid transparent;
+
+            > div {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: end;
+                gap: 1em;
+            }
+
+            &.active {
+                font-weight: 900;
+                color: #0661b6;
+            }
+
+            &:hover, &.active {
+                .icon {
+                    display: block;
+                }
+            }
+
+            .icon {
+                width: 16px;
+                display: none;
+            }
+        }
+    }
+}
