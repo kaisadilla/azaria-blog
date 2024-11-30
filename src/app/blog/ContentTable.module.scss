@@ -7,7 +7,7 @@
         position: sticky;
         top: 50%;
         text-align: right;
-        font-size: 16pt;
+        font-size: 14pt;
         font-weight: 200;
         height: 1px;
         display: flex;
@@ -21,33 +21,38 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            gap: 12px;
         }
 
         .heading {
-            padding-left: 36px;
+            $icon-width: 16px;
+            $icon-gap: 1rem;
+
+            padding-left: calc($icon-width + $icon-gap);
             border-bottom: 1px solid transparent;
 
             > div {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                justify-content: end;
-                gap: 1rem;
+                justify-content: flex-end;
+                gap: $icon-gap;
             }
 
             &.active {
                 font-weight: 900;
-                color: #0661b6;
+                color: var(--color-primary);
             }
 
             &:hover, &.active {
+                padding-left: 0px;
                 .icon {
                     display: block;
                 }
             }
 
             .icon {
-                width: 16px;
+                width: $icon-width;
                 display: none;
             }
         }

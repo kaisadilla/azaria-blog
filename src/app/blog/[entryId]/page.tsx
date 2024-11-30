@@ -1,32 +1,42 @@
-import Clock from '@/components/Clock';
-import WIcon from '@/components/WIcon';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc';
+import { ResolvingMetadata } from 'next';
 import React from 'react';
-import styles from './page.module.scss';
-import { fontAside, fontBody, fontTitle } from "@/app/fonts/fonts";
-import { BlogEntryAttributes } from './BlogEntry';
-import { Metadata, ResolvingMetadata } from 'next';
+import styles from '../page.module.scss';
 import { promises as fs } from 'fs';
 import fm, { FrontMatterResult } from 'front-matter';
-import rehypeSlug from 'rehype-slug';
+import { BlogEntryAttributes } from '../BlogEntry';
 import Link from 'next/link';
-import InlineCode from './InlineCode';
-import CodeBlock from './CodeBlock';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import ContentTable from '../ContentTable';
+import { fontAside, fontTitle } from '@/app/fonts/fonts';
+import rehypeSlug from 'rehype-slug';
 import rehypeMdxCodeProps from 'rehype-mdx-code-props';
-import BlogPre from './BlogPre';
-import BlogCode from './BlogCode';
-import ContentTable from './ContentTable';
+import BlogCode from '../BlogCode';
+import BlogPre from '../BlogPre';
+import InlineCode from '../InlineCode';
+import CodeBlock from '../CodeBlock';
+import WIcon from '@/components/WIcon';
+import Clock from '@/components/Clock';
 
 export async function generateMetadata (parent: ResolvingMetadata) {
-    const entry = await fetchFile();
+    const entry = await fetchFile("test");
 
     return {
         title: `${entry.attributes.title} – Azaria`,
     }
 }
 
-async function BlogPage () {
-    const entry = await fetchFile();
+export interface PidPageProps {
+    params: Promise<{
+        entryId: string
+    }>
+}
+
+async function PidPage ({
+    params,
+}: PidPageProps) {
+    const { entryId } = await params;
+
+    const entry = await fetchFile(entryId);
     const headings = entry.body.match(/^#+.*/gm);
 
     const components = {
@@ -78,12 +88,12 @@ function BlogH1 ({id, ...headingProps}: React.HTMLAttributes<HTMLHeadingElement>
     );
 }
 
-async function fetchFile () : Promise<FrontMatterResult<BlogEntryAttributes>> {
+async function fetchFile (entryId: string) : Promise<FrontMatterResult<BlogEntryAttributes>> {
     const file = await fs.readFile(
-        process.cwd() + '/public/static/blog/examples/test.md', 'utf8'
+        process.cwd() + `/public/static/blog/examples/${entryId}.md`, 'utf8'
     );
     const content = fm<BlogEntryAttributes>(file);
     return content;
 }
 
-export default BlogPage;
+export default PidPage;

@@ -1,0 +1,51 @@
+.header {
+    grid-area: hea;
+    min-height: 100px; // TODO: Remove
+    width: 100%;
+    position: relative;
+    margin-bottom: 236px;
+    background: var(--color-primary);
+
+    .headerContent {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 3vh;
+        gap: 48px;
+        user-select: none;
+        width: 100%;
+        height: 50px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 20;
+        background: var(--color-primary);
+
+
+        .logo {
+            //background-color: red;
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            color: white;
+            font-weight: 500;
+            flex-shrink: 0;
+            //background-color: blue;
+        }
+    }
+
+    .headerEnd {
+        //filter: sepia() saturate(300%) hue-rotate(148deg);
+        // TODO: Orange for night mode
+        //filter: sepia() saturate(300%) hue-rotate(-10deg);
+        position: absolute;
+        top: 100%;
+        user-select: none;
+        width: 100%;
+        aspect-ratio: 3840 / 1144;
+    }
+}

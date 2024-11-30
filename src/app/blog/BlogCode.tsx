@@ -18,7 +18,7 @@ async function BlogCode ({children, ...codeProps}: React.HTMLAttributes<HTMLElem
             theme: "light-plus",
             colorReplacements: {
                 "light-plus": {
-                    "#ffffff": "#eff1f5",
+                    "#ffffff": "var(--color-code-block-bg)",
                 }
             },
         });

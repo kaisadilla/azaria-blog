@@ -101,9 +101,11 @@ function _HeadingLink ({
     );
 }
 
-
+// TODO: Remove and do this in a better way that guarantees it matches rehype-slug.
 function getHeadingId (heading: string) {
-    return heading.substring(2).toLocaleLowerCase().replaceAll(" ", "-");
+    return heading.substring(2).toLocaleLowerCase()
+        .replaceAll(" ", "-")
+        .replaceAll("?", "");
 }
 
 export default ContentTable;

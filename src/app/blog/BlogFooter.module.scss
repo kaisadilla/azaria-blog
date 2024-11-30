@@ -1,0 +1,24 @@
+.footer {
+    grid-area: foo;
+
+    min-height: 1000px; // TODO: Remove
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: -300px;
+
+    .footerStart {
+        //position: absolute;
+        //top: 0;
+        user-select: none;
+        width: 100vw;
+        aspect-ratio: 3840 / 1144;
+        transform: scale(-1);
+    }
+
+    .footerContent {
+        background-color: var(--color-primary);
+        flex: 1;
+    }
+}

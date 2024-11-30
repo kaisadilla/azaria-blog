@@ -25,7 +25,7 @@ async function BlogPre (
             theme: "light-plus",
             colorReplacements: {
                 "light-plus": {
-                    "#ffffff": "#eff1f5",
+                    "#ffffff": "var(--color-code-block-bg)",
                 }
             },
         });
