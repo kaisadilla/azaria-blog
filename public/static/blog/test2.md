@@ -1,6 +1,8 @@
 ---
 title: How to create a blog?
 created: 2023-01-06
+thumbnail: terrible-code.jpg
+summary: Nunc maximus, neque sed scelerisque tristique, lectus sapien dictum orci, elementum posuere tortor lectus ac nulla.
 ---
 
 # Why a blog?

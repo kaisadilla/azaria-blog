@@ -1,89 +1,47 @@
-import Clock from '@/components/Clock';
-import WIcon from '@/components/WIcon';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc';
 import React from 'react';
-import styles from './page.module.scss';
-import { fontAside, fontBody, fontTitle } from "@/app/fonts/fonts";
-import { BlogEntryAttributes } from './BlogEntry';
-import { Metadata, ResolvingMetadata } from 'next';
+import styles from "./page.module.scss";
 import { promises as fs } from 'fs';
+import { BlogEntryAttributes } from './BlogEntry';
 import fm, { FrontMatterResult } from 'front-matter';
-import rehypeSlug from 'rehype-slug';
-import Link from 'next/link';
-import InlineCode from './InlineCode';
-import CodeBlock from './CodeBlock';
-import rehypeMdxCodeProps from 'rehype-mdx-code-props';
-import BlogPre from './BlogPre';
-import BlogCode from './BlogCode';
-import ContentTable from './ContentTable';
+import { Pagination, Text } from '@mantine/core';
+import EntryList from './EntryList';
 
-export async function generateMetadata (parent: ResolvingMetadata) {
-    const entry = await fetchFile();
-
-    return {
-        title: `${entry.attributes.title} – Azaria`,
-    }
+export interface BlogPageProps {
+    
 }
 
-async function BlogPage () {
-    const entry = await fetchFile();
-    const headings = entry.body.match(/^#+.*/gm);
-
-    const components = {
-        h1: BlogH1,
-        code: BlogCode,
-        pre: BlogPre,
-        InlineCode,
-        CodeBlock,
-        WIcon,
-        Clock,
-    };
+async function BlogPage (props: BlogPageProps) {
+    const entries = await getEntries();
 
     return (
-        <div className={styles.entry}>
-            <h1 className={`${styles.entryTitle} ${fontTitle.className}`}>
-                {entry.attributes.title}
-            </h1>
-            <aside className={`${styles.contentTable} ${fontAside.className}`}>
-                {headings && <ContentTable
-                    headings={headings}
-                />}
-            </aside>
-            <main className={styles.content}>
-                {<MDXRemote
-                    source={entry.body}
-                    components={components}
-                    options={{
-                        mdxOptions: {
-                            rehypePlugins: [
-                                rehypeSlug,
-                                rehypeMdxCodeProps,
-                            ]
-                        }
-                    }}
-                />}
-            </main>
+        <div className={styles.page}>
+            <EntryList entries={entries} />
         </div>
     );
 }
 
-function BlogH1 ({id, ...headingProps}: React.HTMLAttributes<HTMLHeadingElement>) {
-    if (id) return (
-        <Link href={`#${id}`}>
-            <h1 id={id} {...headingProps} />
-        </Link>
-    );
-    else return (
-        <h1 {...headingProps} />
-    );
-}
+/**
+ * Reads and returns all entries in the blog folder, sorted from newest to oldest
+ * (according to their 'created' attribute).
+ */
+async function getEntries () : Promise<FrontMatterResult<BlogEntryAttributes>[]> {
+    const entries = [] as FrontMatterResult<BlogEntryAttributes>[];
 
-async function fetchFile () : Promise<FrontMatterResult<BlogEntryAttributes>> {
-    const file = await fs.readFile(
-        process.cwd() + '/public/static/blog/examples/test.md', 'utf8'
+    const files = await fs.readdir(
+        process.cwd() + "/public/static/blog/"
     );
-    const content = fm<BlogEntryAttributes>(file);
-    return content;
+
+    for (const f of files) {
+        const txt = await fs.readFile(
+            process.cwd() + `/public/static/blog/${f}`, 'utf8'
+        );
+        const content = fm<BlogEntryAttributes>(txt);
+        entries.push(content);
+    }
+
+    return entries.sort(
+        (a, b) => b.attributes.created.getTime() - a.attributes.created.getTime()
+    );
 }
 
 export default BlogPage;

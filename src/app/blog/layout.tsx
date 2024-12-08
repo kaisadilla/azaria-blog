@@ -6,6 +6,7 @@ import BlogFooter from './BlogFooter';
 import { fontBody } from '../fonts/fonts';
 import styles from "./layout.module.scss";
 import "../styles.scss";
+import { MantineProvider } from '@mantine/core';
 
 export interface BlogLayoutProps {
     children: React.ReactNode;
@@ -16,11 +17,17 @@ function BlogLayout ({
 }: BlogLayoutProps) {
 
     return (
+        <MantineProvider>
+            
         <div className={`${styles.blogPage} ${fontBody.className}`}>
             <BlogHeader />
-            {children}
+            <div className={styles.pageBody}>
+                {children}
+            </div>
             <BlogFooter />
         </div>
+
+        </MantineProvider>
     );
 }
 

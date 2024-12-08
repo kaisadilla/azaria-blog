@@ -1,0 +1,8 @@
+@mixin hex-horizontal {
+    aspect-ratio: 1 / cos(30deg);
+    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+}
+@mixin hex-vertical {
+    aspect-ratio: cos(30deg) / 1;
+    clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
+}

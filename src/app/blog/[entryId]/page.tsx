@@ -1,6 +1,6 @@
 import { ResolvingMetadata } from 'next';
 import React from 'react';
-import styles from '../page.module.scss';
+import styles from './page.module.scss';
 import { promises as fs } from 'fs';
 import fm, { FrontMatterResult } from 'front-matter';
 import { BlogEntryAttributes } from '../BlogEntry';
@@ -90,7 +90,7 @@ function BlogH1 ({id, ...headingProps}: React.HTMLAttributes<HTMLHeadingElement>
 
 async function fetchFile (entryId: string) : Promise<FrontMatterResult<BlogEntryAttributes>> {
     const file = await fs.readFile(
-        process.cwd() + `/public/static/blog/examples/${entryId}.md`, 'utf8'
+        process.cwd() + `/public/static/blog/${entryId}.md`, 'utf8'
     );
     const content = fm<BlogEntryAttributes>(file);
     return content;

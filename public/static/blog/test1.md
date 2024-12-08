@@ -1,6 +1,8 @@
 ---
 title: Second test article
 created: 2022-07-21
+thumbnail: terrible-code.jpg
+summary: Donec eu aliquet ligula. Etiam sodales ut lectus nec aliquam. Proin vel elit faucibus, iaculis metus sit amet, condimentum enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam vehicula magna nec nulla eleifend, eget lobortis nulla varius. Nulla in nibh mollis, fringilla lacus non, efficitur lacus. In maximus ex quam, vitae aliquam felis luctus sit amet. Aenean tempus dui in tempus lobortis. Aenean condimentum felis quis risus tincidunt, ut pretium orci lacinia. Mauris nec mi feugiat, egestas dui quis, scelerisque eros. Maecenas nunc erat, maximus nec pulvinar eu, aliquam elementum nibh. Pellentesque quis quam lectus.
 ---
 # How to do it
 Donec eu aliquet ligula. Etiam sodales ut lectus nec aliquam. Proin vel elit faucibus, iaculis metus sit amet, condimentum enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam vehicula magna nec nulla eleifend, eget lobortis nulla varius. Nulla in nibh mollis, fringilla lacus non, efficitur lacus. In maximus ex quam, vitae aliquam felis luctus sit amet. Aenean tempus dui in tempus lobortis. Aenean condimentum felis quis risus tincidunt, ut pretium orci lacinia. Mauris nec mi feugiat, egestas dui quis, scelerisque eros. Maecenas nunc erat, maximus nec pulvinar eu, aliquam elementum nibh. Pellentesque quis quam lectus.

@@ -1,87 +1,11 @@
-.entry {
-    display: grid;
-    grid-template: "hea hea" auto
-                   "cta con" 1fr / 3fr 7fr;
-    max-width: 1300px;
-    //background-color: white;
+.page {
+    max-width: 964px;
     padding: 16px 32px;
-    gap: 16px;
-    margin-bottom: calc(calc(1920px - 100vw) / 3);
-    z-index: 10;
-    margin-right: 100px; // TODO: Test
-}
+    width: 70vw;
+    margin-bottom: calc(calc(1920px - 100vw) / 3); // probably not
 
-.entryTitle {
-    grid-area: hea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 42pt;
-    font-weight: 500;
-    color: var(--color-primary-d1);
-    min-height: 200px;
-    margin-left: 100px; // TODO: Test
-    //position: sticky;
-    //top: 0;
-    //z-index: 5;
-}
-
-.contentTable {
-    grid-area: cta;
-    padding: 1rem 3vw 1rem 0;
-    min-width: 250px;
-    overflow-x: unset;
-}
-
-.content {
-    grid-area: con;
-    font-size: 12pt;
-    overflow-x: hidden;
-    min-width: 400px;
-
-    > p, > div {
-        margin: 24px 48px;
-    }
-
-    code {
-        font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
-        font-size: 10pt;
-
-        span::selection {
-            background-color: var(--color-selection-code);
-        }
-    }
-
-    h1 {
-        background-color: var(--color-primary); //#1dd186;
-        color: white;
-        font-size: 18pt;
-        padding: 6px 0 6px 48px;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-        transition: padding-left 0.3s;
-        position: relative;
-        margin: 16px 0;
-        text-shadow: 1px 1px 3px black;
-
-        &:hover {
-            text-decoration: underline;
-            padding-left: calc(48px + 2rem);
-
-            &::before {
-                content: "#";
-                position: absolute;
-                left: 0;
-                transform: translateX(48px);
-                //transform: translateX(-1.75rem) translateY(1px) scale(1);
-            }
-        }
-    }
-
-    hr {
-        border-top: 0;
-        margin: 0 24px;
-        border-color: var(--color-primary);
+    > .title {
+        margin-bottom: 48px;
+        font-size: 36pt;
     }
 }
