@@ -5,6 +5,7 @@ import { BlogEntryAttributes } from './BlogEntry';
 import fm, { FrontMatterResult } from 'front-matter';
 import { Pagination, Text } from '@mantine/core';
 import EntryList from './EntryList';
+import path from 'path';
 
 export interface BlogPageProps {
     
@@ -15,7 +16,13 @@ async function BlogPage (props: BlogPageProps) {
 
     return (
         <div className={styles.page}>
-            <EntryList entries={entries} />
+            <h1 className={styles.title}>Latest entries</h1>
+            <EntryList entries={[
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+            ]} />
         </div>
     );
 }
@@ -36,6 +43,7 @@ async function getEntries () : Promise<FrontMatterResult<BlogEntryAttributes>[]>
             process.cwd() + `/public/static/blog/${f}`, 'utf8'
         );
         const content = fm<BlogEntryAttributes>(txt);
+        content.attributes.id = path.parse(f).name;
         entries.push(content);
     }
 

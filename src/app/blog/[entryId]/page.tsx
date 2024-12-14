@@ -16,6 +16,7 @@ import InlineCode from '../InlineCode';
 import CodeBlock from '../CodeBlock';
 import WIcon from '@/components/WIcon';
 import Clock from '@/components/Clock';
+import rehypeSanitize from 'rehype-sanitize';
 
 export async function generateMetadata (parent: ResolvingMetadata) {
     const entry = await fetchFile("test");
@@ -25,19 +26,19 @@ export async function generateMetadata (parent: ResolvingMetadata) {
     }
 }
 
-export interface PidPageProps {
+export interface EntryPageProps {
     params: Promise<{
         entryId: string
     }>
 }
 
-async function PidPage ({
+async function EntryPage ({
     params,
-}: PidPageProps) {
+}: EntryPageProps) {
     const { entryId } = await params;
 
     const entry = await fetchFile(entryId);
-    const headings = entry.body.match(/^#+.*/gm);
+    const headings = entry.body.match(/^#+.*/gm)?.map(h => h.substring(2)) ?? [];
 
     const components = {
         h1: BlogH1,
@@ -67,6 +68,7 @@ async function PidPage ({
                         mdxOptions: {
                             rehypePlugins: [
                                 rehypeSlug,
+                                //rehypeSanitize, // TODO: Reimplement
                                 rehypeMdxCodeProps,
                             ]
                         }
@@ -96,4 +98,4 @@ async function fetchFile (entryId: string) : Promise<FrontMatterResult<BlogEntry
     return content;
 }
 
-export default PidPage;
+export default EntryPage;

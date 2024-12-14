@@ -5,6 +5,7 @@
     position: relative;
     margin-bottom: 236px;
     background: var(--color-primary);
+    pointer-events: none;
 
     .headerContent {
         display: flex;
@@ -21,7 +22,7 @@
         left: 0px;
         z-index: 20;
         background: var(--color-primary);
-
+        pointer-events: auto;
 
         .logo {
             //background-color: red;
@@ -47,6 +48,5 @@
         user-select: none;
         width: 100%;
         aspect-ratio: 3840 / 1144;
-        pointer-events: none;
     }
 }

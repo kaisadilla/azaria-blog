@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 import styles from "./ContentTable.module.scss";
 import Link from 'next/link';
 import { getClassString } from '@/utils';
+import GithubSlugger from "github-slugger";
 
 export interface ContentTableProps {
     headings: string[];
@@ -12,14 +13,23 @@ export interface ContentTableProps {
 function ContentTable ({
     headings,
 }: ContentTableProps) {
+    const slugger = new GithubSlugger();
+
     const [index, setIndex] = useState(0);
-    const cssPadding = `calc(48px + ${headings.length * 0.8}em)`;
     
+    const cssPadding = `calc(48px + ${headings.length * 0.8}em)`;
+    const headingSlugs = headings.map(h => slugger.slug(h));
+    
+    // This part highlights the section that is currently being read by the
+    // user.
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        const $scrollableBody = document.getElementById("scrollableBody");
+        if (!$scrollableBody) return;
+
+        $scrollableBody.addEventListener('scroll', handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            $scrollableBody.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
@@ -34,6 +44,7 @@ function ContentTable ({
                         {headings?.map((h, i) => <_HeadingLink
                             key={h}
                             heading={h}
+                            slug={headingSlugs[i]}
                             headingIndex={i}
                             activeIndex={index}
                         />)}
@@ -47,13 +58,11 @@ function ContentTable ({
         const yThreshold = window.innerHeight / 3;
         
         let newIndex = 0;
-
-        for (let i = 0; i < headings.length; i++) {
-            const heading = headings[i];
-
-            const el = document.getElementById(getHeadingId(heading));
+        
+        for (let i = 0; i < headings.length; i++) {        
+            const el = document.getElementById(headingSlugs[i]);
             if (!el) continue;
-
+        
             const yClient = el.getBoundingClientRect().y;
             if (yClient < yThreshold) newIndex = i;
         }
@@ -64,6 +73,7 @@ function ContentTable ({
 
 interface _HeadingLinkProps {
     heading: string;
+    slug: string;
     headingIndex: number;
     activeIndex: number;
     onClick?: () => void;
@@ -71,6 +81,7 @@ interface _HeadingLinkProps {
 
 function _HeadingLink ({
     heading,
+    slug,
     headingIndex,
     activeIndex,
     onClick,
@@ -83,7 +94,7 @@ function _HeadingLink ({
     return (
         <Link
             className={classStr}
-            href={"#" + getHeadingId(heading)}
+            href={"#" + slug}
             onClick={onClick}
         >
             <div>
@@ -95,17 +106,10 @@ function _HeadingLink ({
                             : "/img/blog_hex_shallow.png"
                     }
                 />
-                {heading.substring(2)}
+                {heading}
             </div>
         </Link>
     );
-}
-
-// TODO: Remove and do this in a better way that guarantees it matches rehype-slug.
-function getHeadingId (heading: string) {
-    return heading.substring(2).toLocaleLowerCase()
-        .replaceAll(" ", "-")
-        .replaceAll("?", "");
 }
 
 export default ContentTable;

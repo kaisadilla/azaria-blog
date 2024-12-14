@@ -3,4 +3,5 @@ export interface BlogEntryAttributes {
     created: Date;
     thumbnail: string;
     summary?: string;
+    id?: string;
 }

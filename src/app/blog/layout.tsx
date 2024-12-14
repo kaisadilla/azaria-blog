@@ -5,6 +5,7 @@ import BlogHeader from './BlogHeader';
 import BlogFooter from './BlogFooter';
 import { fontBody } from '../fonts/fonts';
 import styles from "./layout.module.scss";
+import 'react-material-symbols/rounded';
 import "../styles.scss";
 import { MantineProvider } from '@mantine/core';
 
@@ -19,7 +20,7 @@ function BlogLayout ({
     return (
         <MantineProvider>
             
-        <div className={`${styles.blogPage} ${fontBody.className}`}>
+        <div id="scrollableBody" className={`${styles.blogPage} ${fontBody.className}`}>
             <BlogHeader />
             <div className={styles.pageBody}>
                 {children}

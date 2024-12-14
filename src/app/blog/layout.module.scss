@@ -3,6 +3,10 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth !important;
 
     ::selection {
         //background-color: #feaaee;
@@ -10,7 +14,7 @@
     }
 
     .pageBody {
-        min-height: 45vw;
+        //min-height: 45vw;
 
         h1 {
             
