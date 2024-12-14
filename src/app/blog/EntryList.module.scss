@@ -99,7 +99,7 @@
                 display: block;
                 visibility: hidden;
                 width: 10px;
-                font-weight: 900;
+                //font-weight: 900;
 
                 @for $i from 1 through 3 {
                     &:nth-child(#{$i}) {

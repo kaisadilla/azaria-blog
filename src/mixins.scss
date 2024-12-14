@@ -6,3 +6,25 @@
     aspect-ratio: cos(30deg) / 1;
     clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
 }
+
+@mixin cut-side-left ($perc) {
+    clip-path: polygon(
+        #{$perc} 0%,
+        100% 0%,
+        100% 100%,
+        #{$perc} 100%,
+        0% calc(100% -  #{$perc}),
+        0% #{$perc}
+    );
+}
+
+@mixin cut-side-right ($perc) {
+    clip-path: polygon(
+        calc(100% -  #{$perc}) 0%,
+        0% 0%,
+        0% 100%,
+        calc(100% -  #{$perc}) 100%,
+        100% calc(100% -  #{$perc}),
+        100% #{$perc}
+    );
+}
