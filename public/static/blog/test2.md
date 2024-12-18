@@ -1,7 +1,8 @@
 ---
-title: How to create a blog?
+title: "[TEST] How to create a blog?"
+category: "css"
 created: 2023-01-06
-thumbnail: terrible-code.jpg
+thumbnail: test-flexbox.gif
 summary: Nunc maximus, neque sed scelerisque tristique, lectus sapien dictum orci, elementum posuere tortor lectus ac nulla.
 ---
 

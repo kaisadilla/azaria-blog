@@ -1,36 +1,55 @@
-import Image from "next/image";
+import React from 'react';
 import styles from "./page.module.scss";
-import "./styles.scss";
+import { promises as fs } from 'fs';
+import { BlogEntryAttributes } from './BlogEntry';
+import fm, { FrontMatterResult } from 'front-matter';
+import { Pagination, Text } from '@mantine/core';
+import EntryList from './EntryList';
+import path from 'path';
 
-import { poppins } from "@/app/fonts/fonts";
-import { useEffect, useState } from "react";
-import WIcon from "@/components/WIcon";
-import Desktop from "@/components/Desktop";
-import { MantineProvider } from "@mantine/core";
-import { ContextMenuProvider } from "mantine-contextmenu";
+export interface BlogPageProps {
+    
+}
 
-// 1024 x 768
+async function BlogPage (props: BlogPageProps) {
+    const entries = await getEntries();
 
-export default function Home () {
     return (
-        <MantineProvider>
-        <ContextMenuProvider>
-
         <div className={styles.page}>
-            <div className={styles.contentContainer} /*style={{backgroundImage: `url("/img/retro_monitor_crt_4_3_by_diegoba_dexnk7i.png")`}}*/>
-                <div className={styles.contentFrame}>
-                    <Desktop />
-                </div>
-            </div>
-
-            <img className={styles.monitorFrame}
-                // credit: https://www.deviantart.com/diegoba/art/Retro-Monitor-CRT-4-3-903053070
-                src="/img/retro_monitor_crt_4_3_by_diegoba_dexnk7i.png"
-                alt="scr"
-            />
+            <h1 className={styles.title}>Latest entries</h1>
+            <EntryList entries={[
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+                ...entries, ...entries, ...entries, ...entries, ...entries, ...entries,
+            ]} />
         </div>
-        
-        </ContextMenuProvider>
-        </MantineProvider>
     );
 }
+
+/**
+ * Reads and returns all entries in the blog folder, sorted from newest to oldest
+ * (according to their 'created' attribute).
+ */
+async function getEntries () : Promise<FrontMatterResult<BlogEntryAttributes>[]> {
+    const entries = [] as FrontMatterResult<BlogEntryAttributes>[];
+
+    const files = await fs.readdir(
+        process.cwd() + "/public/static/blog/"
+    );
+
+    for (const f of files) {
+        const txt = await fs.readFile(
+            process.cwd() + `/public/static/blog/${f}`, 'utf8'
+        );
+        const content = fm<BlogEntryAttributes>(txt);
+        content.attributes.id = path.parse(f).name;
+        entries.push(content);
+    }
+
+    return entries.sort(
+        (a, b) => b.attributes.created.getTime() - a.attributes.created.getTime()
+    );
+}
+
+export default BlogPage;

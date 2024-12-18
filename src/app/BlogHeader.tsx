@@ -11,15 +11,15 @@ function BlogHeader (props: BlogHeaderProps) {
     return (
         <header className={styles.header}>
             <div className={styles.headerContent}>
-                <Link href="/blog">
+                <Link href="/">
                     <h1 className={styles.logo}>Azaria</h1>
                 </Link>
                 <div className={styles.sections}>
-                    <Link href="/blog/entries">Entries</Link>
-                    <Link href="/blog/projects">My projects</Link>
-                    <Link href="/blog/gadgets">Gadgets</Link>
-                    <Link href="/blog/snippets">Snippets</Link>
-                    <Link href="/blog/about">About</Link>
+                    <Link href="/">Entries</Link>
+                    <Link href="/projects">My projects</Link>
+                    <Link href="/gadgets">Gadgets</Link>
+                    <Link href="/snippets">Snippets</Link>
+                    <Link href="/about">About</Link>
                 </div>
             </div>
             <img
