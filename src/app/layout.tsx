@@ -1,4 +1,4 @@
-import "./styles.scss"
+import "./styles.scss";
 import "./globals.css";
 import '@mantine/core/styles.layer.css';
 import 'mantine-contextmenu/styles.layer.css';
@@ -29,17 +29,17 @@ export default function RootLayout({
                 <title>Azaria</title>
             </head>
 
-            <MantineProvider>
-                
             <body id="scrollableBody" className={`${styles.blogPage} ${fontBody.className}`}>
+                <MantineProvider>
+
                 <BlogHeader />
                 <div className={styles.pageBody}>
                     {children}
                 </div>
                 <BlogFooter />
-            </body>
 
-            </MantineProvider>
+                </MantineProvider>
+            </body>
         </html>
     );
 }
