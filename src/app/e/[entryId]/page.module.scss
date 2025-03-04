@@ -36,13 +36,18 @@
 }
 
 .content {
+    position: relative;
+    margin-right: 220px;
+}
+
+.content > .entryBody {
     grid-area: con;
     font-size: 12pt;
     overflow-x: hidden;
     min-width: 400px;
 
     > p, > div {
-        margin: 24px 48px;
+        margin: 12px 48px;
     }
 
     code {
@@ -52,6 +57,10 @@
         span::selection {
             background-color: var(--color-selection-code);
         }
+    }
+
+    .h1Container {
+        margin-bottom: 12px;
     }
 
     h1 {
@@ -84,5 +93,17 @@
         border-top: 0;
         margin: 0 24px;
         border-color: var(--color-primary);
+    }
+
+    ul {
+        margin: 0 64px;
+    }
+
+    aside {
+        position: absolute;
+        right: -220px;
+        width: 220px;
+        font-size: 10pt;
+        border-top: 1px solid var(--color-primary-l2);
     }
 }

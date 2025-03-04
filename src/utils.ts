@@ -70,8 +70,8 @@ export function deleteArrayItem<T> (arr: T[], item: T) {
     }
 }
 
-export function arrayUnion (a: any[], b: any[]) {
-    const set = new Set<any>();
+export function arrayUnion<T> (a: T[], b: T[]) {
+    const set = new Set<T>();
 
     for (const item of [...a, ...b]) {
         set.add(item);

@@ -17,6 +17,8 @@ import CodeBlock from '../../CodeBlock';
 import WIcon from '@/components/WIcon';
 import Clock from '@/components/Clock';
 import rehypeSanitize from 'rehype-sanitize';
+import Aside from './.components/Aside';
+import Type from './.components/Type';
 
 export async function generateMetadata (parent: ResolvingMetadata) {
     const entry = await fetchFile("test");
@@ -44,10 +46,13 @@ async function EntryPage ({
         h1: BlogH1,
         code: BlogCode,
         pre: BlogPre,
+        aside: Aside,
+        Aside,
         InlineCode,
         CodeBlock,
         WIcon,
         Clock,
+        Type,
     };
 
     return (
@@ -61,19 +66,21 @@ async function EntryPage ({
                 />}
             </aside>
             <main className={styles.content}>
-                {<MDXRemote
-                    source={entry.body}
-                    components={components}
-                    options={{
-                        mdxOptions: {
-                            rehypePlugins: [
-                                rehypeSlug,
-                                //rehypeSanitize, // TODO: Reimplement
-                                rehypeMdxCodeProps,
-                            ]
-                        }
-                    }}
-                />}
+                <div className={styles.entryBody}>
+                    {<MDXRemote
+                        source={entry.body}
+                        components={components}
+                        options={{
+                            mdxOptions: {
+                                rehypePlugins: [
+                                    rehypeSlug,
+                                    //rehypeSanitize, // TODO: Reimplement
+                                    rehypeMdxCodeProps,
+                                ]
+                            }
+                        }}
+                    />}
+                </div>
             </main>
         </div>
     );
@@ -81,7 +88,7 @@ async function EntryPage ({
 
 function BlogH1 ({id, ...headingProps}: React.HTMLAttributes<HTMLHeadingElement>) {
     if (id) return (
-        <Link href={`#${id}`}>
+        <Link className={styles.h1Container} href={`#${id}`}>
             <h1 id={id} {...headingProps} />
         </Link>
     );
