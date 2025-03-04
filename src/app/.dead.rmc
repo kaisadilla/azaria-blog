@@ -1,0 +1,7 @@
+async function fetchFile (entryId: string) : Promise<FrontMatterResult<BlogEntryAttributes>> {
+    const file = await fs.readFile(
+        process.cwd() + `/public/static/blog/${entryId}.md`, 'utf8'
+    );
+    const content = fm<BlogEntryAttributes>(file);
+    return content;
+}

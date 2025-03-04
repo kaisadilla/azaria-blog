@@ -24,7 +24,7 @@ type Props = {
     params: {
       entryId: string;
     };
-  };
+};
 
 export async function generateMetadata ({ params }: Props) {
     const entry = await fetchFile("test");
@@ -104,9 +104,13 @@ function BlogH1 ({id, ...headingProps}: React.HTMLAttributes<HTMLHeadingElement>
 }
 
 async function fetchFile (entryId: string) : Promise<FrontMatterResult<BlogEntryAttributes>> {
-    const file = await fs.readFile(
-        process.cwd() + `/public/static/blog/${entryId}.md`, 'utf8'
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/static/blog/${entryId}.md`
     );
+
+    if (!res.ok) throw new Error(`Failed to fetch file '${entryId}.md'`);
+
+    const file = await res.text();
     const content = fm<BlogEntryAttributes>(file);
     return content;
 }
