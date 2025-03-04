@@ -21,7 +21,7 @@ import Aside from './.components/Aside';
 import Type from './.components/Type';
 import { Props } from 'react-rnd';
 
-export async function generateMetadata ({ params }: Props) {
+export async function generateMetadata ({ params }: {[key: string]: string}) {
     const entry = await fetchFile("test");
 
     return {
