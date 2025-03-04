@@ -19,9 +19,14 @@ import Clock from '@/components/Clock';
 import rehypeSanitize from 'rehype-sanitize';
 import Aside from './.components/Aside';
 import Type from './.components/Type';
-import { Props } from 'react-rnd';
 
-export async function generateMetadata ({ params }: {[key: string]: string}) {
+type Props = {
+    params: {
+      entryId: string;
+    };
+  };
+
+export async function generateMetadata ({ params }: Props) {
     const entry = await fetchFile("test");
 
     return {
