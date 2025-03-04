@@ -1,4 +1,4 @@
-import { ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import React from 'react';
 import styles from './page.module.scss';
 import { promises as fs } from 'fs';
@@ -19,8 +19,9 @@ import Clock from '@/components/Clock';
 import rehypeSanitize from 'rehype-sanitize';
 import Aside from './.components/Aside';
 import Type from './.components/Type';
+import { Props } from 'react-rnd';
 
-export async function generateMetadata (parent: ResolvingMetadata) {
+export async function generateMetadata ({ params }: Props) {
     const entry = await fetchFile("test");
 
     return {
