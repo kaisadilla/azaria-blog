@@ -90,9 +90,11 @@ export function splitIntoLines (string: string) {
 
 export const Css = {
     isTablet: () => {
+        if (typeof window === "undefined") return false;
         return Css.isDesktop() === false && window.matchMedia('(min-width: 50rem)').matches
     },
     isDesktop: () => {
+        if (typeof window === "undefined") return false;
         return window.matchMedia('(min-width: 75rem)').matches
     },
     /**
@@ -100,6 +102,7 @@ export const Css = {
      * @param callback The function to execute
      */
     whenTablet: (callback: () => void) => {
+        if (typeof window === "undefined") return;
         if (window.matchMedia('(min-width: 50rem)').matches) {
             callback();
         }
@@ -109,6 +112,7 @@ export const Css = {
      * @param callback The function to execute
      */
     whenDesktop: (callback: () => void) => {
+        if (typeof window === "undefined") return;
         if (window.matchMedia('(min-width: 75rem)').matches) {
             callback();
         }
@@ -118,6 +122,8 @@ export const Css = {
      * @param callback The values for phone, tablet and desktop, in that order.
      */
     deviceValue: function<T> (values: [T, T, T]) : T {
+        if (typeof window === "undefined") return values[0];
+        
         if (window.matchMedia('(min-width: 75rem)').matches) return values[2];
         if (window.matchMedia('(min-width: 50rem)').matches) return values[1];
         return values[0];
