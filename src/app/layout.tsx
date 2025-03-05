@@ -9,9 +9,10 @@ import localFont from "next/font/local";
 import { MantineProvider } from "@mantine/core";
 import BlogHeader from "./BlogHeader";
 import BlogFooter from "./BlogFooter";
-import { fontBody } from './fonts/fonts';
+import { fontBody, fontTitle } from './fonts/fonts';
 
 import styles from "./layout.module.scss";
+import WarningMessage from "@/components/WarningMessage";
 
 export const metadata: Metadata = {
     title: "Azaria",
@@ -29,14 +30,37 @@ export default function RootLayout({
                 <title>Azaria</title>
             </head>
 
-            <body id="scrollableBody" className={`${styles.blogPage} ${fontBody.className}`}>
+            <body className={`
+                ${styles.body}
+                ${fontTitle.variable}
+            `}>
                 <MantineProvider>
 
-                <BlogHeader />
-                <div className={styles.pageBody}>
-                    {children}
+                <WarningMessage
+                    title="WIP"
+                    message={
+                        "This blog is currently a work in progress - you " +
+                        "will find broken styles, placeholder content and " +
+                        "unfinished sections."
+                    }
+                />
+                <div className={styles.actualViewport}>
+                    <BlogHeader />
+                    <div id="scrollableBody" className={
+                        `${styles.blogArea} ${fontBody.className}`
+                    }>
+                        <img
+                            className={styles.headerEnd}
+                            src="/img/blog_header.png"
+                            alt=""
+                            draggable={false}
+                        />
+                        <div className={styles.pageBody}>
+                            {children}
+                        </div>
+                        <BlogFooter />
+                    </div>
                 </div>
-                <BlogFooter />
 
                 </MantineProvider>
             </body>

@@ -1,4 +1,4 @@
-@import "../mixins.scss";
+@import "@src/mixins.scss";
 
 .entryList {
     display: flex;
@@ -38,24 +38,7 @@
     }
 
     .thumbnail {
-        height: 180px;
-        overflow: hidden;
-        flex-shrink: 0;
-
-        > a {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .thumbnailImg {
-            @include hex-horizontal;
-            //background: var(--color-primary);
-
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        display: none;
     }
 
     .content {
@@ -119,6 +102,40 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@include when-tablet {
+    .entry {
+        .thumbnail {
+            display: block;
+            height: 180px;
+            overflow: hidden;
+            flex-shrink: 0;
+
+            > a {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .thumbnailImg {
+                @include hex-horizontal;
+                //background: var(--color-primary);
+
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+@include when-desktop {
+    .entry {
+        .thumbnail {
+            
         }
     }
 }

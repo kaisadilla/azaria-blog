@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./BlogHeader.module.scss";
 import Link from 'next/link';
+import { fontTitle } from './fonts/fonts';
 
 export interface BlogHeaderProps {
     
@@ -12,7 +13,7 @@ function BlogHeader (props: BlogHeaderProps) {
         <header className={styles.header}>
             <div className={styles.headerContent}>
                 <Link href="/">
-                    <h1 className={styles.logo}>Azaria</h1>
+                    <h1 className={`${styles.logo} ${fontTitle.className}`}>Azaria</h1>
                 </Link>
                 <div className={styles.sections}>
                     <Link href="/">Entries</Link>
@@ -22,12 +23,6 @@ function BlogHeader (props: BlogHeaderProps) {
                     <Link href="/about">About</Link>
                 </div>
             </div>
-            <img
-                className={styles.headerEnd}
-                src="/img/blog_header.png"
-                alt=""
-                draggable={false}
-            />
         </header>
     );
 }

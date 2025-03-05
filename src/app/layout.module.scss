@@ -1,23 +1,63 @@
-.blogPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+@import "@src/mixins.scss";
+
+.body {
     width: 100vw;
     height: 100vh;
-    overflow-y: auto;
-    scroll-behavior: smooth !important;
 
-    ::selection {
-        //background-color: #feaaee;
-        background-color: var(--color-selection);
+    display: flex;
+    flex-direction: column;
+
+    .actualViewport {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        overflow-x: none;
+        overflow-y: auto;
     }
+}
+
+.blogArea {
+    position: relative;
 
     .pageBody {
-        //min-height: 45vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 32vw;
 
-        h1 {
-            
+        scroll-behavior: smooth !important;
+        
+        ::selection {
+            //background-color: #feaaee;
+            background-color: var(--color-selection);
+        }
+    }
+
+    .headerEnd {
+        position: absolute;
+        top: 0;
+        user-select: none;
+
+        width: 250%;
+        left: -50%;
+        z-index: -10;
+    }
+}
+
+@include when-tablet {
+    .blogArea {
+        .pageBody {
+            padding-top: 15vw;
+        }
+
+        .headerEnd {
+            //filter: sepia() saturate(300%) hue-rotate(148deg);
+            // TODO: Orange for night mode
+            //filter: sepia() saturate(300%) hue-rotate(-10deg);
+            width: 100%;
+            left: 0;
+            aspect-ratio: 3840 / 1144;
         }
     }
 }

@@ -9,6 +9,8 @@
     --color-selection-code: #006eff60;
     --color-code-block-bg: #eff1f5;
 
+    --min-desktop: 50rem;
+
     box-sizing: border-box;
 }
 
@@ -21,6 +23,8 @@ html {
 body {
     width: 100vw;
     height: 100vh;
+
+    font-size: 12pt;
 }
 
 @import "mantine.scss";

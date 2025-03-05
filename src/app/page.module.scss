@@ -1,11 +1,23 @@
+@import "@src/mixins.scss";
+
 .page {
+    padding: 16px 16px;
     max-width: 964px;
-    padding: 16px 32px;
-    width: 70vw;
     margin-bottom: calc(calc(1920px - 100vw) / 3); // probably not
 
     > .title {
         margin-bottom: 36px;
-        font-size: 36pt;
+        font-size: 2rem;
+    }
+}
+
+@include when-tablet {
+    .page {
+        width: 70vw;
+        padding: 16px 32px;
+
+        > .title {
+            font-size: 3rem;
+        }
     }
 }

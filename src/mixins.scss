@@ -28,3 +28,15 @@
         100% #{$perc}
     );
 }
+
+@mixin when-tablet {
+    @media (min-width: 50rem) {
+        @content;
+    }
+}
+
+@mixin when-desktop {
+    @media (min-width: 75rem) {
+        @content;
+    }
+}
