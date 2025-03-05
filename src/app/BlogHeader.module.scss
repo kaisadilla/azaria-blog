@@ -6,7 +6,7 @@
     left: 0;
     z-index: 1000000;
 
-    min-height: 100px; // TODO: Remove
+    height: 100px; // TODO: Remove
     width: 100%;
     background: var(--color-primary);
     pointer-events: none;
@@ -15,6 +15,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    transition: height 0.15s ease-out;
+
+    &.shrunk {
+        height: 50px;
+    }
 
     .headerContent {
         display: flex;
@@ -22,7 +27,8 @@
         justify-content: center;
         align-items: center;
         padding: 0 3vh;
-        gap: 48px;
+        gap: 10vw;
+        height: 50px;
         
         user-select: none;
 

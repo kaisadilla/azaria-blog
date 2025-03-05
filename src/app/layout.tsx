@@ -44,19 +44,25 @@ export default function RootLayout({
                         "unfinished sections."
                     }
                 />
-                <div className={styles.actualViewport}>
+                <div id="scrollableBody" className={styles.actualViewport}>
                     <BlogHeader />
-                    <div id="scrollableBody" className={
+                    <div className={
                         `${styles.blogArea} ${fontBody.className}`
                     }>
-                        <img
-                            className={styles.headerEnd}
-                            src="/img/blog_header.png"
-                            alt=""
-                            draggable={false}
-                        />
                         <div className={styles.pageBody}>
+                            <img
+                                className={styles.headerEnd}
+                                src="/img/blog_header.png"
+                                alt=""
+                                draggable={false}
+                            />
                             {children}
+                            <img
+                                className={styles.footerStart}
+                                src="/img/blog_header.png"
+                                alt=""
+                                draggable={false}
+                            />
                         </div>
                         <BlogFooter />
                     </div>

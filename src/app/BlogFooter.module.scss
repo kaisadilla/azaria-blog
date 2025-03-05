@@ -6,17 +6,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    margin: -300px;
     pointer-events: none;
-
-    .footerStart {
-        //position: absolute;
-        //top: 0;
-        user-select: none;
-        width: 100vw;
-        aspect-ratio: 3840 / 1144;
-        transform: scale(-1);
-    }
 
     .footerContent {
         background-color: var(--color-primary);

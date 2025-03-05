@@ -87,3 +87,39 @@ export function arrayUnion<T> (a: T[], b: T[]) {
 export function splitIntoLines (string: string) {
     return string.split(/\r?\n|\r|\n/g);
 }
+
+export const Css = {
+    isTablet: () => {
+        return Css.isDesktop() === false && window.matchMedia('(min-width: 50rem)').matches
+    },
+    isDesktop: () => {
+        return window.matchMedia('(min-width: 75rem)').matches
+    },
+    /**
+     * Executes the function given if the media is, at least, a tablet.
+     * @param callback The function to execute
+     */
+    whenTablet: (callback: () => void) => {
+        if (window.matchMedia('(min-width: 50rem)').matches) {
+            callback();
+        }
+    },
+    /**
+     * Executes the function given if the media is, at least, a desktop.
+     * @param callback The function to execute
+     */
+    whenDesktop: (callback: () => void) => {
+        if (window.matchMedia('(min-width: 75rem)').matches) {
+            callback();
+        }
+    },
+    /**
+     * Returns a value depending on the user's device.
+     * @param callback The values for phone, tablet and desktop, in that order.
+     */
+    deviceValue: function<T> (values: [T, T, T]) : T {
+        if (window.matchMedia('(min-width: 75rem)').matches) return values[2];
+        if (window.matchMedia('(min-width: 50rem)').matches) return values[1];
+        return values[0];
+    }
+}

@@ -7,6 +7,7 @@ import { BlogEntryAttributes } from './BlogEntry';
 import { Pagination, Text } from '@mantine/core';
 import Link from 'next/link';
 import { MaterialSymbol } from 'react-material-symbols';
+import { Css } from '@/utils';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -26,7 +27,9 @@ function EntryList ({
     return (
         <div className={styles.entryList}>
             <Pagination
-                withEdges
+                //withEdges
+                //boundaries={0}
+                siblings={Css.deviceValue([1, 2, 2])}
                 total={pageCount}
                 value={page}
                 onChange={setPage}

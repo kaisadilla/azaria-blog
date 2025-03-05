@@ -40,3 +40,15 @@
         @content;
     }
 }
+
+@mixin when-system-theme-light {
+    @media (prefers-color-scheme: light) {
+        @content;
+    }
+}
+
+@mixin when-system-theme-dark {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}

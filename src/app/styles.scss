@@ -1,4 +1,8 @@
+@import "@src/mixins.scss";
+
 :root {
+    --background: #ffffff;
+    --foreground: #171717;
     --color-primary-l3: #d0f3ff;
     --color-primary-l2: #91e3ff;
     --color-primary-l1: #5fd7ff;
@@ -14,6 +18,22 @@
     box-sizing: border-box;
 }
 
+//@include when-system-theme-dark {
+//    :root {
+//        --background: #0a0a0a;
+//        --foreground: #ededed;
+//        --color-primary-l3: #d0f3ff;
+//        --color-primary-l2: #91e3ff;
+//        --color-primary-l1: #ffc64f;
+//        --color-primary: #ffb148;
+//        --color-primary-d1: #faa041;
+//        --color-primary-d2: #d88b38;
+//        --color-selection: #30c0ef;
+//        --color-selection-code: #006eff60;
+//        --color-code-block-bg: #eff1f5;
+//    }
+//}
+
 html {
     width: 100vw;
     height: 100vh;
@@ -25,6 +45,7 @@ body {
     height: 100vh;
 
     font-size: 12pt;
+    color: black;
 }
 
 @import "mantine.scss";
