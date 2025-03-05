@@ -7,7 +7,9 @@ summary: Lorem ipsum dolor sit amet, _consectetur_ adipiscing elit. Quisque inte
 ---
 # Introduction
 
-**Lorem ipsum** dolor sit amet, _consectetur_ adipiscing elit. Quisque interdum nisi ac facilisis ornare. Vivamus tristique porttitor purus sed dignissim. Sed diam augue, eleifend nec felis non, dapibus tincidunt neque. _Praesent sed finibus sapien. Integer aliquam finibus enim, ut pellentesque libero tristique nec. Integer congue magna vitae lectus eleifend accumsan. Ut ante nisi, condimentum nec mauris sed, aliquam fermentum purus. Duis non est vitae mi interdum mattis._ Morbi dictum nec tortor eget sagittis. Morbi sit amet lectus elit. Curabitur viverra, felis vitae pharetra sollicitudin, erat felis pretium enim, at pretium neque quam ultrices neque. **Vestibulum egestas imperdiet diam. Donec id varius tellus, sit amet hendrerit velit.**
+**Lorem ipsum** dolor sit amet, _consectetur_ adipiscing elit. Quisque interdum nisi ac facilisis ornare. Vivamus tristique porttitor purus sed dignissim. Sed diam augue, eleifend nec felis non, dapibus tincidunt neque. _Praesent sed finibus sapien. Integer aliquam finibus enim, ut pellentesque libero tristique nec. Integer congue magna vitae lectus eleifend accumsan. Ut ante nisi, condimentum nec mauris sed, aliquam fermentum purus. Duis non est vitae mi interdum mattis._ Morbi dictum nec <span name="tortor">tortor</span> eget sagittis. Morbi sit amet lectus elit. Curabitur viverra, felis vitae pharetra sollicitudin, erat felis pretium enim, at pretium neque quam ultrices neque. **Vestibulum egestas imperdiet diam. Donec id varius tellus, sit amet hendrerit velit.**
+
+<aside forName="tortor">This is a footnote added to the word "tortor", and should appear in the aside column on desktop and below the paragraph on phone.</aside>
 
 ---
 

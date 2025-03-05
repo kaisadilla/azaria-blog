@@ -52,3 +52,7 @@
         @content;
     }
 }
+
+@function rem-as-pt ($pt, $base: 12) {
+    @return ($pt / $base) * 1rem;
+}

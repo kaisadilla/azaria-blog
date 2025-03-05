@@ -19,6 +19,7 @@ import Clock from '@/components/Clock';
 import rehypeSanitize from 'rehype-sanitize';
 import Aside from './.components/Aside';
 import Type from './.components/Type';
+import { getClassString } from '@/utils';
 
 type Props = {
     params: {
@@ -52,8 +53,8 @@ async function EntryPage ({
         h1: BlogH1,
         code: BlogCode,
         pre: BlogPre,
-        aside: Aside,
-        Aside,
+        //aside: Aside,
+        //Aside,
         InlineCode,
         CodeBlock,
         WIcon,
@@ -63,31 +64,38 @@ async function EntryPage ({
 
     return (
         <div className={styles.entry}>
-            <h1 className={`${styles.entryTitle} ${fontTitle.className}`}>
+            <h1 className={getClassString(styles.entryTitle, fontTitle.className)}>
                 {entry.attributes.title}
             </h1>
-            <aside className={`${styles.contentTable} ${fontAside.className}`}>
-                {headings && <ContentTable
-                    headings={headings}
-                />}
-            </aside>
-            <main className={styles.content}>
-                <div className={styles.entryBody}>
-                    {<MDXRemote
-                        source={entry.body}
-                        components={components}
-                        options={{
-                            mdxOptions: {
-                                rehypePlugins: [
-                                    rehypeSlug,
-                                    //rehypeSanitize, // TODO: Reimplement
-                                    rehypeMdxCodeProps,
-                                ]
-                            }
-                        }}
+            <article className={styles.article}>
+                <nav className={getClassString(
+                    styles.contentTable, fontAside.className
+                )}>
+                    {headings && <ContentTable
+                        headings={headings}
                     />}
+                </nav>
+                <main className={styles.content}>
+                    <div className={styles.entryBody}>
+                        {<MDXRemote
+                            source={entry.body}
+                            components={components}
+                            options={{
+                                mdxOptions: {
+                                    rehypePlugins: [
+                                        rehypeSlug,
+                                        //rehypeSanitize, // TODO: Reimplement
+                                        rehypeMdxCodeProps,
+                                    ]
+                                }
+                            }}
+                        />}
+                    </div>
+                </main>
+                <div className={styles.asideContainer}>
+                    {/* Space reserved to place asides from the article. */}
                 </div>
-            </main>
+            </article>
         </div>
     );
 }
