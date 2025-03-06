@@ -24,6 +24,15 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const warnings = [
+        {
+            title: "WIP",
+            message: "This blog is currently a work in progress - you " +
+            "will find broken styles, placeholder content and " +
+            "unfinished sections."
+        },
+    ];
+
     return (
         <html lang="en">
             <head>
@@ -36,14 +45,12 @@ export default function RootLayout({
             `}>
                 <MantineProvider>
 
-                <WarningMessage
-                    title="WIP"
-                    message={
-                        "This blog is currently a work in progress - you " +
-                        "will find broken styles, placeholder content and " +
-                        "unfinished sections."
-                    }
-                />
+                {warnings.map((w, i) => <WarningMessage
+                    key={i}
+                    title={w.title}
+                    message={w.message}
+                />)}
+
                 <div id="scrollableBody" className={styles.actualViewport}>
                     <BlogHeader />
                     <div className={

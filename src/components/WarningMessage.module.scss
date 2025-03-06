@@ -22,6 +22,10 @@
         font-size: 1rem;
         text-align: center;
     }
+
+    &:has(+ .warningMessage) {
+        border-bottom: 0;
+    }
 }
 
 @include when-tablet {

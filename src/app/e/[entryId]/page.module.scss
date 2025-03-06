@@ -110,8 +110,10 @@
     }
 
     .content > .entryBody {
+        $margin-1: 2em;
+
         > p, > div {
-            margin: 1em 3em;
+            margin: 1em $margin-1;
         }
 
         code {
@@ -120,13 +122,13 @@
 
         h1 {
             margin: 1.375em 0;
-            padding: 0.375em 0 0.375em 2em;
+            padding: 0.375em 0 0.375em 1.5em;
 
             &:hover {
-                padding-left: calc(2em + 2em);
+                padding-left: calc(1.5em + 2em);
                 
                 &::before {
-                    transform: translateX(2em);
+                    transform: translateX(1.5em);
                 }
             }
         }
