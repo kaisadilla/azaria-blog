@@ -1,8 +1,9 @@
 ---
-title: "Making azariadev.dev."
+title: "How I'm building this blog."
 category: "nextjs"
 created: 2025-03-04
 thumbnail: test-voxel.webp
-summary: Creating azariadev.dev from scratch in next.js.
+summary: "How I'm building this blog with Next.js, MDX, Mantine and SASS."
 ---
-#
+# The stack
+nextjs

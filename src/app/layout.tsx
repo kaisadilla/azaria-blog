@@ -3,10 +3,12 @@ import "./globals.css";
 import '@mantine/core/styles.layer.css';
 import 'mantine-contextmenu/styles.layer.css';
 import 'react-material-symbols/rounded';
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import type { Metadata } from "next";
 import { MantineProvider } from "@mantine/core";
 import { fontBody, fontTitle } from './fonts/fonts';
+import { config } from "@fortawesome/fontawesome-svg-core";
 
 import styles from "./layout.module.scss";
 
@@ -20,6 +22,7 @@ function MainLayout ({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    config.autoAddCss = false;
 
     return (
         <html lang="en">

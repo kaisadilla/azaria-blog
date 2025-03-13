@@ -61,6 +61,10 @@
         }
 
         &:hover {
+            .utilIcon {
+                color: var(--color-secondary);
+            }
+            
             .utilTitle {
                 color: var(--color-secondary-d1);
             }

@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { fontTitle } from '../fonts/fonts';
 import { getClassString } from '@/utils';
 import { FloatingPosition, Tooltip } from '@mantine/core';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 interface TooltipProps {
     position: FloatingPosition;
@@ -88,6 +90,24 @@ function BlogHeader (props: BlogHeaderProps) {
                     </Tooltip.Floating>
 
                     <Link href="/main/about">About me</Link>
+                </div>
+                <div className={styles.extraIcons}>
+                    <Tooltip.Floating
+                        {...tooltipProps}
+                        label="Blog's repo!"
+                    >
+                        <a target="_blank" href="https://github.com/kaisadilla/azaria-blog">
+                            <FontAwesomeIcon className={styles.fa} icon={faGithub} />
+                        </a>
+                    </Tooltip.Floating>
+                    <Tooltip.Floating
+                        {...tooltipProps}
+                        label="Europe stands with Ukraine."
+                    >
+                        <a target="_blank" href="https://u24.gov.ua/">
+                            <img className={styles.img} src="/img/flag_eu_ukraine.png" alt="ukr" />
+                        </a>
+                    </Tooltip.Floating>
                 </div>
             </div>
         </header>
