@@ -8,6 +8,8 @@ import type { Metadata } from "next";
 import { MantineProvider } from "@mantine/core";
 import { fontBody, fontTitle } from './fonts/fonts';
 
+import styles from "./layout.module.scss";
+
 export const metadata: Metadata = {
     title: "Azaria",
     description: "Azaria's devblog.",
@@ -26,6 +28,7 @@ function MainLayout ({
             </head>
 
             <body className={`
+                ${styles.body}
                 ${fontTitle.variable}
             `}>
                 <MantineProvider>

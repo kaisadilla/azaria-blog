@@ -11,6 +11,7 @@ import { fontBody, fontTitle } from '../fonts/fonts';
 
 import styles from "./layout.module.scss";
 import WarningMessage from "@/components/WarningMessage";
+import MouseOverBackground from './MouseOverBackground';
 
 export const metadata: Metadata = {
     title: "Azaria",
@@ -32,49 +33,38 @@ export default function RootLayout({
     ];
 
     return (
-        <html lang="en">
-            <head>
-                <title>Azaria</title>
-            </head>
+        <div className={styles.body}>
+            <MouseOverBackground />
 
-            <body className={`
-                ${styles.body}
-                ${fontTitle.variable}
-            `}>
-                <MantineProvider>
+            {warnings.map((w, i) => <WarningMessage
+                key={i}
+                title={w.title}
+                message={w.message}
+            />)}
 
-                {warnings.map((w, i) => <WarningMessage
-                    key={i}
-                    title={w.title}
-                    message={w.message}
-                />)}
-
-                <div id="scrollableBody" className={styles.actualViewport}>
-                    <BlogHeader />
-                    <div className={
-                        `${styles.blogArea} ${fontBody.className}`
-                    }>
-                        <div className={styles.pageBody}>
-                            <img
-                                className={styles.headerEnd}
-                                src="/img/blog_header.png"
-                                alt=""
-                                draggable={false}
-                            />
-                            {children}
-                            <img
-                                className={styles.footerStart}
-                                src="/img/blog_header.png"
-                                alt=""
-                                draggable={false}
-                            />
-                        </div>
-                        <BlogFooter />
+            <div id="scrollableBody" className={styles.actualViewport}>
+                <BlogHeader />
+                <div className={
+                    `${styles.blogArea} ${fontBody.className}`
+                }>
+                    <div className={styles.pageBody}>
+                        <img
+                            className={styles.headerEnd}
+                            src="/img/blog_header.png"
+                            alt=""
+                            draggable={false}
+                        />
+                        {children}
+                        <img
+                            className={styles.footerStart}
+                            src="/img/blog_header.png"
+                            alt=""
+                            draggable={false}
+                        />
                     </div>
+                    <BlogFooter />
                 </div>
-
-                </MantineProvider>
-            </body>
-        </html>
+            </div>
+        </div>
     );
 }

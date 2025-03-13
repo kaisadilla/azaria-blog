@@ -10,7 +10,6 @@ function MainPage (props: EntryPointProps) {
 
     return (
         <div>
-            entry
         </div>
     );
 }
