@@ -55,7 +55,7 @@ interface _EntryProps {
 function _Entry ({
     entry,
 }: _EntryProps) {
-    const link = `/e/${entry.attributes.id}`;
+    const link = `/main/e/${entry.attributes.id}`;
 
     return (
         <div className={styles.entry}>
