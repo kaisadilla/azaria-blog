@@ -35,13 +35,14 @@ function EntryList ({
                 onChange={setPage}
             />
             <div className={styles.entries}>
-                {entries.slice(firstEntry, lastEntry).map((e, i) => <>
-                    <_Entry
-                        key={firstEntry + i}
-                        entry={e}
-                    />
-                    {(firstEntry + i) < (lastEntry - 1) && <hr />}
-                </>)}
+                {entries.slice(firstEntry, lastEntry).map((e, i) => (
+                    <React.Fragment key={firstEntry + i}>
+                        <_Entry
+                            entry={e}
+                        />
+                        {(firstEntry + i) < (lastEntry - 1) && <hr />}
+                    </React.Fragment>
+                ))}
             </div>
         </div>
     );

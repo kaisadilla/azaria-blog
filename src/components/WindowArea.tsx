@@ -9,7 +9,7 @@ import { NumberSize, Resizable } from 're-resizable';
 import { Direction } from 're-resizable/lib/resizer';
 import { Rnd } from 'react-rnd';
 import MovableWindow from './MovableWindow';
-import { useOsContext } from '@/app/context';
+import { useOsContext } from '@/app/main/context';
 import RecycleBinApp from './RecycleBinApp';
 import BlogApp from './BlogApp';
 

@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./BlogHeader.module.scss";
 import Link from 'next/link';
-import { fontTitle } from './fonts/fonts';
+import { fontTitle } from '../fonts/fonts';
 import { getClassString } from '@/utils';
+import { Tooltip } from '@mantine/core';
 
 export interface BlogHeaderProps {
     
@@ -32,7 +33,9 @@ function BlogHeader (props: BlogHeaderProps) {
                     <h1 className={`${styles.logo} ${fontTitle.className}`}>Azaria</h1>
                 </Link>
                 <div className={styles.sections}>
-                    <Link href="/">Entries</Link>
+                    <Tooltip label="All of my blog posts.">
+                        <Link href="/">Entries</Link>
+                    </Tooltip>
                     <Link href="/projects">My projects</Link>
                     <Link href="/gadgets">Gadgets</Link>
                     <Link href="/snippets">Snippets</Link>
