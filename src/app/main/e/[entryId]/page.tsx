@@ -1,25 +1,21 @@
-import { Metadata } from 'next';
-import React from 'react';
-import styles from './page.module.scss';
-import { promises as fs } from 'fs';
-import fm, { FrontMatterResult } from 'front-matter';
-import { BlogEntryAttributes } from '../../BlogEntry';
-import Link from 'next/link';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import ContentTable from '../../ContentTable';
 import { fontAside, fontTitle } from '@/app/fonts/fonts';
-import rehypeSlug from 'rehype-slug';
-import rehypeMdxCodeProps from 'rehype-mdx-code-props';
-import BlogCode from '../../BlogCode';
-import BlogPre from '../../BlogPre';
-import InlineCode from '../../InlineCode';
-import CodeBlock from '../../CodeBlock';
-import WIcon from '@/components/WIcon';
 import Clock from '@/components/Clock';
-import rehypeSanitize from 'rehype-sanitize';
-import Aside from './.components/Aside';
-import Type from './.components/Type';
+import WIcon from '@/components/WIcon';
 import { getClassString } from '@/utils';
+import fm, { FrontMatterResult } from 'front-matter';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import Link from 'next/link';
+import React from 'react';
+import rehypeMdxCodeProps from 'rehype-mdx-code-props';
+import rehypeSlug from 'rehype-slug';
+import BlogCode from '../../../main/BlogCode';
+import { BlogEntryAttributes } from '../../../main/BlogEntry';
+import BlogPre from '../../../main/BlogPre';
+import CodeBlock from '../../../main/CodeBlock';
+import ContentTable from '../../../main/ContentTable';
+import InlineCode from '../../../main/InlineCode';
+import Type from './.components/Type';
+import styles from './page.module.scss';
 
 type Props = {
     params: {

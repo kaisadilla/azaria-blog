@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./WindowsTab.module.scss";
 import { getClassString } from '@/utils';
 import { OsWindow } from '@/logic/OsWindow';
-import { useOsContext } from '@/app/context';
+import { useOsContext } from '@/app/main/context';
 
 export interface WindowsTabProps {
     window: OsWindow;

@@ -1,4 +1,4 @@
-import BlogPage from '@/app/page';
+import BlogPage from '@/app/main/page';
 import React, { use, useEffect, useState } from 'react';
 
 export interface BlogProgramProps {

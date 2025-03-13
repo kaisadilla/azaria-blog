@@ -6,7 +6,7 @@ import WIcon from './WIcon';
 import styles from "./IconGrid.module.scss";
 import { clampNumber, Vec2 } from '@/utils';
 import { OsWindow, OsWindowType, PartialOsWindow } from '@/logic/OsWindow';
-import { useOsContext } from '@/app/context';
+import { useOsContext } from '@/app/main/context';
 import { useContextMenu } from 'mantine-contextmenu';
 
 type IconId = 'recycle_bin' | 'about_me' | 'qualifications' | 'blog' | 'game';

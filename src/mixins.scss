@@ -29,6 +29,13 @@
     );
 }
 
+@mixin blog-body {
+    padding: 1rem 0;
+    width: 100%;
+    max-width: 964px;
+    min-height: max(30vw, 200px);
+}
+
 @mixin when-tablet {
     @media (min-width: 50rem) {
         @content;

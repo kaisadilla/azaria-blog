@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from "./TaskbarTabs.module.scss";
 import WindowsTab from './WindowsTab';
-import { useOsContext } from '@/app/context';
+import { useOsContext } from '@/app/main/context';
 
 export interface TaskbarTabsProps {
     

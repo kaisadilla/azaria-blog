@@ -9,7 +9,7 @@ import { NumberSize } from 're-resizable';
 import { Direction } from 're-resizable/lib/resizer';
 import styles from "./MovableWindow.module.scss";
 import { OsWindow } from '@/logic/OsWindow';
-import { useOsContext } from '@/app/context';
+import { useOsContext } from '@/app/main/context';
 
 export interface MovableWindowProps extends DesktopWindowProps {
     parentWidth: number;

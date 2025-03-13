@@ -8,7 +8,7 @@ import IconGrid from './IconGrid';
 import Megaplace from '@/app/megaplace/page';
 import WindowArea from './WindowArea';
 import TaskbarTabs from './TaskbarTabs';
-import { OsContextProvider } from '@/app/context';
+import { OsContextProvider } from '@/app/main/context';
 
 export interface DesktopProps {
     

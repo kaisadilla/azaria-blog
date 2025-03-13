@@ -1,9 +1,7 @@
 @import "@src/mixins";
 
 .entry {
-    padding: 1rem 0;
-    width: 100%;
-    max-width: 964px;
+    @include blog-body;
     
     display: flex;
     flex-direction: column;

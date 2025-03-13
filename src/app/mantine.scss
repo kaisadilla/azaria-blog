@@ -58,3 +58,19 @@
         }
     }
 }
+
+.mantine-Tooltip-tooltip, .mantine-TooltipFloating-tooltip {
+    background-color: var(--color-primary-d2);
+    padding: 0.33rem 0.67rem;
+    //border-radius: 0;
+    //font-family: var(--font-body);
+    font-family: Consolas;
+    font-size: rem-as-pt(10);
+
+    &::before {
+        content: '>_ ';
+        font-family: Consolas;
+        color: var(--color-primary-l2);
+        font-weight: 800;
+    }
+}
