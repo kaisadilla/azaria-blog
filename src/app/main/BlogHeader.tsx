@@ -48,7 +48,15 @@ function BlogHeader (props: BlogHeaderProps) {
         <header className={getClassString(styles.header, isShrunk && styles.shrunk)}>
             <div className={styles.headerContent}>
                 <Link href="/">
-                    <h1 className={`${styles.logo} ${fontTitle.className}`}>Azaria</h1>
+                    <Tooltip.Floating
+                        {...tooltipProps}
+                        label="'azaria.dev' was already taken :("
+                    >
+                        <h1 className={`${styles.logo} ${fontTitle.className}`}>
+                            <span>Azaria</span>
+                            <span className={styles.logoHighlight}>(dev)<sup>2</sup></span>
+                        </h1>
+                    </Tooltip.Floating>
                 </Link>
                 <div className={styles.sections}>
                     <Tooltip.Floating
@@ -69,12 +77,12 @@ function BlogHeader (props: BlogHeaderProps) {
                         {...tooltipProps}
                         label="Some cool utilities and applications!"
                     >
-                        <Link href="/main/utils">Gadgets</Link>
+                        <Link href="/main/utils">Free tools!</Link>
                     </Tooltip.Floating>
 
                     <Tooltip.Floating
                         {...tooltipProps}
-                        label="Useful snippets of all kinds!"
+                        label="Code snippets for common problems."
                     >
                         <Link href="/main/snippets">Snippets</Link>
                     </Tooltip.Floating>

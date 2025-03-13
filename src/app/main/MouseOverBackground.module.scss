@@ -5,7 +5,7 @@
     pointer-events: none;
     //background: #ff000080;
     z-index: -100;
-    opacity: 0.3;
+    opacity: 0.4;
 
     .bg {
         width: 100%;
@@ -13,6 +13,6 @@
         background-image: url("/img/blog_hex_bg.png");
         background-repeat: repeat;
         background-size: 128px;
-        filter: grayscale(50%);
+        filter: grayscale(20%);
     }
 }
