@@ -1,4 +1,4 @@
-import "./styles.scss";
+import "../styles.scss";
 import "./globals.css";
 import '@mantine/core/styles.layer.css';
 import 'mantine-contextmenu/styles.layer.css';
