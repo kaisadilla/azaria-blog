@@ -37,13 +37,7 @@
         pointer-events: auto;
 
         .logo {
-            font-size: 32pt;
-            //font-family: var(--font-title);
-            //background-color: red;
-
-            .logoHighlight {
-                color: var(--color-primary-d2);
-            }
+            font-size: 2.7rem;
         }
 
         .sections {
@@ -51,7 +45,7 @@
             font-family: var(--font-body);
 
             a {
-                text-shadow: 0px 0px 2px #00000050;
+                text-shadow: 0px 0px 0.125em #00000050;
 
                 &:hover {
                     color: var(--color-secondary);

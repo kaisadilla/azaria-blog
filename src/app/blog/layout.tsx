@@ -5,13 +5,13 @@ import 'react-material-symbols/rounded';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { MantineProvider } from "@mantine/core";
-import BlogHeader from "./BlogHeader";
-import BlogFooter from "./BlogFooter";
-import { fontBody, fontTitle } from '../fonts/fonts';
+import BlogHeader from "@/components/BlogHeader";
+import BlogFooter from "@/components/BlogFooter";
+import { fontBody, fontTitle } from '@/app/fonts/fonts';
 
 import styles from "./layout.module.scss";
 import WarningMessage from "@/components/WarningMessage";
-import MouseOverBackground from './MouseOverBackground';
+import MouseOverBackground from '@/components/MouseOverBackground';
 
 export const metadata: Metadata = {
     title: "Azaria",

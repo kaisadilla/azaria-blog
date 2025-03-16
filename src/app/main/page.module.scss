@@ -1,23 +1,30 @@
-@import "@src/mixins.scss";
+.viewport {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--color-primary);
 
-.page {
-    padding: 16px 16px;
-    max-width: 964px;
-    //margin-bottom: calc(calc(1920px - 100vw) / 3); // probably not
+    .cover {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        top: 0;
+        transition: top 2s ease;
+        background-color: white;
 
-    > .title {
-        margin-bottom: 36px;
-        font-size: 2rem;
-    }
-}
-
-@include when-tablet {
-    .page {
-        width: 70vw;
-        padding: 16px 32px;
-
-        > .title {
-            font-size: 3rem;
+        &.removed {
+            top: 100vh;
         }
+
+        .hexagons {
+            width: 100%;
+            position: absolute;
+        }
+    }
+
+    .logo {
+        font-size: 4rem;
     }
 }

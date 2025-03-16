@@ -7,10 +7,11 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import type { Metadata } from "next";
 import { MantineProvider } from "@mantine/core";
-import { fontBody, fontTitle } from './fonts/fonts';
+import { chakraPetch, fontBody, fontTitle } from './fonts/fonts';
 import { config } from "@fortawesome/fontawesome-svg-core";
 
-import styles from "./layout.module.scss";
+import styles from "@/app/layout.module.scss";
+import { getClassString } from "@/utils";
 
 export const metadata: Metadata = {
     title: "Azaria",
@@ -30,10 +31,10 @@ function MainLayout ({
                 <title>Azaria</title>
             </head>
 
-            <body className={`
-                ${styles.body}
-                ${fontTitle.variable}
-            `}>
+            <body className={getClassString(
+                styles.body,
+                chakraPetch.variable,
+            )}>
                 <MantineProvider>
                     {children}
                 </MantineProvider>

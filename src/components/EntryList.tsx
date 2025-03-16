@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import styles from "./EntryList.module.scss";
 import { FrontMatterResult } from 'front-matter';
-import { BlogEntryAttributes } from './BlogEntry';
+import { BlogEntryAttributes } from '@/app/blog/BlogEntry';
 import { Pagination, Text } from '@mantine/core';
 import Link from 'next/link';
 import { MaterialSymbol } from 'react-material-symbols';
@@ -55,7 +55,7 @@ interface _EntryProps {
 function _Entry ({
     entry,
 }: _EntryProps) {
-    const link = `/main/e/${entry.attributes.id}`;
+    const link = `/blog/e/${entry.attributes.id}`;
 
     return (
         <div className={styles.entry}>

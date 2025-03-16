@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./BlogHeader.module.scss";
 import Link from 'next/link';
-import { fontTitle } from '../fonts/fonts';
+import { fontTitle } from '../app/fonts/fonts';
 import { getClassString } from '@/utils';
 import { FloatingPosition, Tooltip } from '@mantine/core';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import AzariaLogo from './AzariaLogo';
 
 interface TooltipProps {
     position: FloatingPosition;
@@ -54,10 +55,9 @@ function BlogHeader (props: BlogHeaderProps) {
                         {...tooltipProps}
                         label="'azaria.dev' was already taken :("
                     >
-                        <h1 className={`${styles.logo} ${fontTitle.className}`}>
-                            <span>Azaria</span>
-                            <span className={styles.logoHighlight}>(dev)<sup>2</sup></span>
-                        </h1>
+                        <div className={styles.logo}>
+                            <AzariaLogo />
+                        </div>
                     </Tooltip.Floating>
                 </Link>
                 <div className={styles.sections}>
@@ -65,7 +65,7 @@ function BlogHeader (props: BlogHeaderProps) {
                         {...tooltipProps}
                         label="All of my blog posts."
                     >
-                        <Link href="/">Entries</Link>
+                        <Link href="/blog/index">Entries</Link>
                     </Tooltip.Floating>
 
                     <Tooltip.Floating
