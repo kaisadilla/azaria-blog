@@ -2,8 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from "./page.module.scss"
-import { getClassString } from '@/utils';
+import { $cl } from '@/utils';
 import AzariaLogo from '@/components/AzariaLogo';
+import AboutMe from './AboutMe';
+import Projects from './Projects';
+import Blog from './Blog';
+import Tools from './Tools';
+import Snippets from './Snippets';
+import { Tooltip } from '@mantine/core';
 
 export interface MainPageProps {
     
@@ -18,10 +24,7 @@ function MainPage (props: MainPageProps) {
 
     return (
         <div className={styles.viewport}>
-            <div className={getClassString(
-                styles.cover,
-                isCoverRemoved && styles.removed,
-            )}>
+            <div className={$cl(styles.cover, isCoverRemoved && styles.removed)}>
                 <img
                     className={styles.hexagons}
                     src="/img/blog_header.png"
@@ -30,8 +33,30 @@ function MainPage (props: MainPageProps) {
                 />
             </div>
 
-            <div className={styles.logo}>
-                <AzariaLogo />
+            <Tooltip.Floating
+                position='top'
+                label="'azaria.dev' was already taken :("
+            >
+                <div className={styles.logo}>
+                    <AzariaLogo />
+                </div>
+            </Tooltip.Floating>
+            <div className={styles.sectionTable}>
+                <div className={$cl(styles.section, styles.aboutMe)}>
+                    <AboutMe />
+                </div>
+                <div className={$cl(styles.section, styles.myProject)}>
+                    <Projects />
+                </div>
+                <div className={$cl(styles.section, styles.blog)}>
+                    <Blog />
+                </div>
+                <div className={$cl(styles.section, styles.tools)}>
+                    <Tools />
+                </div>
+                <div className={$cl(styles.section, styles.snippets)}>
+                    <Snippets />
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,3 @@
-import '@mantine/core/styles.layer.css';
-import 'mantine-contextmenu/styles.layer.css';
-import 'react-material-symbols/rounded';
-
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { MantineProvider } from "@mantine/core";
@@ -11,7 +7,7 @@ import { fontBody, fontTitle } from '@/app/fonts/fonts';
 
 import styles from "./layout.module.scss";
 import WarningMessage from "@/components/WarningMessage";
-import MouseOverBackground from '@/components/MouseOverBackground';
+import MouseOverBackground2 from '@/components/MouseOverBackground2';
 
 export const metadata: Metadata = {
     title: "Azaria",
@@ -34,7 +30,7 @@ export default function RootLayout({
 
     return (
         <div className={styles.body}>
-            <MouseOverBackground />
+            <MouseOverBackground2 />
 
             {warnings.map((w, i) => <WarningMessage
                 key={i}

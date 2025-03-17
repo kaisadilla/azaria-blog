@@ -3,7 +3,7 @@
 import React, { RefObject, useEffect, useState } from 'react';
 import styles from "./ContentTable.module.scss";
 import Link from 'next/link';
-import { getClassString } from '@/utils';
+import { $cl } from '@/utils';
 import GithubSlugger from "github-slugger";
 
 export interface ContentTableProps {
@@ -86,7 +86,7 @@ function _HeadingLink ({
     activeIndex,
     onClick,
 }: _HeadingLinkProps) {
-    const classStr = getClassString(
+    const classStr = $cl(
         styles.heading,
         headingIndex === activeIndex && styles.active,
     );

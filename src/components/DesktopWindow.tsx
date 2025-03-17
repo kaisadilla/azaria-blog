@@ -1,10 +1,10 @@
 'use client';
 
-import { getClassString, Vec2 } from '@/utils';
+import { $cl, Vec2 } from '@/utils';
 import React, { ReactNode, useEffect, useReducer, useRef, useState } from 'react';
 import styles from "./DesktopWindow.module.scss";
 import { OsWindow } from '@/logic/OsWindow';
-import { useOsContext } from '@/app/main/context';
+import { useOsContext } from '@/app/cmd/context';
 
 export interface DesktopWindowProps {
     window: OsWindow;

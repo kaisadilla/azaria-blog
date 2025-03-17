@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "./BlogHeader.module.scss";
 import Link from 'next/link';
 import { fontTitle } from '../app/fonts/fonts';
-import { getClassString } from '@/utils';
+import { $cl } from '@/utils';
 import { FloatingPosition, Tooltip } from '@mantine/core';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -48,7 +48,7 @@ function BlogHeader (props: BlogHeaderProps) {
     }, []);
 
     return (
-        <header className={getClassString(styles.header, isShrunk && styles.shrunk)}>
+        <header className={$cl(styles.header, isShrunk && styles.shrunk)}>
             <div className={styles.headerContent}>
                 <Link href="/">
                     <Tooltip.Floating

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "@/components/WIcon.module.scss";
 import Image from 'next/image';
-import { getClassString, Vec2 } from '@/utils';
+import { $cl, Vec2 } from '@/utils';
 
 export interface WIconProps {
     icon: string;
@@ -34,7 +34,7 @@ function WIcon ({
         }
     }, [dragging]);
 
-    const classStr = getClassString(
+    const classStr = $cl(
         styles.icon,
         selected && styles.selected
     );

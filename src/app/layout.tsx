@@ -1,5 +1,5 @@
-import "../styles.scss";
 import "./globals.css";
+import "./styles.scss";
 import '@mantine/core/styles.layer.css';
 import 'mantine-contextmenu/styles.layer.css';
 import 'react-material-symbols/rounded';
@@ -7,11 +7,11 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import type { Metadata } from "next";
 import { MantineProvider } from "@mantine/core";
-import { chakraPetch, fontBody, fontTitle } from './fonts/fonts';
+import { chakraPetch, fontBody, fontTitle, orbitron, tomorrow } from '@/app/fonts/fonts';
 import { config } from "@fortawesome/fontawesome-svg-core";
 
-import styles from "@/app/layout.module.scss";
-import { getClassString } from "@/utils";
+//import styles from "@/app/layout.module.scss";
+import { $cl } from "@/utils";
 
 export const metadata: Metadata = {
     title: "Azaria",
@@ -26,20 +26,25 @@ function MainLayout ({
     config.autoAddCss = false;
 
     return (
-        <html lang="en">
+        <html lang="en" className={fontVariables()}>
             <head>
                 <title>Azaria</title>
             </head>
 
-            <body className={getClassString(
-                styles.body,
-                chakraPetch.variable,
-            )}>
+            <body>
                 <MantineProvider>
                     {children}
                 </MantineProvider>
             </body>
         </html>
+    );
+}
+
+function fontVariables () : string {
+    return $cl(
+        chakraPetch.variable,
+        tomorrow.variable,
+        orbitron.variable,
     );
 }
 

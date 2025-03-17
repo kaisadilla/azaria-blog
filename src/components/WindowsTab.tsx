@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from "./WindowsTab.module.scss";
-import { getClassString } from '@/utils';
+import { $cl } from '@/utils';
 import { OsWindow } from '@/logic/OsWindow';
-import { useOsContext } from '@/app/main/context';
+import { useOsContext } from '@/app/cmd/context';
 
 export interface WindowsTabProps {
     window: OsWindow;
@@ -19,7 +19,7 @@ function WindowsTab ({
 
     const imgName = focused ? "active" : "inactive"
 
-    const classStr = getClassString(
+    const classStr = $cl(
         styles.tab,
         focused && styles.focused,
     );

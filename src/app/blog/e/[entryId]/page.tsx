@@ -1,7 +1,7 @@
 import { fontAside, fontTitle } from '@/app/fonts/fonts';
 import Clock from '@/components/Clock';
 import WIcon from '@/components/WIcon';
-import { getClassString } from '@/utils';
+import { $cl } from '@/utils';
 import fm, { FrontMatterResult } from 'front-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
@@ -11,9 +11,9 @@ import rehypeSlug from 'rehype-slug';
 import BlogCode from '../../../../components/BlogCode';
 import { BlogEntryAttributes } from '../../BlogEntry';
 import BlogPre from '../../../../components/BlogPre';
-import CodeBlock from '../../../main/CodeBlock';
-import ContentTable from '../../../main/ContentTable';
-import InlineCode from '../../../main/InlineCode';
+import CodeBlock from './CodeBlock';
+import ContentTable from './ContentTable';
+import InlineCode from './InlineCode';
 import Type from './.components/Type';
 import styles from './page.module.scss';
 
@@ -60,11 +60,11 @@ async function EntryPage ({
 
     return (
         <div className={styles.entry}>
-            <h1 className={getClassString(styles.entryTitle, fontTitle.className)}>
+            <h1 className={$cl(styles.entryTitle, fontTitle.className)}>
                 {entry.attributes.title}
             </h1>
             <article className={styles.article}>
-                <nav className={getClassString(
+                <nav className={$cl(
                     styles.contentTable, fontAside.className
                 )}>
                     {headings && <ContentTable

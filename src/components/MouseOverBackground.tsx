@@ -1,31 +1,71 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import styles from "./MouseOverBackground.module.scss"
+import React, { useEffect, useRef, useState } from 'react';
+import styles from "./MouseOverBackground.module.scss";
+import { $cl } from '@/utils';
+import { DivProps } from '@/props_types';
 
-export interface MouseOverBackgroundProps {
-    
+export interface MouseOverBackgroundProps extends DivProps {
+    blurRadius?: number;
+    radius?: number;
+    visible?: boolean;
+    zIndex?: number;
+    className?: string;
 }
 
-function MouseOverBackground (props: MouseOverBackgroundProps) {
-    const [cursorPos, setCursorPos] = useState({x: 0, y: 0});
-    const radius = 1;
+function MouseOverBackground ({
+    blurRadius = 12,
+    radius = 1,
+    visible = true,
+    zIndex = -1,
+    className,
+    ...divProps
+}: MouseOverBackgroundProps) {
+    const ref = useRef<HTMLDivElement>(null);
+
+    const start = -1_000_000;
+
+    const [mask, setMask] = useState(getMask(start, start, radius, blurRadius));
 
     useEffect(() => {
-        function handleMouseMove (evt: MouseEvent) {
-            setCursorPos({x: evt.clientX, y: evt.clientY});
-        }
+        const handleMouseMove = (evt: MouseEvent) => {
+            if (!ref.current) return;
+
+            const rect = ref.current.getBoundingClientRect();
+            setMask(getMask(
+                evt.clientX - rect.x, evt.clientY - rect.y, radius, blurRadius
+            ));
+        };
 
         document.addEventListener('mousemove', handleMouseMove);
+        return () => document.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
-    const maskImage = `radial-gradient(circle at ${cursorPos.x}px ${cursorPos.y}px, rgba(0, 0, 0, 1) ${radius}rem, rgba(0, 0, 0, 0) ${radius * 12}rem)`
+    const style: React.CSSProperties = {
+        ...divProps.style,
+        zIndex: zIndex,
+        maskImage: mask,
+        visibility: visible ? 'visible' : 'hidden',
+    };
 
     return (
-        <div className={styles.area} style={{maskImage: maskImage}}>
-            <div className={styles.bg} />
+        <div
+            ref={ref}
+            className={$cl(className, styles.area)}
+            style={style}
+            {...divProps}
+        >
+            
         </div>
     );
+}
+
+function getMask (x: number, y: number, radius: number, blur: number) : string {
+    return `radial-gradient(` +
+        `circle at ${x}px ${y}px,` +
+        `#000000FF ${radius}rem,` +
+        `#00000000 ${radius * blur}rem` +
+    `)`;
 }
 
 export default MouseOverBackground;

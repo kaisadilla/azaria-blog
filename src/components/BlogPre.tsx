@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { codeToHtml } from 'shiki';
 import styles from "./BlogPre.module.scss";
-import { getClassString } from '@/utils';
+import { $cl } from '@/utils';
 
 async function BlogPre (
     {children, ...preProps}: React.HTMLAttributes<HTMLPreElement>
@@ -53,7 +53,7 @@ async function BlogPre (
                 dangerouslySetInnerHTML={{__html: html}}
             />
             {language !== null && <div
-                className={getClassString(
+                className={$cl(
                     styles.language,
                     filename === null && styles.standalone
                 )}
