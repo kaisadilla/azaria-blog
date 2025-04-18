@@ -19,7 +19,7 @@ function MainPage (props: MainPageProps) {
     const [isCoverRemoved, setCoverRemoved] = useState(false);
 
     useEffect(() => {
-        setCoverRemoved(true);
+        setTimeout(() => setCoverRemoved(true), 200);
     }, []);
 
     return (

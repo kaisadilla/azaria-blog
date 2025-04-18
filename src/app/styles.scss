@@ -4,15 +4,18 @@
     --background: #ffffff;
     --foreground: #171717;
 
-    --color-primary-l3: #d0f3ff;
-    --color-primary-l2: #91e3ff;
-    --color-primary-l1: #5fd7ff;
-    --color-primary: #30c0ef;
-    --color-primary-d1: #159ad2;
-    --color-primary-d2: #0661b6;
+    --color-primary: #c8268f;
+    --color-background: #100e16; // #262335
 
-    --color-secondary: #fdab31;
-    --color-secondary-d1: #cc630d;
+    --blog-color-primary-l3: #d0f3ff;
+    --blog-color-primary-l2: #91e3ff;
+    --blog-color-primary-l1: #5fd7ff;
+    --blog-color-primary: #30c0ef;
+    --blog-color-primary-d1: #159ad2;
+    --blog-color-primary-d2: #0661b6;
+
+    --blog-color-secondary: #fdab31;
+    --blog-color-secondary-d1: #cc630d;
 
     --color-selection: #fdab31;
     --color-selection-code: #006eff60;
@@ -20,8 +23,8 @@
 
     --min-desktop: 50rem;
 
-    --font-title: var(--font-chakra-petch);
-    --font-body: var(--font-chakra-petch);
+    --font-title: 'Chakra Petch';
+    --font-body: 'Chakra Petch';
 
     box-sizing: border-box;
 }
@@ -30,12 +33,12 @@
 //    :root {
 //        --background: #0a0a0a;
 //        --foreground: #ededed;
-//        --color-primary-l3: #d0f3ff;
-//        --color-primary-l2: #91e3ff;
-//        --color-primary-l1: #ffc64f;
-//        --color-primary: #ffb148;
-//        --color-primary-d1: #faa041;
-//        --color-primary-d2: #d88b38;
+//        --blog-color-primary-l3: #d0f3ff;
+//        --blog-color-primary-l2: #91e3ff;
+//        --blog-color-primary-l1: #ffc64f;
+//        --blog-color-primary: #ffb148;
+//        --blog-color-primary-d1: #faa041;
+//        --blog-color-primary-d2: #d88b38;
 //        --color-selection: #30c0ef;
 //        --color-selection-code: #006eff60;
 //        --color-code-block-bg: #eff1f5;

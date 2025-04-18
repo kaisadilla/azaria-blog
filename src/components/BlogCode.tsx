@@ -3,11 +3,23 @@ import { codeToHtml } from 'shiki';
 import styles from "./BlogCode.module.scss";
 
 async function BlogCode ({children, ...codeProps}: React.HTMLAttributes<HTMLElement>) {
-    const txt = children as string;
-    let language: string | null = txt.split(" ")[0];
-    const code = txt.substring(language.length + 1);
-    
-    if (language === "!") language = null;
+    let txt = children as string;
+
+    let language: string | null = null;
+    let code: string = txt;
+
+    let firstWord = txt.split(" ")[0];
+
+    // If the code starts with "!", that indicates the language of the code.
+    if (firstWord.startsWith("!")) {
+        language = firstWord.substring(1);
+        code = code.substring(language.length + 2);
+    }
+    // If it starts with "\!", we are just escaping "!" so it doesn't indicate
+    // the language.
+    else if (firstWord.startsWith("\\!")) {
+        code = code.substring(1);
+    }
 
     let html: string = "";
     let error = false;

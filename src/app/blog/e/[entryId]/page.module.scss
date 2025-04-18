@@ -14,7 +14,7 @@
         font-size: 2rem;
         font-weight: 800;
         text-align: center;
-        color: var(--color-primary-d2);
+        color: var(--blog-color-primary-d2);
     }
 
     .article {
@@ -62,7 +62,7 @@
         padding: 0.375em 0 0.375em 0.75em;
         margin: 1.375em 0;
 
-        background-color: var(--color-primary);
+        background-color: var(--blog-color-primary);
         color: white;
         font-size: 1.5em;
         border-top: 1px solid black;
@@ -87,7 +87,7 @@
     hr {
         border-top: 0;
         margin: 0 24px;
-        border-color: var(--color-primary);
+        border-color: var(--blog-color-primary);
     }
 
     ul {

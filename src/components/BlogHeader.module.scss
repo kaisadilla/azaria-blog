@@ -8,7 +8,7 @@
 
     height: 100px; // TODO: Remove
     width: 100%;
-    background: var(--color-primary);
+    background: var(--blog-color-primary);
     pointer-events: none;
 
     display: flex;
@@ -33,7 +33,7 @@
         user-select: none;
 
         width: 100%;
-        background: var(--color-primary);
+        background: var(--blog-color-primary);
         pointer-events: auto;
 
         .logo {
@@ -48,7 +48,7 @@
                 text-shadow: 0px 0px 0.125em #00000050;
 
                 &:hover {
-                    color: var(--color-secondary);
+                    color: var(--blog-color-secondary);
                 }
             }
         }
@@ -71,7 +71,7 @@
             color: white;
 
             &:hover {
-                color: var(--color-secondary);
+                color: var(--blog-color-secondary);
             }
         }
 

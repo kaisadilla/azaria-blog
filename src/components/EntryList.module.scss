@@ -14,7 +14,7 @@
 
     hr {
         border: 0;
-        border-top: 1px solid var(--color-primary-d1);
+        border-top: 1px solid var(--blog-color-primary-d1);
         margin: 0 6%;
     }
 }
@@ -35,7 +35,7 @@
     }
 
     &:hover {
-        background-color: var(--color-primary-l3);
+        background-color: var(--blog-color-primary-l3);
     }
 
     .thumbnail {
@@ -52,7 +52,7 @@
         height: 180px;
 
         .title {
-            color: var(--color-primary-d2);
+            color: var(--blog-color-primary-d2);
         }
 
         .summary {
@@ -64,7 +64,7 @@
 
     .readMore {
         font-weight: 600;
-        color: var(--color-primary-d1);
+        color: var(--blog-color-primary-d1);
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -124,7 +124,7 @@
 
             .thumbnailImg {
                 @include hex-horizontal;
-                //background: var(--color-primary);
+                //background: var(--blog-color-primary);
 
                 width: 100%;
                 height: 100%;

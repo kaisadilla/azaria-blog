@@ -60,7 +60,7 @@
 }
 
 .mantine-Tooltip-tooltip, .mantine-TooltipFloating-tooltip {
-    background-color: var(--color-primary-d2);
+    background-color: var(--blog-color-primary-d2);
     padding: 0.33rem 0.67rem;
     //border-radius: 0;
     //font-family: var(--font-body);
@@ -73,7 +73,7 @@
     &::before {
         content: '>_ ';
         font-family: Consolas;
-        color: var(--color-secondary);
+        color: var(--blog-color-secondary);
         font-weight: 800;
     }
 }

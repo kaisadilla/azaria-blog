@@ -49,7 +49,7 @@ async function getEntries () : Promise<FrontMatterResult<BlogEntryAttributes>[]>
 
     return entries.sort(
         (a, b) => b.attributes.created.getTime() - a.attributes.created.getTime()
-    );
+    ).filter(e => e.attributes.published);
 }
 
 export default BlogPage;

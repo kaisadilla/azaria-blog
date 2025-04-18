@@ -4,4 +4,5 @@ export interface BlogEntryAttributes {
     thumbnail: string;
     summary?: string;
     id?: string;
+    published: boolean;
 }

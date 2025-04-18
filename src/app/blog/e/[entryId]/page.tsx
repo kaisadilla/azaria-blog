@@ -37,6 +37,8 @@ export interface EntryPageProps {
     }>
 }
 
+export const revalidate = 1; // TODO: Production: 600.
+
 async function EntryPage ({
     params,
 }: EntryPageProps) {
