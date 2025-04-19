@@ -17,6 +17,7 @@
     "@mantine/hooks": "^7.13.3",
     "@next/mdx": "^15.0.1",
     "@types/mdx": "^2.0.13",
+    "@uit/glitch-image": "^0.0.11",
     "front-matter": "^4.0.2",
     "github-slugger": "^2.0.0",
     "mantine-contextmenu": "^7.12.2",

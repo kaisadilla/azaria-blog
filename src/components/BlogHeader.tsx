@@ -68,6 +68,8 @@ function BlogHeader (props: BlogHeaderProps) {
                         <Link href="/blog/index">Entries</Link>
                     </Tooltip.Floating>
 
+                    <Link href="/portfolio">Portfolio</Link>
+
                     <Tooltip.Floating
                         {...tooltipProps}
                         label="A small overview of each of my personal projects."
