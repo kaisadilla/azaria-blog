@@ -18,12 +18,16 @@ export function usePlaySound (src: string) {
         }
     }, [src]);
 
-    function play () {
+    function play (random = false) {
         if (audioCtx === null || buf === null) return;
 
         const audioSource = audioCtx.createBufferSource();
         audioSource.buffer = buf;
-        audioSource.playbackRate.value = 0.7 + (Math.random() * 0.6);
+
+        if (random) {
+            audioSource.playbackRate.value = 0.7 + (Math.random() * 0.6);
+        }
+
         audioSource.connect(audioCtx.destination);
         audioSource.start();
     }
@@ -32,7 +36,7 @@ export function usePlaySound (src: string) {
         times: number, interval: number, delayFirst: Boolean = false
     ) {
         for (let i = 0; i < times; i++) {
-            setTimeout(play, (i * interval) + (delayFirst ? interval : 0));
+            setTimeout(() => play(true), (i * interval) + (delayFirst ? interval : 0));
         }
     }
 

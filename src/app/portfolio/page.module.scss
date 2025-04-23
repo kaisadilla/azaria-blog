@@ -5,6 +5,16 @@
     inherits: false;
     initial-value: var(--color-primary);
 }
+@property --neon-blue {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: var(--color-secondary);
+}
+@property --neon-yellow {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: var(--color-tertiary);
+}
 
 .hexGrid {
     position: fixed;
@@ -17,7 +27,14 @@
 
 .page {
     --neon-pink: var(--color-primary);
-    animation: neon-pink 60s infinite step-end;
+    --neon-blue: var(--color-secondary);
+    --neon-yellow: var(--color-tertiary);
+
+    --current-neon: var(--neon-pink);
+
+    animation: pinkNeonFlicker 60s infinite step-end,
+        blueNeonFlicker 60s infinite step-end,
+        yellowNeonFlicker 60s infinite step-end;
 
     background-color: var(--color-background);
     width: 100vw;
@@ -26,6 +43,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    button {
+        background-color: transparent;
+        border: 1px solid var(--current-neon);
+        padding: 0.3em 1.2em;
+        color: var(--current-neon);
+        font-weight: 600;
+    }
 
     > .navbar {
         height: 96px;
@@ -44,7 +69,7 @@
             flex-shrink: 0;
             height: 48px;
             fill: none;
-            stroke: var(--neon-pink);
+            stroke: var(--current-neon);
             stroke-width: 0.22rem;
 
             &.appear {
@@ -61,7 +86,7 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            color: var(--neon-pink);
+            color: var(--current-neon);
 
             &.appear {
                 display: flex;
@@ -70,10 +95,53 @@
             a:hover {
                 color: #fff5f6;
                 text-shadow: 0 0 2px #000,
-                    0 0 10px var(--neon-pink),
-                    0 0 5px var(--neon-pink),
-                    0 0 25px var(--neon-pink);
+                    0 0 10px var(--current-neon),
+                    0 0 5px var(--current-neon),
+                    0 0 25px var(--current-neon);
                 backface-visibility: hidden;
+            }
+        }
+
+        .styleRibbon {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+
+            &.appear {
+                display: flex;
+            }
+
+            .leds {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+
+                > div {
+                    cursor: pointer;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    filter: blur(2px);
+
+                    animation-duration: 8s;
+                    animation-iteration-count: infinite;
+
+                    &.pink {
+                        animation-name: pinkBlockGlow;
+                        background-color: var(--color-primary); 
+                    }
+
+                    &.blue {
+                        animation-name: blueBlockGlow;
+                        background-color: var(--color-secondary);
+                    }
+
+                    &.yellow {
+                        animation-name: yellowBlockGlow;
+                        background-color: var(--color-tertiary);
+                    }
+                }
             }
         }
         
@@ -96,7 +164,7 @@
     
             .fa {
                 font-size: 2rem;
-                color: var(--neon-pink);
+                color: var(--current-neon);
                 position: relative;
     
                 &:hover {
@@ -126,7 +194,7 @@
 
             width: 90vw;
             fill: none;
-            stroke: var(--neon-pink);
+            stroke: var(--current-neon);
             overflow: visible;
 
             &.remove {
@@ -151,7 +219,7 @@
             visibility: hidden;
             opacity: 0;
 
-            background-color: var(--neon-pink);
+            background-color: var(--current-neon);
             padding: 0.3rem 3rem;
             font-size: 16pt;
 
@@ -202,7 +270,7 @@
                 .separator {
                     height: calc(100% + 40px);
                     fill: var(--color-background);
-                    stroke: var(--neon-pink);
+                    stroke: var(--current-neon);
                     padding: 1px;
                     overflow: visible;
 
@@ -225,8 +293,8 @@
 
                 .scrollbar {
                     background-color: transparent;
-                    border-top: 1px solid var(--neon-pink);
-                    border-bottom: 1px solid var(--neon-pink);
+                    border-top: 1px solid var(--current-neon);
+                    border-bottom: 1px solid var(--current-neon);
                     padding: 0.5em 0.73em;
                     transition: padding 0.33s;
 
@@ -235,7 +303,7 @@
                     }
 
                     .thumb {
-                        background-color: var(--neon-pink);
+                        background-color: var(--current-neon);
                         border-radius: 0;
                     }
                 }
@@ -261,7 +329,49 @@
                     }
 
                     > .icon {
+                        position: relative;
                         height: 100%;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+
+                        svg {
+                            fill: none;
+                            stroke: var(--current-neon);
+                            stroke-width: 0.18rem;
+                            max-height: 90%;
+                            max-width: 90%;
+
+                            path {
+                                animation: drawBorder 8s forwards;
+                                stroke-dasharray: 1000;
+                                stroke-dashoffset: 1000;
+                            }
+                        }
+
+                        img {
+                            max-height: 90%;
+                            max-width: 90%;
+                        }
+
+                        .mask {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: var(--current-neon);
+                            mix-blend-mode: multiply;
+                        }
+
+                        .img2 {
+                            background-color: var(--current-neon);
+                            mask-repeat: no-repeat;
+                            mask-size: contain;
+                            mask-position: center;
+                            height: 90%;
+                            width: 90%;
+                        }
                     }
 
                     > .description {
@@ -271,13 +381,13 @@
                         flex-direction: column;
                         justify-content: center;
                         padding: 1rem;
-                        border: 1px solid var(--neon-pink);
+                        border: 1px solid var(--current-neon);
                         gap: 0.5rem;
                         
                         > .name {
                             flex-shrink: 0;
                             font-weight: 600;
-                            color: var(--neon-pink);
+                            color: var(--current-neon);
                         }
     
                         > .description {
@@ -295,7 +405,7 @@
                             gap: 0.25rem;
     
                             > div {
-                                background-color: var(--neon-pink);
+                                background-color: var(--current-neon);
                                 font-weight: 600;
                                 padding: 0 2.5em 0 0.5em;
                                 color: var(--color-background);
@@ -334,6 +444,146 @@
     }
 }
 
+@mixin neon-block-glow($name, $col) {
+    @keyframes #{$name} {
+        0%   { box-shadow: 0 1px 10px 5px $col; }
+        3%   { box-shadow: 0 1px 15px 6px $col; }
+        6%   { box-shadow: 0 1px 20px 5px $col; }
+        9%   { box-shadow: 0 1px 25px 6px $col; }
+        11%  { box-shadow: 0 1px 15px 5px $col; }
+
+        20%  { box-shadow: 0 1px 8px 4px $col; }
+        23%  { box-shadow: 0 1px 14px 6px $col; }
+        26%  { box-shadow: 0 1px 18px 7px $col; }
+        29%  { box-shadow: 0 1px 22px 6px $col; }
+        31%  { box-shadow: 0 1px 14px 5px $col; }
+
+        40%  { box-shadow: 0 1px 12px 4px $col; }
+        43%  { box-shadow: 0 1px 18px 5px $col; }
+        46%  { box-shadow: 0 1px 23px 6px $col; }
+        49%  { box-shadow: 0 1px 28px 7px $col; }
+        51%  { box-shadow: 0 1px 18px 5px $col; }
+
+        60%  { box-shadow: 0 1px 11px 6px $col; }
+        63%  { box-shadow: 0 1px 16px 5px $col; }
+        66%  { box-shadow: 0 1px 19px 7px $col; }
+        69%  { box-shadow: 0 1px 23px 6px $col; }
+        71%  { box-shadow: 0 1px 16px 4px $col; }
+
+        80%  { box-shadow: 0 1px 9px 5px $col; }
+        83%  { box-shadow: 0 1px 14px 6px $col; }
+        86%  { box-shadow: 0 1px 19px 5px $col; }
+        89%  { box-shadow: 0 1px 24px 7px $col; }
+        100% { box-shadow: 0 1px 14px 5px $col; }
+    }
+}
+
+@include neon-block-glow(pinkBlockGlow, var(--neon-pink));
+@include neon-block-glow(blueBlockGlow, var(--neon-blue));
+@include neon-block-glow(yellowBlockGlow, var(--neon-yellow));
+
+@mixin neon-flicker($name, $var, $regularCol, $wrongCol, $secondaryCol) {
+    @keyframes #{$name} {
+        0% {
+            #{$var}: #{$regularCol};
+        }
+        8% {
+            #{$var}: #{$wrongCol};
+        }
+        11% {
+            #{$var}: #{$regularCol};
+        }
+        11.7% {
+            #{$var}: #{$wrongCol};
+        }
+        12% {
+            #{$var}: #{$regularCol};
+        }
+        28% {
+            #{$var}: #{$wrongCol};
+        }
+        28.1% {
+            #{$var}: #{$regularCol};
+        }
+        28.4% {
+            #{$var}: #{$secondaryCol};
+        }
+        28.5% {
+            #{$var}: #{$regularCol};
+        }
+        40% {
+            #{$var}: #{$wrongCol};
+        }
+        45% {
+            #{$var}: #{$regularCol};
+        }
+        45.3% {
+            #{$var}: #{$wrongCol};
+        }
+        49% {
+            #{$var}: #{$regularCol};
+        }
+        52% {
+            #{$var}: #{$secondaryCol};
+        }
+        52.4% {
+            #{$var}: #{$regularCol};
+        }
+        71% {
+            #{$var}: #{$secondaryCol};
+        }
+        71.1% {
+            #{$var}: #{$regularCol};
+        }
+        71.7% {
+            #{$var}: #{$secondaryCol};
+        }
+        71.95% {
+            #{$var}: #{$wrongCol};
+        }
+        72.05% {
+            #{$var}: #{$regularCol};
+        }
+        72.15% {
+            #{$var}: #{$wrongCol};
+        }
+        72.30% {
+            #{$var}: #{$regularCol};
+        }
+        72.50% {
+            #{$var}: #{$wrongCol};
+        }
+        80% {
+            #{$var}: #{$regularCol};
+        }
+        81% {
+            #{$var}: #{$wrongCol};
+        }
+        90% {
+            #{$var}: #{$regularCol};
+        }
+        94% {
+            #{$var}: #{$wrongCol};
+        }
+        96% {
+            #{$var}: #{$secondaryCol};
+        }
+        96.12% {
+            #{$var}: #{$regularCol};
+        }
+    }
+}
+
+@include neon-flicker(
+    pinkNeonFlicker, --neon-pink, var(--color-primary), #a02f78, var(--color-secondary)
+);
+@include neon-flicker(
+    blueNeonFlicker, --neon-blue, var(--color-secondary), #2eb6ce, var(--color-tertiary)
+);
+@include neon-flicker(
+    yellowNeonFlicker, --neon-yellow, var(--color-tertiary), #bbbd3c, var(--color-primary)
+);
+
 @keyframes drawBorder {
     to {
         stroke-dashoffset: 0;
@@ -348,99 +598,6 @@
     100% {
         opacity: 0;
         transform: scale(8);
-    }
-}
-
-@keyframes neon-pink {
-    0% {
-        --neon-pink: var(--color-primary);
-    }
-    8% {
-        --neon-pink: #9b3878;
-    }
-    11% {
-        --neon-pink: var(--color-primary);
-    }
-    11.7% {
-        --neon-pink: #9b3878;
-    }
-    12% {
-        --neon-pink: var(--color-primary);
-    }
-    17% {
-        --neon-pink: var(--color-primary);
-    }
-    28% {
-        --neon-pink: var(--color-secondary);
-    }
-    28.1% {
-        --neon-pink: var(--color-primary);
-    }
-    28.4% {
-        --neon-pink: var(--color-secondary);
-    }
-    28.5% {
-        --neon-pink: var(--color-primary);
-    }
-    40% {
-        --neon-pink: #8a2265;
-    }
-    45% {
-        --neon-pink: var(--color-primary);
-    }
-    45.3% {
-        --neon-pink: #8a2265;
-    }
-    49% {
-        --neon-pink: var(--color-primary);
-    }
-    52% {
-        --neon-pink: var(--color-secondary);
-    }
-    52.4% {
-        --neon-pink: var(--color-primary);
-    }
-    71% {
-        --neon-pink: var(--color-secondary);
-    }
-    71.1% {
-        --neon-pink: var(--color-primary);
-    }
-    71.7% {
-        --neon-pink: var(--color-secondary);
-    }
-    71.95% {
-        --neon-pink: #a02f78;
-    }
-    72.05% {
-        --neon-pink: var(--color-primary);
-    }
-    72.15% {
-        --neon-pink: #a02f78;
-    }
-    72.30% {
-        --neon-pink: var(--color-primary);
-    }
-    72.50% {
-        --neon-pink: #a02f78;
-    }
-    80% {
-        --neon-pink: var(--color-primary);
-    }
-    81% {
-        --neon-pink: #a02f78;
-    }
-    90% {
-        --neon-pink: var(--color-primary);
-    }
-    94% {
-        --neon-pink: #a02f78;
-    }
-    96% {
-        --neon-pink: var(--color-secondary);
-    }
-    96.12% {
-        --neon-pink: var(--color-primary);
     }
 }
 
@@ -462,7 +619,7 @@
     }
     16% {
         opacity: 1;
-        fill: var(--color-primary);
+        fill: var(--current-neon);
         stroke: none;
     }
     42% {
@@ -497,12 +654,12 @@
     }
     86% {
         transform: scaleX(1) scaleY(1) skewX(0deg);
-        fill: var(--color-primary);
+        fill: var(--current-neon);
         stroke: none;
     }
     94% {
         fill: none;
-        stroke: var(--color-primary);
+        stroke: var(--current-neon);
     }
 }
 

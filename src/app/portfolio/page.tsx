@@ -12,6 +12,11 @@ import Link from 'next/link';
 
 import hexSeparator from '@src/assets/img/portfolio/hex_separation_shadows.png';
 import iconPlaceholder from '@src/assets/img/portfolio/placeholder_img.png';
+import drawing_al from '@src/assets/img/portfolio/drawing_assetto_lega.png';
+import drawing_leaflys from '@src/assets/img/portfolio/drawing_leaflys.png';
+import drawing_emerald from '@src/assets/img/portfolio/drawing_emerald.png';
+import drawing_aracnephobia from '@src/assets/img/portfolio/drawing_aracnephobia.png';
+import drawing_shattered from '@src/assets/img/portfolio/drawing_shattered.png';
 
 import NoProjectShowcase from './NoProjectShowcase';
 import { usePlaySound } from '@/hooks/usePlaySound';
@@ -29,9 +34,20 @@ export interface PortfolioPageProps {
 }
 
 function PortfolioPage (props: PortfolioPageProps) {
+    const pageRef = useRef<HTMLDivElement>(null);
+
     const { play: playGlitch } = usePlaySound("/sfx/glitch_0.ogg");
 
     const [state, setState] = useState<PageState>(PageState.Initial);
+
+    useEffect(() => {
+        if (pageRef.current === null) return;
+
+        const val = localStorage.getItem('portfolio-neon-color');
+        if (val === null) return;
+
+        pageRef.current.style.setProperty("--current-neon", val);
+    }, [pageRef.current]);
 
     useEffect(() => {
         function handleKeyPress (evt: any) {
@@ -52,7 +68,7 @@ function PortfolioPage (props: PortfolioPageProps) {
     }, [state, playGlitch]);
 
     return (
-        <div className={styles.page}>
+        <div ref={pageRef} className={styles.page}>
             <div className={styles.navbar}>
                 <AzariaSvg className={$cl(
                     styles.logo,
@@ -89,6 +105,44 @@ function PortfolioPage (props: PortfolioPageProps) {
                     </Tooltip.Floating>
 
                     <Link href="/main/about">About me</Link>
+                </div>
+                <div className={$cl(
+                    styles.styleRibbon,
+                    state >= PageState.LogoRemovalEnded && styles.appear
+                )}>
+                    <Tooltip.Floating
+                        position='bottom'
+                        offset={30}
+                        label="Change the color of the neon lights!"
+                    >
+                        <div className={styles.leds}>
+                            <div
+                                className={styles.pink}
+                                onClick={() => setNeonColor("var(--neon-pink)")}
+                            />
+                            <div
+                                className={styles.blue}
+                                onClick={() => setNeonColor("var(--neon-blue)")}
+                            />
+                            <div
+                                className={styles.yellow}
+                                onClick={() => setNeonColor("var(--neon-yellow)")}
+                            />
+                            <div
+                                className={styles.rainbow}
+                            />
+                        </div>
+                    </Tooltip.Floating>
+
+                    <Tooltip.Floating
+                        position='bottom'
+                        offset={30}
+                        label="They are flickering too much."
+                    >
+                        <button>
+                            Fix lights
+                        </button>
+                    </Tooltip.Floating>
                 </div>
                 <div className={$cl(
                     styles.icons,
@@ -152,22 +206,38 @@ function PortfolioPage (props: PortfolioPageProps) {
                         <_ListItem
                             name="Assetto Corsa"
                             description="A content manager and launcher for the racing simulator 'Assetto Corsa'."
+                            drawing={drawing_al.src}
                             tags={["Electron", "React", "TypeScript", "Sass"]}
                         />
                         <_ListItem
                             name="Leaflys"
                             description="A GeoJSON document creator and editor."
+                            drawing={drawing_leaflys.src}
                             tags={["React", "JavaScript", "Leaflet", "Turf"]}
+                        />
+                        <_ListItem
+                            name="Kaisa's Pokémon Emerald"
+                            description="A modded version of Pokémon Emerald."
+                            drawing={drawing_emerald.src}
+                            tags={["C", "Assembly", "Game Boy Advance"]}
                         />
                         <_ListItem
                             name="aracnephobia.com"
                             description="A website and portfolio."
+                            drawing={drawing_aracnephobia.src}
                             tags={["React", "TypeScript", "Sass"]}
                         />
                         <_ListItem
                             name="SPlatform"
                             description="A Super Mario-like platformer game with a custom level editor."
-                            tags={["SFML", "C#", "Electron", "TypeScript", "Pixi.js", "Monaco editor"]}
+                            drawing={drawing_al.src}
+                            tags={["SFML", "C#", "Electron", "Pixi.js", "Monaco"]}
+                        />
+                        <_ListItem
+                            name="Shattered"
+                            description="A small Minecraft-like game engine made in Unity."
+                            drawing={drawing_shattered.src}
+                            tags={["Unity Engine", "C#"]}
                         />
                     </ScrollArea>
                 </div>
@@ -186,11 +256,17 @@ function PortfolioPage (props: PortfolioPageProps) {
             setState(Math.max(state, PageState.LogoRemovalEnded));
         }
     }
+
+    function setNeonColor (col: string) {
+        pageRef.current?.style.setProperty("--current-neon", col);
+        localStorage.setItem('portfolio-neon-color', col);
+    }
 }
 
 interface _ListItemProps {
     name: string;
     description: string;
+    drawing: string;
     tags: string[];
 }
 
@@ -199,6 +275,7 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!
 function _ListItem ({
     name,
     description,
+    drawing,
     tags,
 }: _ListItemProps) {
     const [nameDisplay, setNameDisplay] = useState(name);
@@ -207,7 +284,12 @@ function _ListItem ({
 
     return (
         <div className={styles.item} onMouseEnter={handleMouseEnter}>
-            <img className={styles.icon} src={iconPlaceholder.src} />
+            <div className={styles.icon}>
+                <div
+                    className={styles.img2}
+                    style={{maskImage: `url(${drawing})`}}
+                />
+            </div>
             <div className={styles.description}>
                 <div className={styles.name}>
                     {nameDisplay}
