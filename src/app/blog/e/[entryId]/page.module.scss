@@ -1,0 +1,154 @@
+@import "@src/mixins";
+
+.entry {
+    @include blog-body;
+    
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.5rem;
+    z-index: 10;
+    scroll-behavior: smooth !important;
+
+    .entryTitle {
+        font-size: 2rem;
+        font-weight: 800;
+        text-align: center;
+        color: var(--blog-color-primary-d2);
+    }
+
+    .article {
+        display: flex;
+        flex-direction: row;
+        
+        .contentTable {
+            display: none;
+            padding: 1rem 3vw 1rem 0;
+            min-width: 250px;
+            overflow-x: unset;
+        }
+
+        .content {
+            overflow: hidden;
+        }
+
+        .asideContainer {
+            display: none;
+        }
+    }
+}
+
+.content > .entryBody {
+    font-size: 1rem;
+    overflow: hidden;
+
+    > p, > div {
+        margin: 1em 0.75em;
+    }
+
+    code {
+        font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+
+        span::selection {
+            background-color: var(--color-selection-code);
+        }
+    }
+
+    .h1Container {
+        margin-bottom: 1em;
+    }
+
+    h1 {
+        padding: 0.375em 0 0.375em 0.75em;
+        margin: 1.375em 0;
+
+        background-color: var(--blog-color-primary);
+        color: white;
+        font-size: 1.5em;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        transition: padding-left 0.3s;
+        position: relative;
+        text-shadow: 1px 1px 3px black;
+
+        &:hover {
+            text-decoration: underline;
+            padding-left: calc(0.75em + 2em);
+            
+            &::before {
+                content: "#";
+                position: absolute;
+                left: 0;
+                transform: translateX(0.75em);
+            }
+        }
+    }
+
+    hr {
+        border-top: 0;
+        margin: 0 24px;
+        border-color: var(--blog-color-primary);
+    }
+
+    ul {
+        margin: 0 64px;
+    }
+}
+
+
+@include when-tablet {
+    .entry {
+        padding: 1rem;
+        max-width: 75vw;
+
+        .entryTitle {
+            font-size: 3rem;
+            font-weight: 500;
+        }
+    }
+
+    .content > .entryBody {
+        $margin-1: 2em;
+
+        > p, > div {
+            margin: 1em $margin-1;
+        }
+
+        code {
+            font-size: rem-as-pt(10);
+        }
+
+        h1 {
+            margin: 1.375em 0;
+            padding: 0.375em 0 0.375em 1.5em;
+
+            &:hover {
+                padding-left: calc(1.5em + 2em);
+                
+                &::before {
+                    transform: translateX(1.5em);
+                }
+            }
+        }
+    }
+}
+
+@include when-desktop {
+    .entry {
+        .article {
+            .contentTable {
+                display: block;
+                flex: 3;
+            }
+
+            .content {
+                flex: 7;
+            }
+
+            .asideContainer {
+                display: block;
+                flex: 3;
+            }
+        }
+    }
+}

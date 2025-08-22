@@ -1,0 +1,108 @@
+@import "@src/mixins";
+
+.viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    z-index: -100;
+
+    > .v2 {
+        @include crt;
+        transform: perspective(2500px)
+            scale(1.05)
+            rotateX(2deg)
+            rotateY(2deg);
+    
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > .offline {
+            filter: blur(3px);
+            font-size: 7rem;
+            opacity: 0.7;
+
+            > div {
+                position: absolute;
+                top: 0;
+                left: 0;
+                mix-blend-mode: screen;
+                font-weight: 600;
+
+                &:nth-child(1) {
+                    position: static;
+                    visibility: hidden;
+                }
+
+                &:nth-child(2) {
+                    animation: shake1 1s infinite;
+
+                    color: #0000ff;
+
+                    &::selection {
+                        mix-blend-mode: screen;
+                        color: transparent;
+                        background-color: #0000ff;
+                    }
+                }
+                &:nth-child(3) {
+                    animation: shake2 1s infinite;
+
+                    color: #ff0000;
+
+                    &::selection {
+                        mix-blend-mode: screen;
+                        color: transparent;
+                        background-color: #ff0000;
+                    }
+                }
+                &:nth-child(4) {
+                    animation: shake3 1s infinite;
+
+                    color: #00ff00;
+
+                    &::selection {
+                        mix-blend-mode: screen;
+                        color: transparent;
+                        background-color: #00ff00;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes shake1 {
+    0% {transform: translate(4px, 4px)}
+    15% {transform: translate(5px, 6px)}
+    30% {transform: translate(4px, 4px)}
+    45% {transform: translate(5px, 6px)}
+    60% {transform: translate(4px, 4px)}
+    75% {transform: translate(6px, -2px)}
+    100% {transform: translate(4px, 4px)}
+}
+
+@keyframes shake2 {
+    0% {transform: translate(0px, 0px)}
+    15% {transform: translate(-1px, -2px)}
+    30% {transform: translate(0px, 0px)}
+    45% {transform: translate(-1px, -2px)}
+    60% {transform: translate(0px, 0px)}
+    75% {transform: translate(-1px, 1px)}
+    100% {transform: translate(0px, 0px)}
+}
+
+@keyframes shake3 {
+    0% {transform: translate(-4px, -4px)}
+    15% {transform: translate(-6px, -6px)}
+    30% {transform: translate(-4px, -4px)}
+    45% {transform: translate(0px, 0px)}
+    60% {transform: translate(-4px, -4px)}
+    75% {transform: translate(-3px, -5px)}
+    100% {transform: translate(-4px, -4px)}
+}

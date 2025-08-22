@@ -4,6 +4,7 @@ category: "procedural_gen"
 created: 2024-01-05
 thumbnail: test-voxel.webp
 summary: Doing something with voxels.
+published: true
 ---
 # What is procedural?
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget congue ligula, ullamcorper bibendum ante. Morbi maximus vitae ante quis pellentesque. Integer condimentum sapien neque. Proin ornare et odio id pulvinar. Nulla vitae quam ut urna pharetra ornare. Cras tristique sem et eros fermentum mollis nec id arcu. Nulla lacinia auctor aliquam. Suspendisse potenti. Nam ornare at quam in posuere.

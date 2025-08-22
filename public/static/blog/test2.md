@@ -4,6 +4,7 @@ category: "css"
 created: 2023-01-06
 thumbnail: test-flexbox.gif
 summary: Nunc maximus, neque sed scelerisque tristique, lectus sapien dictum orci, elementum posuere tortor lectus ac nulla.
+published: true
 ---
 
 # Why a blog?

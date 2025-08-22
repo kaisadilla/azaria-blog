@@ -1,23 +1,80 @@
-@import "@src/mixins.scss";
+@import "@src/mixins";
 
-.page {
-    padding: 16px 16px;
-    max-width: 964px;
-    //margin-bottom: calc(calc(1920px - 100vw) / 3); // probably not
+.viewport {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--blog-color-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    //justify-content: center;
 
-    > .title {
-        margin-bottom: 36px;
-        font-size: 2rem;
+    .cover {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        top: 0;
+        transition: top 2s ease;
+        background-color: white;
+        z-index: 100000;
+
+        &.removed {
+            top: 100vh;
+        }
+
+        .hexagons {
+            width: 100%;
+            position: absolute;
+        }
+    }
+
+    .logo {
+        font-size: 4rem;
+    }
+
+    .sectionTable {
+
     }
 }
 
 @include when-tablet {
-    .page {
-        width: 70vw;
-        padding: 16px 32px;
+    .viewport {
+        .sectionTable {
+            $border: 1px solid white;
+            height: 100%;
+            max-height: 40rem;
+            width: 100%;
+            max-width: 90rem;
 
-        > .title {
-            font-size: 3rem;
+            display: grid;
+            grid-template: "ab ab ab my my my" 1fr
+                           "bl bl to to sn sn" 1fr / 1fr 1fr 1fr 1fr 1fr 1fr;
+
+            .aboutMe {
+                grid-area: ab;
+                border-bottom: $border;
+                border-right: $border;
+                position: relative;
+            }
+            .myProject {
+                grid-area: my;
+                border-bottom: $border;
+            }
+            .blog {
+                grid-area: bl;
+                border-right: $border;
+            }
+            .tools {
+                grid-area: to;
+                border-right: $border;
+            }
+            .snippets {
+                grid-area: sn;
+            }
         }
     }
 }

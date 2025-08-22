@@ -1,3 +1,5 @@
+import { $cl } from "@/utils";
+import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 import { Aldrich, Chakra_Petch, Coda, Iceberg, Jockey_One, Kdam_Thmor_Pro, Michroma, Nova_Square, Orbitron, Passero_One, Poppins, Russo_One, Share_Tech, Tomorrow, Tourney, Tsukimi_Rounded } from "next/font/google";
 
 export const poppins = Poppins({ weight: "400", subsets: ['latin', 'latin-ext'] });
@@ -53,3 +55,13 @@ export const fontBody = Chakra_Petch({
 });
 
 export const fontAside = chakraPetch;
+
+// TODO: This shouldn't be necessary, but for some reason font loading breaks
+// randomly.
+export function fontVariables () : string {
+    return $cl(
+        chakraPetch.variable,
+        tomorrow.variable,
+        orbitron.variable,
+    );
+}

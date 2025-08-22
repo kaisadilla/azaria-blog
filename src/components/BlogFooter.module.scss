@@ -1,0 +1,16 @@
+.footer {
+    grid-area: foo;
+
+    min-height: 300px;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+
+    .footerContent {
+        background-color: var(--blog-color-primary);
+        flex: 1;
+        pointer-events: auto;
+    }
+}

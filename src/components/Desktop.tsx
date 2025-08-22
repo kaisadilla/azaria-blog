@@ -5,10 +5,9 @@ import WIcon from './WIcon';
 import Clock from './Clock';
 import styles from "./Desktop.module.scss";
 import IconGrid from './IconGrid';
-import Megaplace from '@/app/megaplace/page';
 import WindowArea from './WindowArea';
 import TaskbarTabs from './TaskbarTabs';
-import { OsContextProvider } from '@/app/main/context';
+import { OsContextProvider } from '@/app/cmd/context';
 
 export interface DesktopProps {
     

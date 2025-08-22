@@ -4,12 +4,12 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Draggable, { DraggableBounds, DraggableEvent } from 'react-draggable';
 import { DraggableData, Rnd } from 'react-rnd';
 import DesktopWindow, { DesktopWindowProps } from './DesktopWindow';
-import { getClassString, Vec2 } from '@/utils';
+import { $cl, Vec2 } from '@/utils';
 import { NumberSize } from 're-resizable';
 import { Direction } from 're-resizable/lib/resizer';
 import styles from "./MovableWindow.module.scss";
 import { OsWindow } from '@/logic/OsWindow';
-import { useOsContext } from '@/app/main/context';
+import { useOsContext } from '@/app/cmd/context';
 
 export interface MovableWindowProps extends DesktopWindowProps {
     parentWidth: number;
@@ -40,7 +40,7 @@ function MovableWindow ({
         }
     }, []);
 
-    const divClass = getClassString(
+    const divClass = $cl(
         styles.movableWindow,
         focused && styles.focused,
     );

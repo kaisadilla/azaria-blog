@@ -7,7 +7,7 @@
  * @param params 
  * @returns 
  */
-export function getClassString (
+export function $cl (
     ...params: (string | boolean | [string, boolean | undefined] | undefined | null)[]
 ) : string
 {

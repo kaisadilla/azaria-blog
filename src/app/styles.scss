@@ -1,0 +1,73 @@
+@import "@src/mixins.scss";
+
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+
+    --color-primary: #c8268f;
+    --color-secondary: #29d8f7;
+    --color-tertiary: #ffe600;
+    --color-background: #100e16; // #262335
+    --color-white: #d5d5d5;
+    --color-light: #8794bb;
+
+    --blog-color-primary-l3: #d0f3ff;
+    --blog-color-primary-l2: #91e3ff;
+    --blog-color-primary-l1: #5fd7ff;
+    --blog-color-primary: #30c0ef;
+    --blog-color-primary-d1: #159ad2;
+    --blog-color-primary-d2: #0661b6;
+
+    --blog-color-secondary: #fdab31;
+    --blog-color-secondary-d1: #cc630d;
+
+    --color-selection: #fdab31;
+    --color-selection-code: #006eff60;
+    --color-code-block-bg: #eff1f5;
+
+    --min-desktop: 50rem;
+
+    --font-title: 'Chakra Petch';
+    --font-body: 'Chakra Petch';
+
+    box-sizing: border-box;
+}
+
+//@include when-system-theme-dark {
+//    :root {
+//        --background: #0a0a0a;
+//        --foreground: #ededed;
+//        --blog-color-primary-l3: #d0f3ff;
+//        --blog-color-primary-l2: #91e3ff;
+//        --blog-color-primary-l1: #ffc64f;
+//        --blog-color-primary: #ffb148;
+//        --blog-color-primary-d1: #faa041;
+//        --blog-color-primary-d2: #d88b38;
+//        --color-selection: #30c0ef;
+//        --color-selection-code: #006eff60;
+//        --color-code-block-bg: #eff1f5;
+//    }
+//}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+
+    font-size: 12pt;
+    color: black;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-family: var(--font-body);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+@import "mantine.scss";
