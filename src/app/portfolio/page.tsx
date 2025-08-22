@@ -1,27 +1,24 @@
 'use client';
 
-import React, { Dispatch, KeyboardEvent, SetStateAction, useEffect, useRef, useState } from 'react';
-import styles from './page.module.scss';
 import AzariaSvg from '@/assets/AzariaSvg';
 import { $cl } from '@/utils';
-import { Typewriter } from 'react-simple-typewriter';
-import { ScrollArea, Tooltip } from '@mantine/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ScrollArea, Tooltip } from '@mantine/core';
 import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './page.module.scss';
 
-import hexSeparator from '@src/assets/img/portfolio/hex_separation_shadows.png';
-import iconPlaceholder from '@src/assets/img/portfolio/placeholder_img.png';
-import drawing_al from '@src/assets/img/portfolio/drawing_assetto_lega.png';
-import drawing_leaflys from '@src/assets/img/portfolio/drawing_leaflys.png';
-import drawing_emerald from '@src/assets/img/portfolio/drawing_emerald.png';
 import drawing_aracnephobia from '@src/assets/img/portfolio/drawing_aracnephobia.png';
+import drawing_al from '@src/assets/img/portfolio/drawing_assetto_lega.png';
+import drawing_emerald from '@src/assets/img/portfolio/drawing_emerald.png';
+import drawing_leaflys from '@src/assets/img/portfolio/drawing_leaflys.png';
 import drawing_shattered from '@src/assets/img/portfolio/drawing_shattered.png';
 
-import NoProjectShowcase from './NoProjectShowcase';
-import { usePlaySound } from '@/hooks/usePlaySound';
 import HexSeparatorSvg from '@/assets/HexSeparatorSvg';
+import { usePlaySound } from '@/hooks/usePlaySound';
 import { MaterialSymbol } from 'react-material-symbols';
+import NoProjectShowcase from './NoProjectShowcase';
 
 enum PageState {
     Initial,
@@ -42,11 +39,16 @@ function PortfolioPage (props: PortfolioPageProps) {
         "/sfx/cyberpunk-bg-1.ogg", {
             volume: 0.2,
             loop: true,
-            muted: localStorage.getItem('portfolio-bg-music-muted') === 'true'
+            muted: false
         }
     );
 
     const [state, setState] = useState<PageState>(PageState.Initial);
+
+    useEffect(() => {
+        const muted = localStorage.getItem('portfolio-bg-music-muted') === 'true'
+        bgMusicSound.setMuted(muted);
+    }, []);
 
     useEffect(() => {
         if (pageRef.current === null) return;
