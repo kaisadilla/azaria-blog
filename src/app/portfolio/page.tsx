@@ -21,6 +21,7 @@ import drawing_shattered from '@src/assets/img/portfolio/drawing_shattered.png';
 import NoProjectShowcase from './NoProjectShowcase';
 import { usePlaySound } from '@/hooks/usePlaySound';
 import HexSeparatorSvg from '@/assets/HexSeparatorSvg';
+import { MaterialSymbol } from 'react-material-symbols';
 
 enum PageState {
     Initial,
@@ -36,7 +37,14 @@ export interface PortfolioPageProps {
 function PortfolioPage (props: PortfolioPageProps) {
     const pageRef = useRef<HTMLDivElement>(null);
 
-    const { play: playGlitch } = usePlaySound("/sfx/glitch_0.ogg");
+    const glitchSound = usePlaySound("/sfx/glitch_0.ogg");
+    const bgMusicSound = usePlaySound(
+        "/sfx/cyberpunk-bg-1.ogg", {
+            volume: 0.2,
+            loop: true,
+            muted: localStorage.getItem('portfolio-bg-music-muted') === 'true'
+        }
+    );
 
     const [state, setState] = useState<PageState>(PageState.Initial);
 
@@ -55,7 +63,11 @@ function PortfolioPage (props: PortfolioPageProps) {
             if (state >= PageState.LogoRemovalStarted) return;
 
             setState(PageState.LogoRemovalStarted);
-            playGlitch();
+            glitchSound.play();
+
+            setTimeout(() => {
+                bgMusicSound.play();
+            }, 500);
         }
         
         document.addEventListener('keypress', handleKeyPress);
@@ -65,7 +77,7 @@ function PortfolioPage (props: PortfolioPageProps) {
             document.removeEventListener('keypress', handleKeyPress);
             document.removeEventListener('touchend', handleKeyPress);
         }
-    }, [state, playGlitch]);
+    }, [state, glitchSound.play, bgMusicSound.play]);
 
     return (
         <div ref={pageRef} className={styles.page}>
@@ -130,6 +142,7 @@ function PortfolioPage (props: PortfolioPageProps) {
                             />
                             <div
                                 className={styles.rainbow}
+                                onClick={() => setNeonColor("var(--neon-rainbow)")}
                             />
                         </div>
                     </Tooltip.Floating>
@@ -140,9 +153,22 @@ function PortfolioPage (props: PortfolioPageProps) {
                         label="They are flickering too much."
                     >
                         <button>
-                            Fix lights
+                            <div className={styles.bordered}>Fix lights</div>
                         </button>
                     </Tooltip.Floating>
+
+                    <button
+                        className={styles.mute}
+                        onClick={() => handleBgMusicMute(!bgMusicSound.muted)}
+                    >
+                        <div>
+                            <MaterialSymbol
+                                className={styles.mute}
+                                icon={bgMusicSound.muted ? 'volume_off' : 'volume_up'}
+                            />
+                        </div>
+                    </button>
+
                 </div>
                 <div className={$cl(
                     styles.icons,
@@ -204,7 +230,7 @@ function PortfolioPage (props: PortfolioPageProps) {
                         scrollbarSize="1.5em"
                     >
                         <_ListItem
-                            name="Assetto Corsa"
+                            name="Assetto Lega"
                             description="A content manager and launcher for the racing simulator 'Assetto Corsa'."
                             drawing={drawing_al.src}
                             tags={["Electron", "React", "TypeScript", "Sass"]}
@@ -260,6 +286,11 @@ function PortfolioPage (props: PortfolioPageProps) {
     function setNeonColor (col: string) {
         pageRef.current?.style.setProperty("--current-neon", col);
         localStorage.setItem('portfolio-neon-color', col);
+    }
+
+    function handleBgMusicMute (muted: boolean) {
+        bgMusicSound.setMuted(muted);
+        localStorage.setItem('portfolio-bg-music-muted', muted ? 'true' : 'false');
     }
 }
 

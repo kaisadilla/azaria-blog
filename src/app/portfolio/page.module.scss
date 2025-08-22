@@ -1,5 +1,7 @@
 @import "@src/mixins";
 
+$hover-glitch: glitchHover 1.6s infinite;
+
 @property --neon-pink {
     syntax: '<color>';
     inherits: false;
@@ -15,6 +17,11 @@
     inherits: false;
     initial-value: var(--color-tertiary);
 }
+@property --neon-rainbow {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: var(--color-primary);
+}
 
 .hexGrid {
     position: fixed;
@@ -29,12 +36,14 @@
     --neon-pink: var(--color-primary);
     --neon-blue: var(--color-secondary);
     --neon-yellow: var(--color-tertiary);
+    --neon-rainbow: var(--color-primary);
 
-    --current-neon: var(--neon-pink);
+    --current-neon: var(--neon-yellow);
 
     animation: pinkNeonFlicker 60s infinite step-end,
         blueNeonFlicker 60s infinite step-end,
-        yellowNeonFlicker 60s infinite step-end;
+        yellowNeonFlicker 60s infinite step-end,
+        rainbowNeon 20s infinite step-end;
 
     background-color: var(--color-background);
     width: 100vw;
@@ -45,11 +54,23 @@
     justify-content: center;
 
     button {
+        cursor: pointer;
+        border: 0;
         background-color: transparent;
-        border: 1px solid var(--current-neon);
-        padding: 0.3em 1.2em;
         color: var(--current-neon);
         font-weight: 600;
+        min-width: 0;
+
+        > div {
+            &.bordered {
+                border: 1px solid var(--current-neon);
+                padding: 0.3em 1.2em;
+            }
+        }
+
+        &:hover > * {
+            animation: $hover-glitch;
+        }
     }
 
     > .navbar {
@@ -106,7 +127,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
 
             &.appear {
                 display: flex;
@@ -117,6 +138,7 @@
                 align-items: center;
                 justify-content: center;
                 gap: 2rem;
+                padding: 0 1rem 0 0;
 
                 > div {
                     cursor: pointer;
@@ -124,24 +146,44 @@
                     height: 1.5rem;
                     filter: blur(2px);
 
-                    animation-duration: 8s;
-                    animation-iteration-count: infinite;
+                    &:not(.rainbow) {
+                        animation-duration: 8s;
+                        animation-iteration-count: infinite;
+                    }
 
                     &.pink {
                         animation-name: pinkBlockGlow;
-                        background-color: var(--color-primary); 
+                        background-color: var(--neon-pink); 
                     }
 
                     &.blue {
                         animation-name: blueBlockGlow;
-                        background-color: var(--color-secondary);
+                        background-color: var(--neon-blue);
                     }
 
                     &.yellow {
                         animation-name: yellowBlockGlow;
-                        background-color: var(--color-tertiary);
+                        background-color: var(--neon-yellow);
+                    }
+
+                    &.rainbow {
+                        //animation-name: rainbowBlockGlow;
+                        //background-color: var(--neon-rainbow);
+                        background-color: hsl(0, 80%, 42%);
+                        //animation-name: rainbowHue;
+                        animation: rainbowBlockGlow 8s infinite,
+                            rainbowHue 2s infinite;
                     }
                 }
+            }
+
+            .mute {
+                cursor: pointer;
+                color: var(--current-neon);
+                font-size: 2rem;
+                font-weight: 200;
+                display: flex;
+                align-items: center;
             }
         }
         
@@ -160,6 +202,12 @@
 
             &.appear {
                 display: flex;
+            }
+
+            a {
+                &:hover {
+                    animation: $hover-glitch;
+                }
             }
     
             .fa {
@@ -190,8 +238,6 @@
         gap: 3rem;
 
         > .azaria {
-            //animation: logoGlitchOut 0.6s linear 5.05s forwards;
-
             width: 90vw;
             fill: none;
             stroke: var(--current-neon);
@@ -334,6 +380,7 @@
                         width: 100%;
                         display: flex;
                         justify-content: center;
+                        align-items: center;
 
                         svg {
                             fill: none;
@@ -446,41 +493,42 @@
 
 @mixin neon-block-glow($name, $col) {
     @keyframes #{$name} {
-        0%   { box-shadow: 0 1px 10px 5px $col; }
-        3%   { box-shadow: 0 1px 15px 6px $col; }
-        6%   { box-shadow: 0 1px 20px 5px $col; }
-        9%   { box-shadow: 0 1px 25px 6px $col; }
-        11%  { box-shadow: 0 1px 15px 5px $col; }
+        0%   { box-shadow: 0 1px 10px 5px #{$col}; }
+        3%   { box-shadow: 0 1px 15px 6px #{$col}; }
+        6%   { box-shadow: 0 1px 20px 5px #{$col}; }
+        9%   { box-shadow: 0 1px 25px 6px #{$col}; }
+        11%  { box-shadow: 0 1px 15px 5px #{$col}; }
 
-        20%  { box-shadow: 0 1px 8px 4px $col; }
-        23%  { box-shadow: 0 1px 14px 6px $col; }
-        26%  { box-shadow: 0 1px 18px 7px $col; }
-        29%  { box-shadow: 0 1px 22px 6px $col; }
-        31%  { box-shadow: 0 1px 14px 5px $col; }
+        20%  { box-shadow: 0 1px  8px 4px #{$col}; }
+        23%  { box-shadow: 0 1px 14px 6px #{$col}; }
+        26%  { box-shadow: 0 1px 18px 7px #{$col}; }
+        29%  { box-shadow: 0 1px 22px 6px #{$col}; }
+        31%  { box-shadow: 0 1px 14px 5px #{$col}; }
 
-        40%  { box-shadow: 0 1px 12px 4px $col; }
-        43%  { box-shadow: 0 1px 18px 5px $col; }
-        46%  { box-shadow: 0 1px 23px 6px $col; }
-        49%  { box-shadow: 0 1px 28px 7px $col; }
-        51%  { box-shadow: 0 1px 18px 5px $col; }
+        40%  { box-shadow: 0 1px 12px 4px #{$col}; }
+        43%  { box-shadow: 0 1px 18px 5px #{$col}; }
+        46%  { box-shadow: 0 1px 23px 6px #{$col}; }
+        49%  { box-shadow: 0 1px 28px 7px #{$col}; }
+        51%  { box-shadow: 0 1px 18px 5px #{$col}; }
 
-        60%  { box-shadow: 0 1px 11px 6px $col; }
-        63%  { box-shadow: 0 1px 16px 5px $col; }
-        66%  { box-shadow: 0 1px 19px 7px $col; }
-        69%  { box-shadow: 0 1px 23px 6px $col; }
-        71%  { box-shadow: 0 1px 16px 4px $col; }
+        60%  { box-shadow: 0 1px 11px 6px #{$col}; }
+        63%  { box-shadow: 0 1px 16px 5px #{$col}; }
+        66%  { box-shadow: 0 1px 19px 7px #{$col}; }
+        69%  { box-shadow: 0 1px 23px 6px #{$col}; }
+        71%  { box-shadow: 0 1px 16px 4px #{$col}; }
 
-        80%  { box-shadow: 0 1px 9px 5px $col; }
-        83%  { box-shadow: 0 1px 14px 6px $col; }
-        86%  { box-shadow: 0 1px 19px 5px $col; }
-        89%  { box-shadow: 0 1px 24px 7px $col; }
-        100% { box-shadow: 0 1px 14px 5px $col; }
+        80%  { box-shadow: 0 1px  9px 5px #{$col}; }
+        83%  { box-shadow: 0 1px 14px 6px #{$col}; }
+        86%  { box-shadow: 0 1px 19px 5px #{$col}; }
+        89%  { box-shadow: 0 1px 24px 7px #{$col}; }
+        100% { box-shadow: 0 1px 14px 5px #{$col}; }
     }
 }
 
 @include neon-block-glow(pinkBlockGlow, var(--neon-pink));
 @include neon-block-glow(blueBlockGlow, var(--neon-blue));
 @include neon-block-glow(yellowBlockGlow, var(--neon-yellow));
+@include neon-block-glow(rainbowBlockGlow, hsl(0, 80%, 42%));
 
 @mixin neon-flicker($name, $var, $regularCol, $wrongCol, $secondaryCol) {
     @keyframes #{$name} {
@@ -584,6 +632,19 @@
     yellowNeonFlicker, --neon-yellow, var(--color-tertiary), #bbbd3c, var(--color-primary)
 );
 
+@keyframes rainbowNeon {
+    @for $i from 0 through 359 {
+        #{$i * 100% / 359} {
+            --neon-rainbow: hsl(#{$i}, 80%, 42%);
+        }
+    }
+}
+
+@keyframes rainbowHue {
+    0%   { filter: blur(2px) hue-rotate(0deg); }
+    100% { filter: blur(2px) hue-rotate(360deg); }
+}
+
 @keyframes drawBorder {
     to {
         stroke-dashoffset: 0;
@@ -686,6 +747,171 @@
         #{($i * (1 / 20) * 100%)} {
             clip-path: inset(#{random(100)}px 9999px #{random(100)}px 0);
         }
+    }
+}
+
+@keyframes logoGlitchOut {
+    0% {
+        opacity: 1;
+        transform: translate(2vw, 3vh);
+    }
+    11% {
+        transform: translate(2vw, 3vh);
+    }
+    12% {
+        opacity: 0;
+        transform: translate(-3vw, 2vh);
+    }
+    14% {
+        opacity: 0;
+        transform: translate(2vw, -2vh);
+    }
+    16% {
+        opacity: 1;
+        fill: var(--current-neon);
+        stroke: none;
+    }
+    42% {
+        transform: scaleY(1) skewX(0deg) translate(2vw, -2vh);
+    }
+    44% {
+        transform: scaleY(3) skewX(-60deg) translate(-4vw, -4vh);
+    }
+    46% {
+        transform: scaleY(1) skewX(0deg);
+    }
+    60% {
+        opacity: 1;
+    }
+    62% {
+        opacity: 0;
+        transform: translate(0 0);
+    }
+    68% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+    83% {
+        transform: scaleX(1) scaleY(1) skewX(0deg);
+        fill: none;
+        stroke: var(--color-secondary);
+    }
+    84% {
+        transform: scaleX(1.5) scaleY(.2) skewX(80deg);
+    }
+    86% {
+        transform: scaleX(1) scaleY(1) skewX(0deg);
+        fill: var(--current-neon);
+        stroke: none;
+    }
+    94% {
+        fill: none;
+        stroke: var(--current-neon);
+    }
+}
+
+@keyframes glitchHover {
+    0%, 2.99% {
+        opacity: 1;
+        background-color: none;
+        color: var(--current-neon);
+        transform: translate(4px, 0);
+    }
+    @for $i from 0 through 60 {
+        #{3% + ($i * 0.16%)} {
+            transform: translate(#{13px * -($i % 2)}, 0);
+        }
+    }
+    //3%, 5.99% {
+    //    transform: translate(-3px, 0);
+    //}
+    //6%, 8.99% {
+    //    transform: translate(-1px, 0);
+    //}
+    //9%, 11.99% {
+    //    transform: translate(4px, 0);
+    //}
+    12%, 14.99% {
+        transform: translate(2px, 0);
+    }
+    15%, 17.99% {
+        opacity: 1;
+        transform: translate(1px, 0);
+    }
+    18% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+        transform: translate(2px, -2px) skew(-30deg);
+    }
+    23% {
+        opacity: 1;
+    }
+    28%, 30.99% {
+        transform: translate(11px, 0) skew(0deg);
+    }
+    31%, 34.99% {
+        transform: translate(11px, 0) skew(30deg);
+    }
+    34.99% {
+        transform: skew(30deg);
+        background-color: transparent;
+        color: var(--current-neon);
+    }
+    35%, 38.99% {
+        transform: skew(0deg);
+        background-color: var(--current-neon);
+        color: var(--color-background);
+    }
+    39% {
+        background-color: transparent;
+        color: var(--current-neon);
+    }
+    42% {
+        transform: scaleY(1) skewX(0deg) translate(-6px, 0);
+    }
+    44% {
+        transform: scaleY(1.2) skewX(-60deg) translate(-6px, 0);
+    }
+    46% {
+        transform: scaleY(1) skewX(0deg);
+    }
+    60% {
+        opacity: 1;
+    }
+    62% {
+        opacity: 0;
+        transform: translate(0 0);
+    }
+    68% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+    83% {
+        transform: scaleX(1) scaleY(1) skewX(0deg);
+        background-color: transparent;
+        color: var(--current-neon);
+    }
+    84% {
+        transform: scaleX(1.1) scaleY(.2) skewX(80deg);
+    }
+    85% {
+        background-color: transparent;
+        color: var(--current-neon);
+    }
+    86% {
+        transform: scaleX(1) scaleY(1) skewX(0deg);
+        background-color: var(--current-neon);
+        color: var(--color-background);
+    }
+    94% {
+        background-color: transparent;
+        color: var(--current-neon);
     }
 }
 
