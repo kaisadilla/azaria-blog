@@ -12,54 +12,54 @@ import Snippets from './Snippets';
 import { Tooltip } from '@mantine/core';
 
 export interface MainPageProps {
-    
+  
 }
 
 function MainPage (props: MainPageProps) {
-    const [isCoverRemoved, setCoverRemoved] = useState(false);
+  const [isCoverRemoved, setCoverRemoved] = useState(false);
 
-    useEffect(() => {
-        setTimeout(() => setCoverRemoved(true), 200);
-    }, []);
+  useEffect(() => {
+    setTimeout(() => setCoverRemoved(true), 200);
+  }, []);
 
-    return (
-        <div className={styles.viewport}>
-            <div className={$cl(styles.cover, isCoverRemoved && styles.removed)}>
-                <img
-                    className={styles.hexagons}
-                    src="/img/blog_header.png"
-                    alt=""
-                    draggable={false}
-                />
-            </div>
+  return (
+    <div className={styles.viewport}>
+      <div className={$cl(styles.cover, isCoverRemoved && styles.removed)}>
+        <img
+          className={styles.hexagons}
+          src="/img/blog_header.png"
+          alt=""
+          draggable={false}
+        />
+      </div>
 
-            <Tooltip.Floating
-                position='top'
-                label="'azaria.dev' was already taken :("
-            >
-                <div className={styles.logo}>
-                    <AzariaLogo />
-                </div>
-            </Tooltip.Floating>
-            <div className={styles.sectionTable}>
-                <div className={$cl(styles.section, styles.aboutMe)}>
-                    <AboutMe />
-                </div>
-                <div className={$cl(styles.section, styles.myProject)}>
-                    <Projects />
-                </div>
-                <div className={$cl(styles.section, styles.blog)}>
-                    <Blog />
-                </div>
-                <div className={$cl(styles.section, styles.tools)}>
-                    <Tools />
-                </div>
-                <div className={$cl(styles.section, styles.snippets)}>
-                    <Snippets />
-                </div>
-            </div>
+      <Tooltip.Floating
+        position='top'
+        label="'azaria.dev' was already taken :("
+      >
+        <div className={styles.logo}>
+          <AzariaLogo />
         </div>
-    );
+      </Tooltip.Floating>
+      <div className={styles.sectionTable}>
+        <div className={$cl(styles.section, styles.aboutMe)}>
+          <AboutMe />
+        </div>
+        <div className={$cl(styles.section, styles.myProject)}>
+          <Projects />
+        </div>
+        <div className={$cl(styles.section, styles.blog)}>
+          <Blog />
+        </div>
+        <div className={$cl(styles.section, styles.tools)}>
+          <Tools />
+        </div>
+        <div className={$cl(styles.section, styles.snippets)}>
+          <Snippets />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default MainPage;

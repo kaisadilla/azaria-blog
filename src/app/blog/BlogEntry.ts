@@ -1,8 +1,8 @@
 export interface BlogEntryAttributes {
-    title: string;
-    created: Date;
-    thumbnail: string;
-    summary?: string;
-    id?: string;
-    published: boolean;
+  title: string;
+  created: Date;
+  thumbnail: string;
+  summary?: string;
+  id?: string;
+  published: boolean;
 }

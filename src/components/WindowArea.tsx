@@ -14,85 +14,85 @@ import RecycleBinApp from './RecycleBinApp';
 import BlogApp from './BlogApp';
 
 export interface WindowAreaProps {
-    
+  
 }
 
 function WindowArea (props: WindowAreaProps) {
-    const ctx = useOsContext();
+  const ctx = useOsContext();
 
-    const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-    const [width, setWidth] = useState(1);
-    const [height, setHeight] = useState(1);
-    const [topleft, setTopleft] = useState({top: 0, left: 0});
-    const [indices, setIndices] = useState<{[windowId: string]: number}>({});
+  const [width, setWidth] = useState(1);
+  const [height, setHeight] = useState(1);
+  const [topleft, setTopleft] = useState({top: 0, left: 0});
+  const [indices, setIndices] = useState<{[windowId: string]: number}>({});
 
-    useEffect(() => {
-        if (ref.current === null) return;
+  useEffect(() => {
+    if (ref.current === null) return;
 
-        const rect = ref.current?.getBoundingClientRect();
+    const rect = ref.current?.getBoundingClientRect();
 
-        setWidth(ref.current.clientWidth);
-        setHeight(ref.current.clientHeight);
-        
-        setTopleft({ top: rect.top, left: rect.left });
-    }, [ref.current]);
+    setWidth(ref.current.clientWidth);
+    setHeight(ref.current.clientHeight);
+    
+    setTopleft({ top: rect.top, left: rect.left });
+  }, [ref.current]);
 
-    useEffect(() => {
-        setIndices(prevState => {
-            const newState: {[windowId: string]: number} = {};
-            const windowCount = Object.keys(prevState).length;
+  useEffect(() => {
+    setIndices(prevState => {
+      const newState: {[windowId: string]: number} = {};
+      const windowCount = Object.keys(prevState).length;
 
-            for (const k in prevState) {
-                if (ctx.activeWindowId === k) {
-                    newState[k] = windowCount;
-                }
-                else {
-                    newState[k] = clampNumber(prevState[k] - 1, 0, windowCount - 1);
-                }
-            }
+      for (const k in prevState) {
+        if (ctx.activeWindowId === k) {
+          newState[k] = windowCount;
+        }
+        else {
+          newState[k] = clampNumber(prevState[k] - 1, 0, windowCount - 1);
+        }
+      }
 
-            return newState;
-        });
-    }, [ctx.activeWindowId]);
+      return newState;
+    });
+  }, [ctx.activeWindowId]);
 
-    useEffect(() => {
-        setIndices(prevState => {
-            const newState: {[windowId: string]: number} = {};
+  useEffect(() => {
+    setIndices(prevState => {
+      const newState: {[windowId: string]: number} = {};
 
-            for (const w of ctx.windows) {
-                if (ctx.activeWindowId === w.id) {
-                    newState[w.id] = ctx.windows.length;
-                }
-                else {
-                    newState[w.id] = prevState[w.id] ?? 0;
-                }
-            }
+      for (const w of ctx.windows) {
+        if (ctx.activeWindowId === w.id) {
+          newState[w.id] = ctx.windows.length;
+        }
+        else {
+          newState[w.id] = prevState[w.id] ?? 0;
+        }
+      }
 
-            return newState;
-        })
-    }, [ctx.windows.length]);
+      return newState;
+    })
+  }, [ctx.windows.length]);
 
-    return (
-        <div ref={ref} className={styles.windowArea}>
-            {ctx.windows.filter(w => w.minimized === false).map(w => <MovableWindow
-                key={w.id}
-                window={w}
-                parentWidth={width}
-                parentHeight={height}
-                focused={ctx.activeWindowId === w.id}
-                onFocus={() => ctx.setActiveWindow(w.id)}
-                index={indices[w.id]}
-            >
-                {
-                    w.type === 'recycle_bin' && <RecycleBinApp />
-                }
-                {
-                    w.type === 'blog' && <BlogApp />
-                }
-            </MovableWindow>)}
-        </div>
-    );
+  return (
+    <div ref={ref} className={styles.windowArea}>
+      {ctx.windows.filter(w => w.minimized === false).map(w => <MovableWindow
+        key={w.id}
+        window={w}
+        parentWidth={width}
+        parentHeight={height}
+        focused={ctx.activeWindowId === w.id}
+        onFocus={() => ctx.setActiveWindow(w.id)}
+        index={indices[w.id]}
+      >
+        {
+          w.type === 'recycle_bin' && <RecycleBinApp />
+        }
+        {
+          w.type === 'blog' && <BlogApp />
+        }
+      </MovableWindow>)}
+    </div>
+  );
 }
 
 export default WindowArea;

@@ -6,77 +6,77 @@ import Image from 'next/image';
 import { $cl, Vec2 } from '@/utils';
 
 export interface WIconProps {
-    icon: string;
-    name: string;
-    position: Vec2;
-    selected?: boolean;
-    onOpen?: () => void;
-    onMouseDown?: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-    onDrop?: (position: Vec2) => void;
+  icon: string;
+  name: string;
+  position: Vec2;
+  selected?: boolean;
+  onOpen?: () => void;
+  onMouseDown?: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onDrop?: (position: Vec2) => void;
 }
 
 function WIcon ({
-    icon,
-    name,
-    position,
-    selected,
-    onOpen,
-    onMouseDown,
-    onDrop,
+  icon,
+  name,
+  position,
+  selected,
+  onOpen,
+  onMouseDown,
+  onDrop,
 }: WIconProps) {
-    const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(false);
 
-    useEffect(() => {
-        document.addEventListener('mouseup', handleMouseUp);
+  useEffect(() => {
+    document.addEventListener('mouseup', handleMouseUp);
 
-        return () => {
-            document.removeEventListener('mouseup', handleMouseUp);
-        }
-    }, [dragging]);
-
-    const classStr = $cl(
-        styles.icon,
-        selected && styles.selected
-    );
-
-    const divStyle = {
-        top: position.y,
-        left: position.x
-    };
-
-    return (
-        <div
-            className={classStr}
-            style={divStyle}
-            onMouseDown={handleMouseDown}
-            onDoubleClick={handleDoubleClick}
-        >
-            <Image
-                src={`/img/w_icon/${icon}_48.png`}
-                alt=""
-                width={48}
-                height={48}
-                draggable={false}
-            />
-            <div className={styles.fileName}>{name}</div>
-        </div>
-    );
-
-    function handleMouseDown (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        setDragging(true);
-        onMouseDown?.(evt);
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp);
     }
+  }, [dragging]);
 
-    function handleMouseUp (evt: MouseEvent) {
-        if (dragging === false) return;
+  const classStr = $cl(
+    styles.icon,
+    selected && styles.selected
+  );
 
-        setDragging(false);
-        onDrop?.({ x: evt.pageX, y: evt.pageY });
-    }
+  const divStyle = {
+    top: position.y,
+    left: position.x
+  };
 
-    function handleDoubleClick () {
-        onOpen?.();
-    }
+  return (
+    <div
+      className={classStr}
+      style={divStyle}
+      onMouseDown={handleMouseDown}
+      onDoubleClick={handleDoubleClick}
+    >
+      <Image
+        src={`/img/w_icon/${icon}_48.png`}
+        alt=""
+        width={48}
+        height={48}
+        draggable={false}
+      />
+      <div className={styles.fileName}>{name}</div>
+    </div>
+  );
+
+  function handleMouseDown (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    setDragging(true);
+    onMouseDown?.(evt);
+  }
+
+  function handleMouseUp (evt: MouseEvent) {
+    if (dragging === false) return;
+
+    setDragging(false);
+    onDrop?.({ x: evt.pageX, y: evt.pageY });
+  }
+
+  function handleDoubleClick () {
+    onOpen?.();
+  }
 }
 
 export default WIcon;

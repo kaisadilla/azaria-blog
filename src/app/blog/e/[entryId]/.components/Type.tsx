@@ -2,16 +2,16 @@ import React from 'react';
 import styles from "./type.module.scss";
 
 export interface TypeProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 function Type ({
-    children,
+  children,
 }: TypeProps) {
 
-    return (
-        <span className={styles.type}>{children}</span>
-    );
+  return (
+    <span className={styles.type}>{children}</span>
+  );
 }
 
 export default Type;

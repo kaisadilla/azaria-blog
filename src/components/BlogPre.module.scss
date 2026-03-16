@@ -1,77 +1,77 @@
 @import "@src/mixins";
 
 .codeBlock {
-    $border-radius: 0.375em;
+  $border-radius: 0.375em;
 
-    position: relative;
+  position: relative;
 
-    .code {
-        display: block;
-        max-width: 100%;
-        overflow: hidden;
-        border-radius: 0 0 $border-radius $border-radius;
-    
-        > pre {
-            padding: 0.25rem 0.33rem;
-            display: flex;
-            flex-direction: column;
-            overflow: auto;
-            font-size: rem-as-pt(6);
-    
-            code > span:not(:last-child) {
-                margin-right: 24px;
-            }
-        }
+  .code {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 0 0 $border-radius $border-radius;
+  
+    > pre {
+      padding: 0.25rem 0.33rem;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      font-size: rem-as-pt(6);
+  
+      code > span:not(:last-child) {
+        margin-right: 24px;
+      }
     }
+  }
 
-    .fileName {
-        background: #00000024;
-        font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
-        padding: 0.2em 0.4em;
-        font-size: 0.5em;
-        border-radius: $border-radius $border-radius 0 0;
-    }
-    
-    .language {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 10;
-        font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
-        padding: 0.2em 0.4em;
-        font-size: 0.5em;
-        user-select: none;
+  .fileName {
+    background: #00000024;
+    font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+    padding: 0.2em 0.4em;
+    font-size: 0.5em;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+  
+  .language {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+    padding: 0.2em 0.4em;
+    font-size: 0.5em;
+    user-select: none;
 
-        &.standalone {
-            background: #00000018;
-            padding: 4px 12px;
-        }
+    &.standalone {
+      background: #00000018;
+      padding: 4px 12px;
     }
+  }
 }
 
 @include when-tablet {
-    .codeBlock {
-        $border-radius: 0.75em;
-        
-        .code {
-            border-radius: 0 0 $border-radius $border-radius;
-            
-            > pre {
-                padding: 1rem 1.5rem;
-                font-size: rem-as-pt(10);
-            }
-        }
-
-        .fileName {
-            padding: 0.4em 0.8em;
-            font-size: rem-as-pt(10);
-
-            border-radius: $border-radius $border-radius 0 0;
-        }
-
-        .language {
-            padding: 0.4rem 0.8em;
-            font-size: rem-as-pt(10);
-        }
+  .codeBlock {
+    $border-radius: 0.75em;
+    
+    .code {
+      border-radius: 0 0 $border-radius $border-radius;
+      
+      > pre {
+        padding: 1rem 1.5rem;
+        font-size: rem-as-pt(10);
+      }
     }
+
+    .fileName {
+      padding: 0.4em 0.8em;
+      font-size: rem-as-pt(10);
+
+      border-radius: $border-radius $border-radius 0 0;
+    }
+
+    .language {
+      padding: 0.4rem 0.8em;
+      font-size: rem-as-pt(10);
+    }
+  }
 }

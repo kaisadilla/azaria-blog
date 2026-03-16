@@ -1,192 +1,192 @@
 @mixin hex-horizontal {
-    aspect-ratio: 1 / cos(30deg);
-    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  aspect-ratio: 1 / cos(30deg);
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
 }
 @mixin hex-vertical {
-    aspect-ratio: cos(30deg) / 1;
-    clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
+  aspect-ratio: cos(30deg) / 1;
+  clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
 }
 
 @mixin cut-side-left ($perc) {
-    clip-path: polygon(
-        #{$perc} 0%,
-        100% 0%,
-        100% 100%,
-        #{$perc} 100%,
-        0% calc(100% -  #{$perc}),
-        0% #{$perc}
-    );
+  clip-path: polygon(
+    #{$perc} 0%,
+    100% 0%,
+    100% 100%,
+    #{$perc} 100%,
+    0% calc(100% -  #{$perc}),
+    0% #{$perc}
+  );
 }
 
 @mixin cut-side-right ($perc) {
-    clip-path: polygon(
-        calc(100% -  #{$perc}) 0%,
-        0% 0%,
-        0% 100%,
-        calc(100% -  #{$perc}) 100%,
-        100% calc(100% -  #{$perc}),
-        100% #{$perc}
-    );
+  clip-path: polygon(
+    calc(100% -  #{$perc}) 0%,
+    0% 0%,
+    0% 100%,
+    calc(100% -  #{$perc}) 100%,
+    100% calc(100% -  #{$perc}),
+    100% #{$perc}
+  );
 }
 
 @mixin blog-body {
-    padding: 1rem 0;
-    width: 100%;
-    max-width: 964px;
-    min-height: max(30vw, 200px);
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 964px;
+  min-height: max(30vw, 200px);
 }
 
 @mixin when-tablet {
-    @media (min-width: 50rem) {
-        @content;
-    }
+  @media (min-width: 50rem) {
+    @content;
+  }
 }
 
 @mixin when-desktop {
-    @media (min-width: 75rem) {
-        @content;
-    }
+  @media (min-width: 75rem) {
+    @content;
+  }
 }
 
 @mixin when-system-theme-light {
-    @media (prefers-color-scheme: light) {
-        @content;
-    }
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
 }
 
 @mixin when-system-theme-dark {
-    @media (prefers-color-scheme: dark) {
-        @content;
-    }
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
 }
 
 @function rem-as-pt ($pt, $base: 12) {
-    @return ($pt / $base) * 1rem;
+  @return ($pt / $base) * 1rem;
 }
 
 @mixin crt {
-    animation: textShadow 1.6s infinite;
+  animation: textShadow 1.6s infinite;
 
-    &::before {
-        content: " ";
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background: linear-gradient(
-            rgba(18, 16, 16, 0) 50%,
-            rgba(0, 0, 0, 0.25) 50%,
-        ), linear-gradient(
-            90deg, rgba(255, 0, 0, 0.06),
-            rgba(0, 255, 0, 0.02),
-            rgba(0, 0, 255, 0.06)
-        );
+  &::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%,
+    ), linear-gradient(
+      90deg, rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
 
-        z-index: 20;
-        background-size: 100% 2px, 3px 100%;
-        pointer-events: none;
-    }
+    z-index: 20;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
 
-    &::after {
-        content: " ";
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background: rgba(18, 16, 16, 0.1);
-        opacity: 0;
-        z-index: 20;
-        pointer-events: none;
-        animation: flicker 0.15s infinite;
-    }
+  &::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(18, 16, 16, 0.1);
+    opacity: 0;
+    z-index: 20;
+    pointer-events: none;
+    animation: flicker 0.15s infinite;
+  }
 }
 
 @keyframes flicker {
-    0% {
-        opacity: 0.27861;
-    }
+  0% {
+    opacity: 0.27861;
+  }
 
-    5% {
-        opacity: 0.34769;
-    }
+  5% {
+    opacity: 0.34769;
+  }
 
-    10% {
-        opacity: 0.23604;
-    }
+  10% {
+    opacity: 0.23604;
+  }
 
-    15% {
-        opacity: 0.90626;
-    }
+  15% {
+    opacity: 0.90626;
+  }
 
-    20% {
-        opacity: 0.18128;
-    }
+  20% {
+    opacity: 0.18128;
+  }
 
-    25% {
-        opacity: 0.83891;
-    }
+  25% {
+    opacity: 0.83891;
+  }
 
-    30% {
-        opacity: 0.65583;
-    }
+  30% {
+    opacity: 0.65583;
+  }
 
-    35% {
-        opacity: 0.67807;
-    }
+  35% {
+    opacity: 0.67807;
+  }
 
-    40% {
-        opacity: 0.26559;
-    }
+  40% {
+    opacity: 0.26559;
+  }
 
-    45% {
-        opacity: 0.84693;
-    }
+  45% {
+    opacity: 0.84693;
+  }
 
-    50% {
-        opacity: 0.96019;
-    }
+  50% {
+    opacity: 0.96019;
+  }
 
-    55% {
-        opacity: 0.08594;
-    }
+  55% {
+    opacity: 0.08594;
+  }
 
-    60% {
-        opacity: 0.20313;
-    }
+  60% {
+    opacity: 0.20313;
+  }
 
-    65% {
-        opacity: 0.71988;
-    }
+  65% {
+    opacity: 0.71988;
+  }
 
-    70% {
-        opacity: 0.53455;
-    }
+  70% {
+    opacity: 0.53455;
+  }
 
-    75% {
-        opacity: 0.37288;
-    }
+  75% {
+    opacity: 0.37288;
+  }
 
-    80% {
-        opacity: 0.71428;
-    }
+  80% {
+    opacity: 0.71428;
+  }
 
-    85% {
-        opacity: 0.70419;
-    }
+  85% {
+    opacity: 0.70419;
+  }
 
-    90% {
-        opacity: 0.7003;
-    }
+  90% {
+    opacity: 0.7003;
+  }
 
-    95% {
-        opacity: 0.36108;
-    }
+  95% {
+    opacity: 0.36108;
+  }
 
-    100% {
-        opacity: 0.24387;
-    }
+  100% {
+    opacity: 0.24387;
+  }
 }

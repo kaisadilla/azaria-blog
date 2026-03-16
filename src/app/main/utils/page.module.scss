@@ -1,73 +1,73 @@
 @import "@src/mixins";
 
 .body {
-    @include blog-body;
+  @include blog-body;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth !important;
+
+  .utilList {
     display: flex;
     flex-direction: column;
-    scroll-behavior: smooth !important;
-
-    .utilList {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+    justify-content: center;
+  }
 }
 
 .util {
-    display: grid;
-    grid-template: "ico tit" auto
-                   "ico des" 1fr / 5em 1fr;
+  display: grid;
+  grid-template: "ico tit" auto
+           "ico des" 1fr / 5em 1fr;
+  gap: 0.33em;
+
+  .utilIcon {
+    grid-area: ico;
+
+    font-size: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blog-color-primary);
+  }
+
+  .utilTitle {
+    grid-area: tit;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: 0.33em;
+    font-weight: 600;
+    font-size: 1.2em;
+    color: var(--blog-color-primary-d2);
+  }
 
-    .utilIcon {
-        grid-area: ico;
-
-        font-size: 4em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--blog-color-primary);
-    }
-
-    .utilTitle {
-        grid-area: tit;
-
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.33em;
-        font-weight: 600;
-        font-size: 1.2em;
-        color: var(--blog-color-primary-d2);
-    }
-
-    .utilDesc {
-        grid-area: des;
-    }
+  .utilDesc {
+    grid-area: des;
+  }
 }
 
 @include when-tablet {
-    .util {
-        grid-template: "ico tit" auto
-                       "ico des" 1fr / 10em 1fr;
-        gap: 0.5em;
+  .util {
+    grid-template: "ico tit" auto
+             "ico des" 1fr / 10em 1fr;
+    gap: 0.5em;
 
-        .utilIcon {
-            font-size: 8em;
-        }
-
-        .utilTitle {
-            font-size: 1.8em;
-        }
-
-        &:hover {
-            .utilIcon {
-                color: var(--blog-color-secondary);
-            }
-            
-            .utilTitle {
-                color: var(--blog-color-secondary-d1);
-            }
-        }
+    .utilIcon {
+      font-size: 8em;
     }
+
+    .utilTitle {
+      font-size: 1.8em;
+    }
+
+    &:hover {
+      .utilIcon {
+        color: var(--blog-color-secondary);
+      }
+      
+      .utilTitle {
+        color: var(--blog-color-secondary-d1);
+      }
+    }
+  }
 }

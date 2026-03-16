@@ -1,125 +1,125 @@
 .window {
-    pointer-events: auto;
-    user-select: none;
+  pointer-events: auto;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template: "top top top" 30px
+           "lef con rig" 1fr
+           "bot bot bot" 3px / 3px 1fr 3px;
+
+  .windowTop {
+    grid-area: top;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    .windowTopLeft {
+      flex: 0;
+    }
+
+    .windowTopCenter {
+      flex: 1;
+    }
+
+    .windowTopRight {
+      flex: 0;
+    }
+
+    .windowHandle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: flex;
+      flex-direction: row;
+      
+      .identity {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 10px;
+        gap: 5px;
+        overflow: hidden;
+
+        .icon {
+          width: 16px;
+          height: 16px;
+          margin-top: 2px;
+        }
+        .title {
+          color: white;
+          text-shadow: 1px 1px 1px #000000bb;
+          font-size: 9pt;
+          font-weight: 600;
+          font-family: Tahoma, Geneva, Verdana, sans-serif;
+          text-overflow: ellipsis;
+          text-wrap: nowrap;
+          overflow: hidden;
+        }
+      }
+
+      .windowControls {
+        width: 76px;
+        height: 21px;
+        flex-shrink: 0;
+        margin-top: 6px;
+        padding-left: 3px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2px;
+
+        .control {
+          pointer-events: auto;
+
+          &:hover {
+            filter: brightness(120%);
+          }
+        }
+      }
+    }
+  }
+
+  .windowLeft > img {
+    grid-area: lef;
     height: 100%;
-    display: grid;
-    grid-template: "top top top" 30px
-                   "lef con rig" 1fr
-                   "bot bot bot" 3px / 3px 1fr 3px;
+    width: 100%;
+  }
 
-    .windowTop {
-        grid-area: top;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        position: relative;
+  .windowContent {
+    grid-area: con;
+    background-color: white;
+  }
 
-        .windowTopLeft {
-            flex: 0;
-        }
+  .windowRight > img {
+    grid-area: rig;
+    height: 100%;
+    width: 100%;
+  }
 
-        .windowTopCenter {
-            flex: 1;
-        }
+  .windowBottom {
+    grid-area: bot;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 
-        .windowTopRight {
-            flex: 0;
-        }
-
-        .windowHandle {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            display: flex;
-            flex-direction: row;
-            
-            .identity {
-                flex: 1;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-                padding: 0 10px;
-                gap: 5px;
-                overflow: hidden;
-
-                .icon {
-                    width: 16px;
-                    height: 16px;
-                    margin-top: 2px;
-                }
-                .title {
-                    color: white;
-                    text-shadow: 1px 1px 1px #000000bb;
-                    font-size: 9pt;
-                    font-weight: 600;
-                    font-family: Tahoma, Geneva, Verdana, sans-serif;
-                    text-overflow: ellipsis;
-                    text-wrap: nowrap;
-                    overflow: hidden;
-                }
-            }
-
-            .windowControls {
-                width: 76px;
-                height: 21px;
-                flex-shrink: 0;
-                margin-top: 6px;
-                padding-left: 3px;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-                gap: 2px;
-
-                .control {
-                    pointer-events: auto;
-
-                    &:hover {
-                        filter: brightness(120%);
-                    }
-                }
-            }
-        }
+    .windowBottomLeft {
+      flex: 0;
     }
 
-    .windowLeft > img {
-        grid-area: lef;
-        height: 100%;
-        width: 100%;
+    .windowBottomCenter {
+      flex: 1;
     }
 
-    .windowContent {
-        grid-area: con;
-        background-color: white;
+    .windowBottomRight {
+      flex: 0;
     }
-
-    .windowRight > img {
-        grid-area: rig;
-        height: 100%;
-        width: 100%;
-    }
-
-    .windowBottom {
-        grid-area: bot;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-
-        .windowBottomLeft {
-            flex: 0;
-        }
-
-        .windowBottomCenter {
-            flex: 1;
-        }
-
-        .windowBottomRight {
-            flex: 0;
-        }
-    }
+  }
 }

@@ -14,38 +14,38 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { $cl } from "@/utils";
 
 export const metadata: Metadata = {
-    title: "Azaria",
-    description: "Azaria's devblog.",
+  title: "Azaria",
+  description: "Azaria's devblog.",
 };
 
 function MainLayout ({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    config.autoAddCss = false;
+  config.autoAddCss = false;
 
-    return (
-        <html lang="en" className={fontVariables()}>
-            <head>
-                <title>Azaria</title>
-            </head>
+  return (
+    <html lang="en" className={fontVariables()}>
+      <head>
+        <title>Azaria</title>
+      </head>
 
-            <body>
-                <MantineProvider>
-                    {children}
-                </MantineProvider>
-            </body>
-        </html>
-    );
+      <body>
+        <MantineProvider>
+          {children}
+        </MantineProvider>
+      </body>
+    </html>
+  );
 }
 
 function fontVariables () : string {
-    return $cl(
-        chakraPetch.variable,
-        tomorrow.variable,
-        orbitron.variable,
-    );
+  return $cl(
+    chakraPetch.variable,
+    tomorrow.variable,
+    orbitron.variable,
+  );
 }
 
 export default MainLayout;

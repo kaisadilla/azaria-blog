@@ -1,13 +1,13 @@
 @import "@src/mixins";
 
 .inlineCode {
-    display: inline-block;
+  display: inline-block;
 
-    > pre {
-        border-radius: 6px;
-        padding: 0px 8px;
-        margin: 0px 4px;
+  > pre {
+    border-radius: 6px;
+    padding: 0px 8px;
+    margin: 0px 4px;
 
-        font-size: rem-as-pt(10);
-    }
+    font-size: rem-as-pt(10);
+  }
 }

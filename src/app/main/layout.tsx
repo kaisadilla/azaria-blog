@@ -2,16 +2,16 @@ import React from 'react';
 import { fontVariables } from '../fonts/fonts';
 
 function MainLayout ({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
 
-    return (
-        <div className={fontVariables()}>
-            {children}
-        </div>
-    );
+  return (
+    <div className={fontVariables()}>
+      {children}
+    </div>
+  );
 }
 
 export default MainLayout;
