@@ -1,0 +1,181 @@
+$hover-glitch: glitchHover 1.6s infinite;
+
+.navbar {
+  height: 96px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  user-select: none;
+  padding: 0 5rem;
+  margin-bottom: -17px;
+
+  button {
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    color: var(--current-neon);
+    font-weight: 600;
+    min-width: 0;
+
+    > div {
+      &.bordered {
+        border: 1px solid var(--current-neon);
+        padding: 0.3em 1.2em;
+      }
+    }
+
+    &:hover > * {
+      animation: $hover-glitch;
+    }
+  }
+
+  > .logo {
+    flex: 1;
+    display: none;
+
+    flex-shrink: 0;
+    height: 48px;
+    fill: none;
+    stroke: var(--current-neon);
+    stroke-width: 0.22rem;
+
+    &.appear {
+      animation: 0.4s is-off 0.6s linear forwards;
+      display: block;
+    }
+  }
+
+  > .sections {
+    flex: 4;
+    display: none;
+
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--current-neon);
+
+    &.appear {
+      display: flex;
+    }
+
+    a:hover {
+      color: #fff5f6;
+      text-shadow: 0 0 2px #000,
+        0 0 10px var(--current-neon),
+        0 0 5px var(--current-neon),
+        0 0 25px var(--current-neon);
+      backface-visibility: hidden;
+    }
+  }
+
+  .styleRibbon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    &.appear {
+      display: flex;
+    }
+
+    .leds {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0 1rem 0 0;
+
+      > div {
+        cursor: pointer;
+        width: 1.5rem;
+        height: 1.5rem;
+        filter: blur(2px);
+
+        &:not(.rainbow) {
+          animation-duration: 8s;
+          animation-iteration-count: infinite;
+        }
+
+        &.pink {
+          animation-name: pinkBlockGlow;
+          background-color: var(--neon-pink); 
+        }
+
+        &.blue {
+          animation-name: blueBlockGlow;
+          background-color: var(--neon-blue);
+        }
+
+        &.yellow {
+          animation-name: yellowBlockGlow;
+          background-color: var(--neon-yellow);
+        }
+
+        &.rainbow {
+          //animation-name: rainbowBlockGlow;
+          //background-color: var(--neon-rainbow);
+          background-color: hsl(0, 80%, 42%);
+          //animation-name: rainbowHue;
+          animation: rainbowBlockGlow 8s infinite,
+            rainbowHue 2s infinite;
+        }
+      }
+    }
+
+    .crtButton {
+      width: 140px;
+    }
+
+    .mute {
+      cursor: pointer;
+      color: var(--current-neon);
+      font-size: 2rem;
+      font-weight: 200;
+      display: flex;
+      align-items: center;
+    }
+  }
+  
+  > .icons {
+    flex: 1;
+    display: none;
+
+    flex-shrink: 0;
+    height: 100%;
+    gap: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: end;
+    animation: text-glitch /*15s*/ 2s infinite step-end;
+
+    &.appear {
+      display: flex;
+    }
+
+    a {
+      &:hover {
+        animation: $hover-glitch;
+      }
+    }
+
+    .fa {
+      font-size: 2rem;
+      color: var(--current-neon);
+      position: relative;
+
+      &:hover {
+
+        color: var(--color-secondary);
+      }
+    }
+
+    .img {
+      max-height: 2rem;
+      max-width: 2rem;
+    }
+  }
+}

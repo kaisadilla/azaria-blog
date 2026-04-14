@@ -64,7 +64,7 @@
   @return ($pt / $base) * 1rem;
 }
 
-@mixin crt {
+@mixin crt($strength: 0.25, $flicker-speed: 0.15s) {
   animation: textShadow 1.6s infinite;
 
   &::before {
@@ -77,7 +77,7 @@
     right: 0;
     background: linear-gradient(
       rgba(18, 16, 16, 0) 50%,
-      rgba(0, 0, 0, 0.25) 50%,
+      rgba(0, 0, 0, $strength) 50%,
     ), linear-gradient(
       90deg, rgba(255, 0, 0, 0.06),
       rgba(0, 255, 0, 0.02),
@@ -101,7 +101,7 @@
     opacity: 0;
     z-index: 20;
     pointer-events: none;
-    animation: flicker 0.15s infinite;
+    animation: flicker $flicker-speed infinite;
   }
 }
 

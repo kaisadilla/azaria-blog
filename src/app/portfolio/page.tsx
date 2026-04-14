@@ -2,10 +2,7 @@
 
 import AzariaSvg from '@/assets/AzariaSvg';
 import { $cl } from '@/utils';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ScrollArea, Tooltip } from '@mantine/core';
-import Link from 'next/link';
+import { ScrollArea } from '@mantine/core';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './page.module.scss';
 
@@ -17,15 +14,23 @@ import drawing_shattered from '@src/assets/img/portfolio/drawing_shattered.png';
 
 import HexSeparatorSvg from '@/assets/HexSeparatorSvg';
 import { usePlaySound } from '@/hooks/usePlaySound';
-import { MaterialSymbol } from 'react-material-symbols';
+import AssettoLegaShowcase from './AssettoLegaShowcase';
+import NavBar from './NavBar';
 import NoProjectShowcase from './NoProjectShowcase';
 
-enum PageState {
+export enum PageState {
   Initial,
   LogoIntroFinished,
   LogoRemovalStarted,
   LogoRemovalEnded,
 };
+
+type ShowcaseId = 'assetto_lega'
+  | 'leaflys'
+  | 'reforged'
+  | 'aracnephobia'
+  | 'splatform'
+  ;
 
 export interface PortfolioPageProps {
 
@@ -44,6 +49,8 @@ function PortfolioPage (props: PortfolioPageProps) {
   );
 
   const [state, setState] = useState<PageState>(PageState.Initial);
+  const [showcase, setShowcase] = useState<ShowcaseId | null>(null);
+  const [isCrtFixed, setCrtFixed] = useState(false);
 
   useEffect(() => {
     const muted = localStorage.getItem('portfolio-bg-music-muted') === 'true'
@@ -83,119 +90,14 @@ function PortfolioPage (props: PortfolioPageProps) {
 
   return (
     <div ref={pageRef} className={styles.page}>
-      <div className={styles.navbar}>
-        <AzariaSvg className={$cl(
-          styles.logo,
-          state >= PageState.LogoRemovalEnded && styles.appear
-        )} />
-        <div className={$cl(
-          styles.sections,
-          state >= PageState.LogoRemovalEnded && styles.appear
-        )}>
-          <Tooltip.Floating
-            position='bottom'
-            offset={30}
-            label="All of my blog posts."
-          >
-            <Link href="/blog/index">Blog</Link>
-          </Tooltip.Floating>
-
-          <Link href="/main/utils">Portfolio</Link>
-
-          <Tooltip.Floating
-            position='bottom'
-            offset={30}
-            label="An overview of each of my personal projects."
-          >
-            <Link href="/main/projects">My projects</Link>
-          </Tooltip.Floating>
-
-          <Tooltip.Floating
-            position='bottom'
-            offset={30}
-            label="Code snippets for common problems."
-          >
-            <Link href="/main/snippets">Snippets</Link>
-          </Tooltip.Floating>
-
-          <Link href="/main/about">About me</Link>
-        </div>
-        <div className={$cl(
-          styles.styleRibbon,
-          state >= PageState.LogoRemovalEnded && styles.appear
-        )}>
-          <Tooltip.Floating
-            position='bottom'
-            offset={30}
-            label="Change the color of the neon lights!"
-          >
-            <div className={styles.leds}>
-              <div
-                className={styles.pink}
-                onClick={() => setNeonColor("var(--neon-pink)")}
-              />
-              <div
-                className={styles.blue}
-                onClick={() => setNeonColor("var(--neon-blue)")}
-              />
-              <div
-                className={styles.yellow}
-                onClick={() => setNeonColor("var(--neon-yellow)")}
-              />
-              <div
-                className={styles.rainbow}
-                onClick={() => setNeonColor("var(--neon-rainbow)")}
-              />
-            </div>
-          </Tooltip.Floating>
-
-          <Tooltip.Floating
-            position='bottom'
-            offset={30}
-            label="They are flickering too much."
-          >
-            <button>
-              <div className={styles.bordered}>Fix lights</div>
-            </button>
-          </Tooltip.Floating>
-
-          <button
-            className={styles.mute}
-            onClick={() => handleBgMusicMute(!bgMusicSound.muted)}
-          >
-            <div>
-              <MaterialSymbol
-                className={styles.mute}
-                icon={bgMusicSound.muted ? 'volume_off' : 'volume_up'}
-              />
-            </div>
-          </button>
-
-        </div>
-        <div className={$cl(
-          styles.icons,
-          state >= PageState.LogoRemovalEnded && styles.appear
-        )}>
-          <Tooltip.Floating
-            label="Blog's repo!"
-            position='bottom'
-            offset={30}
-          >
-            <a target="_blank" href="https://github.com/kaisadilla/azaria-blog">
-              <FontAwesomeIcon className={styles.fa} icon={faGithub} />
-            </a>
-          </Tooltip.Floating>
-          <Tooltip.Floating
-            label="Europe stands with Ukraine."
-            position='bottom'
-            offset={30}
-          >
-            <a target="_blank" href="https://u24.gov.ua/">
-              <img className={styles.img} src="/img/flag_eu_ukraine.png" alt="ukr" />
-            </a>
-          </Tooltip.Floating>
-        </div>
-      </div>
+      <NavBar
+        state={state}
+        isCrtFixed={isCrtFixed}
+        isMusicMuted={bgMusicSound.muted}
+        setNeonColor={setNeonColor}
+        onFixCrt={handleFixCrt}
+        onMuteMusic={handleBgMusicMute}
+      />
       {state < PageState.LogoRemovalEnded && <div className={styles.landing}>
         <AzariaSvg
           className={$cl(
@@ -236,41 +138,48 @@ function PortfolioPage (props: PortfolioPageProps) {
               description="A content manager and launcher for the racing simulator 'Assetto Corsa'."
               drawing={drawing_al.src}
               tags={["Electron", "React", "TypeScript", "Sass"]}
+              onClick={() => setShowcase('assetto_lega')}
             />
             <_ListItem
               name="Leaflys"
               description="A GeoJSON document creator and editor."
               drawing={drawing_leaflys.src}
               tags={["React", "JavaScript", "Leaflet", "Turf"]}
+              onClick={() => setShowcase('leaflys')}
             />
             <_ListItem
               name="Kaisa's Pokémon Emerald"
               description="A modded version of Pokémon Emerald."
               drawing={drawing_emerald.src}
               tags={["C", "Assembly", "Game Boy Advance"]}
+              onClick={() => setShowcase(null)}
             />
             <_ListItem
               name="aracnephobia.com"
               description="A website and portfolio."
               drawing={drawing_aracnephobia.src}
               tags={["React", "TypeScript", "Sass"]}
+              onClick={() => setShowcase('aracnephobia')}
             />
             <_ListItem
               name="SPlatform"
               description="A Super Mario-like platformer game with a custom level editor."
               drawing={drawing_al.src}
               tags={["SFML", "C#", "Electron", "Pixi.js", "Monaco"]}
+              onClick={() => setShowcase('splatform')}
             />
             <_ListItem
               name="Shattered"
               description="A small Minecraft-like game engine made in Unity."
               drawing={drawing_shattered.src}
               tags={["Unity Engine", "C#"]}
+              onClick={() => setShowcase(null)}
             />
           </ScrollArea>
         </div>
         <div className={styles.showcase}>
-          <NoProjectShowcase />
+          {showcase === null && <NoProjectShowcase />}
+          {showcase === 'assetto_lega' && <AssettoLegaShowcase />}
         </div>
       </div>}
     </div>
@@ -290,6 +199,20 @@ function PortfolioPage (props: PortfolioPageProps) {
     localStorage.setItem('portfolio-neon-color', col);
   }
 
+  function handleFixCrt () {
+    const style = pageRef.current?.style;
+    if (!style) return;
+
+    if (isCrtFixed) {
+      style.removeProperty("--flicker-speed");
+      setCrtFixed(false);
+    }
+    else {
+      style.setProperty("--flicker-speed", "0s");
+      setCrtFixed(true);
+    }
+  }
+
   function handleBgMusicMute (muted: boolean) {
     bgMusicSound.setMuted(muted);
     localStorage.setItem('portfolio-bg-music-muted', muted ? 'true' : 'false');
@@ -301,6 +224,7 @@ interface _ListItemProps {
   description: string;
   drawing: string;
   tags: string[];
+  onClick: () => void;
 }
 
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!·$%&/()=";
@@ -310,13 +234,18 @@ function _ListItem ({
   description,
   drawing,
   tags,
+  onClick,
 }: _ListItemProps) {
   const [nameDisplay, setNameDisplay] = useState(name);
   const [descDisplay, setDescDisplay] = useState(description);
   const [tagsDisplay, setTagsDisplay] = useState(tags);
 
   return (
-    <div className={styles.item} onMouseEnter={handleMouseEnter}>
+    <div
+      className={styles.item}
+      onMouseEnter={handleMouseEnter}
+      onClick={onClick}
+    >
       <div className={styles.icon}>
         <div
           className={styles.img2}
