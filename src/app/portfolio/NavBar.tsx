@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Tooltip } from '@mantine/core';
 import Link from 'next/link';
 import { MaterialSymbol } from 'react-material-symbols';
+import { PageState } from './ClientLayout';
 import styles from './NavBar.module.scss';
-import { PageState } from './page';
 
 export interface NavBarProps {
   state: PageState;

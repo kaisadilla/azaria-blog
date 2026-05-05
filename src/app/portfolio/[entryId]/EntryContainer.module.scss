@@ -1,0 +1,86 @@
+@import "@src/mixins";
+
+.viewport {
+  position: relative;
+  
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  //z-index: -100;
+
+  background-color: var(--color-background-2);
+
+  ::selection {
+    color: var(--color-background-2);
+    background-color: var(--current-neon);
+    text-shadow: none;
+  }
+
+  > .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    opacity: 0.5;
+    filter: blur(5px);
+    background: var(--bg-url) center no-repeat;
+    background-size: auto;
+    background-size: cover;
+  }
+
+  > .v2 {
+    @include crt(var(--crt-strength, 0.075), var(--flicker-speed, 0.15s));
+    transform: perspective(2500px)
+      scale(1.05)
+      rotateX(2deg)
+      rotateY(2deg);
+  
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    padding: 18px 46px 20px 220px;
+
+    > .container {
+      flex: 1;
+      min-width: 0px;
+      
+      display: flex;
+      justify-content: safe center;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      padding: 32px 24px 64px 24px;
+
+      //background-image: url("/img/portfolio/entry-bg.png");
+      //background-color: -2px -2px;
+      //background-size: 10px 10px;
+
+      color: var(--current-neon);
+      scrollbar-color: var(--current-neon) var(--color-background);
+
+      > .content {
+        min-width: 0;
+        max-width: calc(800px + 64px + 64px);
+        height: fit-content;
+        background-color: #00000080;
+        padding: 16px 64px;
+
+        strong {
+          font-weight: 600;
+        }
+
+        p {
+          color: white;
+          text-shadow: 0px 0px 2px black, 0px 0px 2px black;
+        }
+      }
+    }
+  }
+}
