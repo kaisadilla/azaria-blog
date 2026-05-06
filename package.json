@@ -22,7 +22,7 @@
     "github-slugger": "^2.0.0",
     "mantine-contextmenu": "^7.12.2",
     "next": "^14.2.28",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "re-resizable": "^6.10.0",
     "react": "^18",
     "react-dom": "^18",
