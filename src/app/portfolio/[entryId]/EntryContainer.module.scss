@@ -1,6 +1,8 @@
 @import "@src/mixins";
 
 .viewport {
+  @include crt(var(--crt-strength, 0.075), var(--flicker-speed, 0.15s));
+
   position: relative;
   
   width: 100%;
@@ -9,6 +11,7 @@
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  overflow: hidden;
   //z-index: -100;
 
   background-color: var(--color-background-2);
@@ -34,8 +37,7 @@
     background-size: cover;
   }
 
-  > .v2 {
-    @include crt(var(--crt-strength, 0.075), var(--flicker-speed, 0.15s));
+  > .transformedViewport {
     transform: perspective(2500px)
       scale(1.05)
       rotateX(2deg)
@@ -45,9 +47,10 @@
     height: 100%;
     display: flex;
 
-    padding: 18px 46px 20px 220px;
+    padding: 14px 46px 20px 220px;
 
     > .container {
+
       flex: 1;
       min-width: 0px;
       

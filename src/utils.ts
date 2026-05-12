@@ -129,3 +129,7 @@ export const Css = {
     return values[0];
   }
 }
+
+export function randomItem<T> (arr: T[]) : T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}

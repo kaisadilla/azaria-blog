@@ -74,12 +74,17 @@ export function usePlaySound (src: string, settings?: _Settings) {
     }
   }
 
+  function stop () {
+    audioSource.current?.stop();
+  }
+
   return {
     volume,
     muted,
     loop,
     play,
     playRepeated,
+    stop,
     setVolume,
     setMuted,
     setLoop,

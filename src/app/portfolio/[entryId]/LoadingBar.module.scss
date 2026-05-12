@@ -1,0 +1,133 @@
+@property --progress {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  color: var(--current-neon);
+
+  > .container {
+    animation: endLoadAnim 0.4s 2s linear forwards;
+
+    background-color: #00000080;
+    padding: 16px;
+
+    > .box {
+      width: 360px;
+
+      display: flex;
+      flex-direction: column;
+
+      > .info {
+        display: flex;
+        flex-direction: row;
+
+        > .message {
+          flex: 1;
+
+          font-weight: 600;
+        }
+
+        > .perc {
+          flex-shrink: 0;
+        }
+      }
+
+      > .loadingBar {
+        position: relative;
+
+        width: 100%;
+        height: 12px;
+        margin-top: 4px;
+
+        border: 1px solid currentColor;
+
+        .progress {
+          --progress: 0%;
+          animation: loadingBarAnim 1.75s 0.25s linear forwards;
+
+          position: absolute;
+          top: 2px;
+          left: 2px;
+
+          width: calc(var(--progress) - 4px);
+          height: calc(100% - 4px);
+
+          background-color: currentColor;
+        }
+      }
+    }
+  }
+}
+
+@keyframes loadingBarAnim {
+  0% {
+    --progress: 0%;
+  }
+
+  10% {
+    --progress: 16%;
+  }
+
+  22% {
+    --progress: 23%;
+  }
+
+  37% {
+    --progress: 29%;
+  }
+
+  54% {
+    --progress: 67%;
+  }
+
+  65% {
+    --progress: 69%;
+  }
+
+  73% {
+    --progress: 77%;
+  }
+
+  85% {
+    --progress: 83%;
+  }
+
+  92% {
+    --progress: 97%;
+  }
+
+  100% {
+    --progress: 100%;
+  }
+}
+
+@keyframes endLoadAnim {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
