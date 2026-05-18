@@ -83,6 +83,14 @@
           color: white;
           text-shadow: 0px 0px 2px black, 0px 0px 2px black;
         }
+
+        li {
+          color: white;
+          
+          &::marker {
+            color: var(--current-neon);
+          }
+        }
       }
     }
   }

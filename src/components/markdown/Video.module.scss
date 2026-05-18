@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 
   > video {
@@ -7,5 +8,11 @@
     max-width: 900px;
 
     border: 1px solid var(--current-neon);
+  }
+
+  > .footnote {
+    text-align: end;
+
+    font-style: italic;
   }
 }

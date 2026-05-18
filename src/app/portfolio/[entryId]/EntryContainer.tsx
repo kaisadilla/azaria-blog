@@ -12,7 +12,10 @@ export interface EntryContainerProps {
 function EntryContainer ({
   children,
 }: EntryContainerProps) {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return new URLSearchParams(window.location.search).has('l');
+  });
 
   return (
     <div className={styles.viewport}>
