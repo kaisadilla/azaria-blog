@@ -40,36 +40,27 @@
 }
 
 @keyframes glitchHover {
-  0%, 2.99% {
-    opacity: 1;
-    background-color: none;
-    color: var(--current-neon);
-    transform: translate(4px, 0);
-  }
-  23% {
-    opacity: 1;
-  }
-  28%, 30.99% {
+  8%, 10.99% {
     transform: translate(11px, 0) skew(0deg);
   }
-  31%, 34.99% {
+  11%, 14.99% {
     transform: translate(11px, 0) skew(30deg);
   }
-  34.99% {
+  14.99% {
     transform: skew(30deg);
     background-color: transparent;
     color: var(--current-neon);
   }
-  35%, 38.99% {
+  15%, 18.99% {
     transform: skew(0deg);
     background-color: var(--current-neon);
     color: var(--color-background);
   }
-  39% {
+  25% {
     background-color: transparent;
     color: var(--current-neon);
   }
-  42% {
+  33% {
     transform: scaleY(1) skewX(0deg) translate(-6px, 0);
   }
   44% {

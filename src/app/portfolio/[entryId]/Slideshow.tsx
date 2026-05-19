@@ -1,6 +1,7 @@
 'use client';
 
-import { range } from '@/utils';
+import { usePlaySound } from '@/hooks/usePlaySound';
+import { randomItem, range } from '@/utils';
 import { Carousel } from '@mantine/carousel';
 import { Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -18,6 +19,12 @@ function Slideshow ({
 }: SlideshowProps) {
   const [ opened, { open, close } ] = useDisclosure(false);
   const [ activeImg, setActiveImg ] = useState(0);
+
+  const decodeSounds = [
+    usePlaySound("/sfx/glitch-open-0.ogg"),
+    usePlaySound("/sfx/glitch-open-1.ogg"),
+    usePlaySound("/sfx/glitch-open-2.ogg"),
+  ];
 
   return (<>
     <Modal
@@ -73,6 +80,7 @@ function Slideshow ({
     setActiveImg(index);
 
     open();
+    setTimeout(() => randomItem(decodeSounds).play(true), 150);
   }
 }
 
