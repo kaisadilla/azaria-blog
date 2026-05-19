@@ -60,6 +60,24 @@
   }
 }
 
+@mixin neon-glow {
+  color: #fff5f6;
+  text-shadow: 0 0 2px #000,
+    0 0 10px var(--current-neon),
+    0 0 5px var(--current-neon),
+    0 0 25px var(--current-neon);
+  backface-visibility: hidden;
+}
+
+@mixin neon-glow-full {
+  @include neon-glow;
+
+  box-shadow: 0 0 2px var(--current-neon),
+    0 0 10px var(--current-neon),
+    0 0 5px var(--current-neon),
+    inset 0 0 2px var(--current-neon);
+}
+
 @function rem-as-pt ($pt, $base: 12) {
   @return ($pt / $base) * 1rem;
 }

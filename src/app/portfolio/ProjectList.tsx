@@ -46,18 +46,18 @@ function ProjectList (props: ProjectListProps) {
         scrollbarSize="1.5em"
       >
         <_ListItem
-          slug="assetto-lega"
-          name="Assetto Lega"
-          description="A content manager and launcher for the racing simulator 'Assetto Corsa'."
-          drawing={drawing_al.src}
-          tags={["Electron", "React", "TypeScript", "Sass"]}
-        />
-        <_ListItem
           slug="yerevan"
           name="Yerevan"
           description="A GeoJSON document creator and editor."
           drawing={drawing_leaflys.src}
           tags={["React", "JavaScript", "Leaflet", "Turf"]}
+        />
+        <_ListItem
+          slug="assetto-lega"
+          name="Assetto Lega"
+          description="A content manager and launcher for the racing simulator 'Assetto Corsa'."
+          drawing={drawing_al.src}
+          tags={["Electron", "React", "TypeScript", "Sass"]}
         />
         <_ListItem
           slug="lrc-workbench"

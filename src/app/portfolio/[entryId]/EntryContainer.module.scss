@@ -74,23 +74,6 @@
         height: fit-content;
         background-color: #00000080;
         padding: 16px 64px;
-
-        strong {
-          font-weight: 600;
-        }
-
-        p {
-          color: white;
-          text-shadow: 0px 0px 2px black, 0px 0px 2px black;
-        }
-
-        li {
-          color: white;
-          
-          &::marker {
-            color: var(--current-neon);
-          }
-        }
       }
     }
   }

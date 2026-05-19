@@ -1,0 +1,115 @@
+@import "@src/mixins";
+
+.slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 24px;
+
+  > img {
+    cursor: pointer;
+
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+
+    &:hover {
+      //border: 1px solid var(--current-neon);
+      box-shadow: 0 0 6px 3px var(--current-neon);
+    }
+  }
+}
+
+.modalContent {
+  animation: glitchHover 0.7s step-end;
+
+  //border: 5px solid var(--current-neon);
+}
+
+.modalContainer {
+  width: 100%;
+  max-height: calc(100% - 60px);
+  overflow: auto;
+
+  > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+@keyframes glitchHover {
+  0%, 2.99% {
+    opacity: 1;
+    background-color: none;
+    color: var(--current-neon);
+    transform: translate(4px, 0);
+  }
+  23% {
+    opacity: 1;
+  }
+  28%, 30.99% {
+    transform: translate(11px, 0) skew(0deg);
+  }
+  31%, 34.99% {
+    transform: translate(11px, 0) skew(30deg);
+  }
+  34.99% {
+    transform: skew(30deg);
+    background-color: transparent;
+    color: var(--current-neon);
+  }
+  35%, 38.99% {
+    transform: skew(0deg);
+    background-color: var(--current-neon);
+    color: var(--color-background);
+  }
+  39% {
+    background-color: transparent;
+    color: var(--current-neon);
+  }
+  42% {
+    transform: scaleY(1) skewX(0deg) translate(-6px, 0);
+  }
+  44% {
+    transform: scaleY(1.2) skewX(-60deg) translate(-6px, 0);
+  }
+  46% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  60% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 0;
+    transform: translate(0 0);
+  }
+  68% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  83% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
+    background-color: transparent;
+    color: var(--current-neon);
+  }
+  80% {
+    transform: scaleX(1.1) scaleY(.2) skewX(80deg);
+  }
+  85% {
+    background-color: transparent;
+    color: var(--current-neon);
+  }
+  86% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
+    background-color: var(--current-neon);
+    color: var(--color-background);
+  }
+  94% {
+    background-color: transparent;
+    color: var(--current-neon);
+  }
+}

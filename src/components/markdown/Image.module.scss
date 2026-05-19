@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > img {
+    min-width: 100px;
+    max-width: 900px;
+    object-fit: contain;
+
+    border: 1px solid var(--current-neon);
+  }
+
+  > .footnote {
+    width: 100%;
+    
+    text-align: end;
+
+    font-style: italic;
+  }
+}

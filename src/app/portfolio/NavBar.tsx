@@ -36,33 +36,33 @@ function NavBar ({
         styles.sections,
         state >= PageState.LogoRemovalEnded && styles.appear
       )}>
-        <Tooltip.Floating
+        {false && <Tooltip.Floating
           position='bottom'
           offset={30}
           label="All of my blog posts."
         >
           <Link href="/blog/index">Blog</Link>
-        </Tooltip.Floating>
+        </Tooltip.Floating>}
 
-        <Link href="/main/utils">Portfolio</Link>
+        <Link href="/portfolio">Portfolio</Link>
 
-        <Tooltip.Floating
+        {false && <Tooltip.Floating
           position='bottom'
           offset={30}
           label="An overview of each of my personal projects."
         >
-          <Link href="/main/projects">My projects</Link>
-        </Tooltip.Floating>
+          <Link href="/projects">My projects</Link>
+        </Tooltip.Floating>}
 
-        <Tooltip.Floating
+        {false && <Tooltip.Floating
           position='bottom'
           offset={30}
           label="Code snippets for common problems."
         >
-          <Link href="/main/snippets">Snippets</Link>
-        </Tooltip.Floating>
+          <Link href="/snippets">Snippets</Link>
+        </Tooltip.Floating>}
 
-        <Link href="/main/about">About me</Link>
+        {false && <Link href="/about">About me</Link>}
       </div>
       <div className={$cl(
         styles.styleRibbon,

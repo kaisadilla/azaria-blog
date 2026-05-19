@@ -133,3 +133,7 @@ export const Css = {
 export function randomItem<T> (arr: T[]) : T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
+
+export function range (max: number) : number[] {
+  return Array.from({ length: max, }).map((v, i) => i);
+}

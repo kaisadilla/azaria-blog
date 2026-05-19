@@ -6,8 +6,10 @@ import BlogCode from '@/components/BlogCode';
 import BlogPre from '@/components/BlogPre';
 import Clock from '@/components/Clock';
 import GlitchText from '@/components/GlitchText';
+import Image from '@/components/markdown/Image';
 import Video from '@/components/markdown/Video';
 import WIcon from '@/components/WIcon';
+import { GitForkIcon } from '@/Icons';
 import fm, { FrontMatterResult } from 'front-matter';
 import fs from 'fs/promises';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -17,6 +19,7 @@ import rehypeSlug from 'rehype-slug';
 import NoProjectShowcase from '../NoProjectShowcase';
 import EntryContainer from './EntryContainer';
 import styles from './page.module.scss';
+import Slideshow from './Slideshow';
 
 export interface Props {
   params: {
@@ -47,23 +50,55 @@ async function EntryPage ({ params }: Props) {
     Clock,
     Type,
     Video,
+    Image,
   };
+
+  const slideshowPath = entry.attributes.slideshowPath;
+  const slideshowCount = Number(entry.attributes.slideshowCount);
 
   return (
     <EntryContainer>
-      <MDXRemote
-        source={entry.body}
-        components={components}
-        options={{
-          mdxOptions: {
-            rehypePlugins: [
-              rehypeSlug,
-              //rehypeSanitize, // TODO: Reimplement
-              rehypeMdxCodeProps,
-            ]
-          }
-        }}
-      />
+      <BlogH1>{entry.attributes.title}</BlogH1>
+
+      <div className={styles.entryRibbon}>
+        {entry.attributes.url && <a
+          className={styles.tryIt}
+          target='_blank'
+          href={entry.attributes.url}
+        >
+          <span>&gt; Try it yourself!</span>
+        </a>}
+
+        {entry.attributes.repo && <a
+          className={styles.button}
+          target='_blank'
+          href={entry.attributes.repo}
+        >
+          <GitForkIcon />
+          <span> Git repo</span>
+        </a>}
+      </div>
+
+      {slideshowPath && slideshowCount && <Slideshow
+        path={slideshowPath}
+        count={slideshowCount}
+      />}
+
+      <div className={styles.body}>
+        <MDXRemote
+          source={entry.body}
+          components={components}
+          options={{
+            mdxOptions: {
+              rehypePlugins: [
+                rehypeSlug,
+                //rehypeSanitize, // TODO: Reimplement
+                rehypeMdxCodeProps,
+              ]
+            }
+          }}
+        />
+      </div>
     </EntryContainer>
   );
 }
