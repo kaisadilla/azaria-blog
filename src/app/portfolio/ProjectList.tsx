@@ -64,14 +64,7 @@ function ProjectList (props: ProjectListProps) {
           name="LRC Workbench"
           description="A .lrc document authoring and edition tool."
           drawing={drawing_leaflys.src}
-          tags={["React", "JavaScript", "Leaflet", "Turf"]}
-        />
-        <_ListItem
-          slug="pkmn-emerald"
-          name="Kaisa's Pokémon Emerald"
-          description="A modded version of Pokémon Emerald."
-          drawing={drawing_emerald.src}
-          tags={["C", "Assembly", "Game Boy Advance"]}
+          tags={["React", "TypeScript", "Leaflet", "Turf"]}
         />
         <_ListItem
           slug="aracnephobia"
@@ -79,6 +72,13 @@ function ProjectList (props: ProjectListProps) {
           description="A website and portfolio."
           drawing={drawing_aracnephobia.src}
           tags={["React", "TypeScript", "Sass"]}
+        />
+        <_ListItem
+          slug="pkmn-emerald"
+          name="Kaisa's Pokémon Emerald"
+          description="A modded version of Pokémon Emerald."
+          drawing={drawing_emerald.src}
+          tags={["C", "Assembly", "Game Boy Advance"]}
         />
         <_ListItem
           slug="splatform"
