@@ -188,6 +188,12 @@ a {
     76% {
       #{$var}: #{$wrongCol};
     }
+    78% {
+      #{$var}: #{$regularCol};
+    }
+    88% {
+      #{$var}: #{$wrongCol};
+    }
     90% {
       #{$var}: #{$regularCol};
     }
