@@ -2,27 +2,6 @@
 
 $hover-glitch: glitchHover 1.6s infinite;
 
-@property --neon-pink {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-primary);
-}
-@property --neon-blue {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-secondary);
-}
-@property --neon-yellow {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-tertiary);
-}
-@property --neon-rainbow {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-primary);
-}
-
 .hexGrid {
   position: fixed;
   top: 0;
@@ -33,13 +12,6 @@ $hover-glitch: glitchHover 1.6s infinite;
 }
 
 .page {
-  --neon-pink: var(--color-primary);
-  --neon-blue: var(--color-secondary);
-  --neon-yellow: var(--color-tertiary);
-  --neon-rainbow: var(--color-primary);
-
-  --current-neon: var(--neon-pink);
-
   animation: pinkNeonFlicker 60s infinite step-end,
     blueNeonFlicker 60s infinite step-end,
     yellowNeonFlicker 60s infinite step-end,

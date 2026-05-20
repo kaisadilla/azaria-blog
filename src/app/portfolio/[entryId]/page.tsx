@@ -56,6 +56,10 @@ async function EntryPage ({ params }: Props) {
   const slideshowPath = entry.attributes.slideshowPath;
   const slideshowCount = Number(entry.attributes.slideshowCount);
 
+  const tech = entry.attributes.tech
+    ? entry.attributes.tech.split(",").map(str => str.trim())
+    : null;
+
   return (
     <EntryContainer>
       <BlogH1>{entry.attributes.title}</BlogH1>
@@ -83,6 +87,16 @@ async function EntryPage ({ params }: Props) {
         path={slideshowPath}
         count={slideshowCount}
       />}
+
+      {tech && <div className={styles.techRibbon}>
+        {tech.map((t, i) => <div
+          key={i}
+          className={styles.entry}
+        >
+          <span className={styles.default}>{t}</span>
+          <span className={styles.hover}>{t}</span>
+        </div>)}
+      </div>}
 
       <div className={styles.body}>
         <MDXRemote

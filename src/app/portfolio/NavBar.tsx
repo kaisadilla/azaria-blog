@@ -12,7 +12,7 @@ export interface NavBarProps {
   state: PageState;
   isCrtFixed: boolean;
   isMusicMuted: boolean;
-  setNeonColor: (col: string) => void;
+  setNeonColor: (col: string, textCol: string) => void;
   onFixCrt: () => void;
   onMuteMusic: (muted: boolean) => void;
 }
@@ -76,19 +76,19 @@ function NavBar ({
           <div className={styles.leds}>
             <div
               className={styles.pink}
-              onClick={() => setNeonColor("var(--neon-pink)")}
+              onClick={() => setNeonColor("var(--neon-pink)", 'black')}
             />
             <div
               className={styles.blue}
-              onClick={() => setNeonColor("var(--neon-blue)")}
+              onClick={() => setNeonColor("var(--neon-blue)", 'black')}
             />
             <div
               className={styles.yellow}
-              onClick={() => setNeonColor("var(--neon-yellow)")}
+              onClick={() => setNeonColor("var(--neon-yellow)", 'black')}
             />
             <div
               className={styles.rainbow}
-              onClick={() => setNeonColor("var(--neon-rainbow)")}
+              onClick={() => setNeonColor("var(--neon-rainbow)", 'white')}
             />
           </div>
         </Tooltip.Floating>

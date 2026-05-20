@@ -67,18 +67,18 @@ function ProjectList (props: ProjectListProps) {
           tags={["React", "TypeScript", "Leaflet", "Turf"]}
         />
         <_ListItem
+          slug="reforged"
+          name="Pokémon Reforged"
+          description="A custom, online Pokémon battle simulator built from scratch."
+          drawing={drawing_emerald.src}
+          tags={["WebSocket", "SignalR", "ASP.NET"]}
+        />
+        <_ListItem
           slug="aracnephobia"
           name="aracnephobia.com"
           description="A website and portfolio."
           drawing={drawing_aracnephobia.src}
           tags={["React", "TypeScript", "Sass"]}
-        />
-        <_ListItem
-          slug="pkmn-emerald"
-          name="Kaisa's Pokémon Emerald"
-          description="A modded version of Pokémon Emerald."
-          drawing={drawing_emerald.src}
-          tags={["C", "Assembly", "Game Boy Advance"]}
         />
         <_ListItem
           slug="splatform"

@@ -5,4 +5,5 @@ export interface PortfolioEntryAttributes {
   id?: string;
   slideshowPath?: string;
   slideshowCount?: string;
+  tech?: string;
 }

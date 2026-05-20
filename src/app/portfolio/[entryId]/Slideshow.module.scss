@@ -21,20 +21,102 @@
   }
 }
 
+.carouselControl {
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--current-neon);
+  border: 1px solid var(--current-neon);
+
+  width: 32px;
+  height: 32px;
+
+  &:hover {
+    color: var(--current-neon-text);
+    border-color: transparent;
+    background-color: var(--current-neon);
+
+    box-shadow: 0 0 12px 1px var(--current-neon);
+  }
+
+  svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+.carouselIndicator {
+  border-radius: 0;
+
+  border: 1px solid var(--current-neon);
+  background-color: transparent;
+
+  &[data-active=true] {
+    background-color: var(--current-neon);
+  }
+}
+
 .modalContent {
+  position: relative;
+  overflow: hidden;
+
   animation: glitchHover 0.7s step-end;
 
-  //border: 5px solid var(--current-neon);
+  border: 1px solid var(--current-neon);
+  box-shadow: 0 0 18px 3px var(--current-neon) !important;
+
+  :global(.mantine-Modal-header) {
+    position: absolute;
+    background-color: transparent;
+
+    top: 0;
+    right: 0;
+    padding: 0;
+
+    width: 48px;
+    height: 32px;
+    min-height: unset;
+
+    button {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+
+      border-color: var(--current-neon);
+      border-style: solid;
+      border-left-width: 1px;
+      border-bottom-width: 1px;
+
+      svg {
+        width: 24px !important;
+        height: 24px !important;
+        color: var(--current-neon);
+
+        //filter: drop-shadow(0px 0px 3px var(--current-neon));
+      }
+
+      &:hover {
+        background-color: var(--current-neon);
+        box-shadow: 0 0 18px 3px var(--current-neon) !important;
+
+        svg {
+          color: var(--current-neon-text);
+          filter: unset;
+        }
+      }
+    }
+  }
 }
 
 .modalContainer {
   width: 100%;
-  max-height: calc(100% - 60px);
+  height: 100%;
   overflow: auto;
 
   > img {
-    max-width: 100%;
-    max-height: 100%;
+    display: block;
+
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 }

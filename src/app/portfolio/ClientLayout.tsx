@@ -46,8 +46,9 @@ function ClientLayout ({
     if (pageRef.current === null) return;
 
     const neonColor = localStorage.getItem('portfolio-neon-color');
+
     if (neonColor !== null) {
-      pageRef.current.style.setProperty("--current-neon", neonColor);
+      setNeonColor(neonColor, 'black');
     }
 
     const crtFixed = localStorage.getItem('portfolio-crt-fixed');
@@ -70,7 +71,7 @@ function ClientLayout ({
 
       setTimeout(() => {
         bgMusicSound.play();
-      }, 500);
+      }, 1000);
     }
     
     document.addEventListener('keypress', handleKeyPress);
@@ -125,8 +126,10 @@ function ClientLayout ({
     }
   }
 
-  function setNeonColor (col: string) {
-    pageRef.current?.style.setProperty("--current-neon", col);
+  function setNeonColor (col: string, textCol: string) {
+    document.documentElement.style.setProperty('--current-neon', col);
+    document.documentElement.style.setProperty('--current-neon-text', textCol);
+
     localStorage.setItem('portfolio-neon-color', col);
   }
 

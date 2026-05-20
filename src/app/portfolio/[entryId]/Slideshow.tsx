@@ -58,10 +58,12 @@ function Slideshow ({
 
     <div className={styles.container}>
       <Carousel
+        classNames={{
+          control: styles.carouselControl,
+          indicator: styles.carouselIndicator,
+        }}
         withIndicators
-        //height={500}
         slideSize="70%"
-        //slideGap={12}
       >
         {range(count).map(i => <Carousel.Slide
           key={i}

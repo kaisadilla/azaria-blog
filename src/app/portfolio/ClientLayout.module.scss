@@ -1,28 +1,5 @@
 @import "@src/mixins";
 
-$hover-glitch: glitchHover 1.6s infinite;
-
-@property --neon-pink {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-primary);
-}
-@property --neon-blue {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-secondary);
-}
-@property --neon-yellow {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-tertiary);
-}
-@property --neon-rainbow {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--color-primary);
-}
-
 .hexGrid {
   position: fixed;
   top: 0;
@@ -33,17 +10,6 @@ $hover-glitch: glitchHover 1.6s infinite;
 }
 
 .page {
-  --neon-pink: var(--color-primary);
-  --neon-blue: var(--color-secondary);
-  --neon-yellow: var(--color-tertiary);
-  --neon-rainbow: var(--color-primary);
-
-  --current-neon: var(--neon-pink);
-
-  animation: pinkNeonFlicker 60s infinite step-end,
-    blueNeonFlicker 60s infinite step-end,
-    yellowNeonFlicker 60s infinite step-end,
-    rainbowNeon 20s infinite step-end;
 
   background-color: var(--color-background);
   width: 100vw;
@@ -179,116 +145,6 @@ $hover-glitch: glitchHover 1.6s infinite;
 @include neon-block-glow(blueBlockGlow, var(--neon-blue));
 @include neon-block-glow(yellowBlockGlow, var(--neon-yellow));
 @include neon-block-glow(rainbowBlockGlow, hsl(0, 80%, 42%));
-
-@mixin neon-flicker($name, $var, $regularCol, $wrongCol, $secondaryCol) {
-  @keyframes #{$name} {
-    0% {
-      #{$var}: #{$regularCol};
-    }
-    8% {
-      #{$var}: #{$wrongCol};
-    }
-    11% {
-      #{$var}: #{$regularCol};
-    }
-    11.7% {
-      #{$var}: #{$wrongCol};
-    }
-    12% {
-      #{$var}: #{$regularCol};
-    }
-    28% {
-      #{$var}: #{$wrongCol};
-    }
-    28.1% {
-      #{$var}: #{$regularCol};
-    }
-    28.4% {
-      #{$var}: #{$secondaryCol};
-    }
-    28.5% {
-      #{$var}: #{$regularCol};
-    }
-    40% {
-      #{$var}: #{$wrongCol};
-    }
-    45% {
-      #{$var}: #{$regularCol};
-    }
-    45.3% {
-      #{$var}: #{$wrongCol};
-    }
-    49% {
-      #{$var}: #{$regularCol};
-    }
-    52% {
-      #{$var}: #{$secondaryCol};
-    }
-    52.4% {
-      #{$var}: #{$regularCol};
-    }
-    71% {
-      #{$var}: #{$secondaryCol};
-    }
-    71.1% {
-      #{$var}: #{$regularCol};
-    }
-    71.7% {
-      #{$var}: #{$secondaryCol};
-    }
-    71.95% {
-      #{$var}: #{$wrongCol};
-    }
-    72.05% {
-      #{$var}: #{$regularCol};
-    }
-    72.15% {
-      #{$var}: #{$wrongCol};
-    }
-    72.30% {
-      #{$var}: #{$regularCol};
-    }
-    72.50% {
-      #{$var}: #{$wrongCol};
-    }
-    80% {
-      #{$var}: #{$regularCol};
-    }
-    81% {
-      #{$var}: #{$wrongCol};
-    }
-    90% {
-      #{$var}: #{$regularCol};
-    }
-    94% {
-      #{$var}: #{$wrongCol};
-    }
-    96% {
-      #{$var}: #{$secondaryCol};
-    }
-    96.12% {
-      #{$var}: #{$regularCol};
-    }
-  }
-}
-
-@include neon-flicker(
-  pinkNeonFlicker, --neon-pink, var(--color-primary), #a02f78, var(--color-secondary)
-);
-@include neon-flicker(
-  blueNeonFlicker, --neon-blue, var(--color-secondary), #2eb6ce, var(--color-tertiary)
-);
-@include neon-flicker(
-  yellowNeonFlicker, --neon-yellow, var(--color-tertiary), #bbbd3c, var(--color-primary)
-);
-
-@keyframes rainbowNeon {
-  @for $i from 0 through 359 {
-    #{$i * 100% / 359} {
-      --neon-rainbow: hsl(#{$i}, 80%, 42%);
-    }
-  }
-}
 
 @keyframes rainbowHue {
   0%   { filter: blur(2px) hue-rotate(0deg); }
