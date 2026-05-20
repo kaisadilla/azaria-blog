@@ -2,7 +2,7 @@
   position: relative;
   animation: movement 8s step-end infinite;
 
-  color: white;
+  color: var(--current-neon);
   z-index: 5;
 
   > span::selection {
@@ -47,26 +47,6 @@
   > span:nth-child(4) {
     visibility: hidden;
   }
-
-  //&::before, &::after {
-  //  content: attr(data-text);
-//
-  //  position: absolute;
-  //  width: 110%;
-  //  z-index: -1;
-  //}
-//
-  //&::before {
-  //  top: -5.5%;
-  //  left: 1.5%;
-  //  color: var(--color-primary);
-  //}
-//
-  //&::after {
-  //  top: -3.5%;
-  //  left: -2%;
-  //  color: var(--color-secondary);
-  //}
 }
 
 .paths {
