@@ -62,7 +62,7 @@ async function EntryPage ({ params }: Props) {
 
   return (
     <EntryContainer>
-      <BlogH1>{entry.attributes.title}</BlogH1>
+      <BlogTitle>{entry.attributes.title}</BlogTitle>
 
       <div className={styles.entryRibbon}>
         {entry.attributes.url && <a
@@ -127,6 +127,17 @@ async function fetchFile (
   } catch {
     return null
   }
+}
+
+function BlogTitle (
+  {id, ...headingProps}: React.HTMLAttributes<HTMLHeadingElement>
+) {
+  return (
+    <GlitchText
+      className={styles.title}
+      text={headingProps.children as string}
+    />
+  );
 }
 
 function BlogH1 (

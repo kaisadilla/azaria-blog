@@ -4,6 +4,7 @@ url: https://lrc-workbench.azariadev.dev/
 repo: https://github.com/kaisadilla/lrc-workbench/
 slideshowPath: /img/portfolio/slideshow/lrc-workbench
 slideshowCount: 4
+tech: "Vite, React, Redux, TypeScript, SASS, Mantine, Canvas API, Monaco Editor, LRC Kit"
 ---
 
 **.lrc** is a standardized text format to write lyrics that are synchronized with audio. This is the format used in music players such as **Spotify** to show a song's lyrics on screen.

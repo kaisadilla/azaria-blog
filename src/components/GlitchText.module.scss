@@ -2,7 +2,6 @@
   position: relative;
   animation: movement 8s step-end infinite;
 
-  color: var(--current-neon);
   z-index: 5;
 
   > span::selection {

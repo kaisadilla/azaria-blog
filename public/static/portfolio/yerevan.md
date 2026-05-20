@@ -4,7 +4,7 @@ url: https://yerevan.azariadev.dev/
 repo: https://github.com/kaisadilla/yerevan-geojson-editor
 slideshowPath: /img/portfolio/slideshow/yerevan
 slideshowCount: 4
-tech: "React, Redux, TypeScript, SASS, Leaflet, Turf, GeoJSON, Pragmatic Drag 'n Drop, Phosphor Icons, Monaco, i18next"
+tech: "Vite, React, Redux, TypeScript, SASS, Leaflet, Turf, GeoJSON, Pragmatic Drag 'n Drop, Phosphor Icons, Monaco, i18next"
 ---
 
 **GeoJSON** is an open standard based on the **JSON** format to represent simple geographical features. It is generally the technology between modern charts and map visualizations. 
